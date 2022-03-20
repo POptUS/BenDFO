@@ -5,11 +5,7 @@ This repository contains source code and updates from the codes originally share
 
 These codes are based on the supplemental information for the paper:
 - [[1](#pap1)] Benchmarking Derivative-Free Optimization Algorithms by J.J. Moré and S.M. Wild. *SIAM J. Optimization*, Vol. 20 (1), pp. 172-191, 2009. doi:[10.1137/080724083](https://doi.org/10.1137/080724083)
-    
-This repository is intended to reflect the initial version at
-https://www.mcs.anl.gov/~more/dfo/
-as well as subsequent changes.
-
+   
 
 ### Benchmark Problems
 The following source files were used to define the benchmark problems in [[1](https://github.com/POptUS/BenDFO#pap1)]. Fortran files are found in `fortran/` and Octave/Matlab files are found in `m/`.
