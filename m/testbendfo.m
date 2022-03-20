@@ -1,6 +1,9 @@
 % This file covers the BenDFO m files
 %   calfun.m dfoxs.m jacobian.m dfovec.m g_dfovec_1d.m
 % Updated versions may be found at github.com/POptUS/BenDFO
+%
+% Note: Full code coverage can be achieved by setting running the smooth 
+% version of problem 5 with x(1) < 0 and with x(1) = 0.
 
 addpath('../data') % location of dfo.dat
 load dfo.dat
@@ -32,13 +35,37 @@ for np = 1:numprobs
             case 'smooth'
                 [f,fv,G] = calfun(Xs);
                 Results{p,np}.f = f;
-                Results{p,np}.fv = fv;
+                Results{p,np}.Xs = Xs;
+                Results{p,np}.Fv = fv;
                 Results{p,np}.G = G;
             otherwise % skip gradients for the other problems
                 rand('state',1) % For reproducibility of 'noisy3'
-                [f] = calfun(Xs);
+                [f,fv] = calfun(Xs);
                 Results{p,np}.f = f;
+                Results{p,np}.Fv = fv;
+                Results{p,np}.Xs = Xs;
         end
     end
 end
-%    save('testoutput', 'Results','fvals');
+
+% The following file can be compared with ../data/testout.dat
+%   diff testout.dat ../data/testout.dat
+
+fid = fopen('testout.dat','w');
+p = 1;
+for np = 1:numprobs
+    fprintf(fid,'%3i  %8s  %3i  %3i  %6.5e  %6.5e  %6.5e  %6.5e \n',np,...
+        probnames{p},size(Results{p,np}.Xs,1),size(Results{p,np}.Fv,1),...
+        Results{p,np}.f,abs(sum(sin(Results{p,np}.Fv))), ...
+        norm(Results{p,np}.G,2),Results{p,np}.G'*Results{p,np}.Xs);
+end
+for p = 2:4
+    for np = 1:numprobs
+        fprintf(fid,'%3i  %8s  %3i  %3i  %6.5e  %6.5e \n',np,...
+            probnames{p},size(Results{p,np}.Xs,1),size(Results{p,np}.Fv,1),...
+            Results{p,np}.f,abs(sum(sin(Results{p,np}.Fv))));
+    end
+end
+fprintf(fid,'\n');
+fclose(fid);
+
