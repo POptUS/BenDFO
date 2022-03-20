@@ -12,7 +12,7 @@ as well as subsequent changes.
 
 
 ### Benchmark Problems
-The following source files were used to define the benchmark problems in [[pap1]]. Fortran files are found in `fortran/` and Octave/Matlab files are found in `m/`.
+The following source files were used to define the benchmark problems in [[1](https://github.com/POptUS/BenDFO#pap1)]. Fortran files are found in `fortran/` and Octave/Matlab files are found in `m/`.
 
 - `calfun` [[Fortran](fortran/calfun.f)]  [[Matlab/Octave](m/calfun.m)]:
   Code for evaluating the 22 CUTEr problems considered (needs dfovec).
