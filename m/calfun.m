@@ -1,4 +1,4 @@
-function [y,fvec] = calfun(x)
+function [y,fvec,G] = calfun(x)
 %     This is a Matlab version of the subroutine calfun.f
 %     This subroutine returns a function value as used in:
 %
@@ -14,13 +14,15 @@ function [y,fvec] = calfun(x)
 %     The subroutine returns the function value f(x)
 %
 %       x is an input array of length n.
-%       f is an output that contains the function value at x.
+%       y is an output that contains the function value at x.
+%       fvec is an m-by-1 array containing component function values at x.
+%       G is an n-by-1 array containing component function values at x.
 %
 %     The rand generator should be seeded before this is called
 %
 %     Additional problem descriptors are passed through the global
 %     variables:
-%       m a positive integer (length of output from dfovec).
+%       m is a positive integer (length of output from dfovec).
 %          m must not exceed n.
 %       nprob is a positive integer that defines the number of the problem.
 %          nprob must not exceed 22.
@@ -30,10 +32,10 @@ function [y,fvec] = calfun(x)
 %           'wild3' corresponds to deterministically noisy problems
 %           'noisy3' corresponds to stochastically noisy problems
 %
-%     To store the evaluation history, additional variables are passed 
-%     through global variables. These may be commented out if a user 
+%     To store the evaluation history, additional variables are passed
+%     through global variables. These may be commented out if a user
 %     desires. They are:
-%       nfev is a non-negative integer containing the number of function 
+%       nfev is a non-negative integer containing the number of function
 %          evaluations done so far (nfev=0 is a good default).
 %          after calling calfun, nfev will be incremented by one.
 %       np is a counter for the test problem number. np=1 is a good
@@ -57,77 +59,36 @@ if strcmp('nondiff',probtype)
 end
 
 % Generate the vector
-fvec = dfovec(m,n,xc,nprob); 
-
-% J = jacobian(m,n,x,nprob);
-% grad = J'*sign(fvec);
-% disp(grad)
+fvec = dfovec(m,n,xc,nprob);
 
 % Calculate the function value
 switch probtype
     case 'noisy3'
-        sigma=10^-3;
+        sigma = 10^-3;
         u = sigma*(-ones(m,1)+2*rand(m,1));
         fvec = fvec.*(1+u);
         y = sum(fvec.^2);
     case 'wild3'
-        sigma=10^-3;
+        sigma = 10^-3;
         phi = 0.9*sin(100*norm(x,1))*cos(100*norm(x,inf)) + 0.1*cos(norm(x,2));
         phi = phi*(4*phi^2 -3);
         y = (1 + sigma*phi)*sum(fvec.^2);
     case 'smooth'
         y = sum(fvec.^2);
+        if nargout>2
+            J = jacobian(m,n,x,nprob);
+            G = J'*fvec;
+        end
     case 'nondiff'
-        y = sum(abs(fvec));
-    % for the sake of experiments on nonsmooth noisy functions
-    % sigma should be declared as a global variable
-    case 'ndnoisy3'
-        u = sigma*randn(m,1);
-        fvec = fvec + u;
         y = sum(abs(fvec));
 end
 
 % Update the function value history
- nfev = nfev +1;
+nfev = nfev +1;
 fvals(nfev,np) = y;
 fvals_true(nfev,np) = y;
-% % 
-% % % Update fvec and Jacobian history
-% JHIST(:,:,nfev,np) = {fvec,jacobian(m,n,x,nprob)};
-
-% flag = 1;
-% if flag && nfev == 1 && n == 2
-%     if exist(['./' num2str(nprob) '_plot_points.mat'],'file')
-%         load(['./' num2str(nprob) '_plot_points.mat'])
-%         hold off
-%     else
-%     inc = 0.025;
-%     sigma = 0;
-%     [X,Y] = meshgrid(-2:inc:2,-2:inc:2);
-%     Z = zeros(size(X));
-%     for i = 1:size(X,1); 
-%         for j = 1:size(X,2); 
-%             Z(i,j) = calfun([X(i,j),Y(i,j)]); 
-%         end; 
-%         disp(i); 
-%     end;
-%     save(['./' num2str(nprob) '_plot_points.mat'],'X','Y','Z')    
-%     error('DONE')
-%     end
-%     contour(X,Y,log2(Z-min(min(Z))+1),20,'linewidth',2)
-%     hold on
-%     axis square    
-% end
-% if flag && n == 2
-%     scatter(x(1),x(2),80,'b','filled');
-%     pause
-% end
 
 end
-
-
-    
-    
 
 %if y>1e64
 %  display('Function value exceeds 10^64')
