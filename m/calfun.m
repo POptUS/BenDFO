@@ -52,7 +52,9 @@ n = BenDFO.n;
 m = BenDFO.m;
 probtype = BenDFO.probtype;
 
-% n = size(x,1); % Problem dimension
+eid = 'Input:dimensionIncompatible';
+[nin,jin] = size(x); % Problem dimension
+if (nin~=n || jin~=1), error(eid,'Input x is not of size n by 1.'), end
 
 % Restrict domain for some nondiff problems
 xc = x;

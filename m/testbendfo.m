@@ -2,8 +2,10 @@
 %   calfun.m dfoxs.m jacobian.m dfovec.m g_dfovec_1d.m
 % Updated versions may be found at github.com/POptUS/BenDFO
 %
-% Note: Full code coverage can be achieved by setting running the smooth 
-% version of problem 5 with x(1) < 0 and with x(1) = 0.
+% Note: Full code coverage can be achieved by running:
+%  i) the smooth version of problem 5 with x(1) < 0 and with x(1) = 0
+% and
+% ii) [f,fv] = calfun(Xs'); for one problem to test error handling
 
 addpath('../data') % location of dfo.dat
 load dfo.dat
