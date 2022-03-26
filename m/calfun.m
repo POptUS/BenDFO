@@ -20,8 +20,8 @@ function [y,fvec,G] = calfun(x)
 %
 %     The rand generator should be seeded before this is called
 %
-%     Additional problem descriptors are passed through the global
-%     variables:
+%     Additional problem descriptors are passed through the following fields
+%     contained in the global variable BenDFO:
 %       m is a positive integer (length of output from dfovec).
 %          m must not exceed n.
 %       nprob is a positive integer that defines the number of the problem.
@@ -32,8 +32,8 @@ function [y,fvec,G] = calfun(x)
 %           'wild3' corresponds to deterministically noisy problems
 %           'noisy3' corresponds to stochastically noisy problems
 %
-%     To store the evaluation history, additional variables are passed
-%     through global variables. These may be commented out if a user
+%     To store the evaluation history, additional fields are passed via 
+%     global variable BenDFO. These may be commented out if a user
 %     desires. They are:
 %       nfev is a non-negative integer containing the number of function
 %          evaluations done so far (nfev=0 is a good default).
@@ -89,9 +89,8 @@ end
 
 % Update the function value history
 if isfield(BenDFO,'nfev')    
-    BenDFO.nfev = BenDFO.nfev +1;
-    BenDFO.fvals(BenDFO.nfev,np) = y;
-    BenDFO.fvals_true(BenDFO.nfev,np) = y;
+    BenDFO.nfev = BenDFO.nfev + 1;
+    BenDFO.fvals(BenDFO.nfev,BenDFO.np) = y;
 end
 
 end
