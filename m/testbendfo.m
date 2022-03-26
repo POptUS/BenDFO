@@ -16,7 +16,8 @@ global BenDFO
 
 % Initialize the results cell and fvals array
 Results = cell(length(probnames),numprobs);
-fvals = zeros(1,numprobs);
+BenDFO.fvals = zeros(1,4*numprobs);
+BenDFO.np = 0;
 
 for np = 1:numprobs
     BenDFO.nprob = dfo(np,1);
@@ -30,7 +31,8 @@ for np = 1:numprobs
     % Loop over the 4 problem types
     for p = 1:4
         BenDFO.probtype = probnames{p};
-        nfev = 0;
+        BenDFO.nfev = 0;
+        BenDFO.np = BenDFO.np + 1;
         switch BenDFO.probtype
             case 'smooth'
                 [f,fv,G] = calfun(Xs);
