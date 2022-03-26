@@ -12,26 +12,26 @@ numprobs = size(dfo,1);
 probnames = {'smooth','nondiff','wild3','noisy3'};
 
 % Global variables needed
-global m np nprob probtype fvals nfev
+global BenDFO
 
 % Initialize the results cell and fvals array
 Results = cell(length(probnames),numprobs);
 fvals = zeros(1,numprobs);
 
 for np = 1:numprobs
-    nprob = dfo(np,1);
-    n = dfo(np,2);
-    m = dfo(np,3);
-    factor_power = dfo(np,4);
+    BenDFO.nprob = dfo(np,1);
+    BenDFO.n = dfo(np,2);
+    BenDFO.m = dfo(np,3);
+    BenDFO.factor_power = dfo(np,4);
     
     % Obtain starting vector
-    Xs = dfoxs(n,nprob,10^factor_power);
+    Xs = dfoxs(BenDFO.n,BenDFO.nprob,10^BenDFO.factor_power);
     
     % Loop over the 4 problem types
     for p = 1:4
-        probtype = probnames{p};
+        BenDFO.probtype = probnames{p};
         nfev = 0;
-        switch probtype
+        switch BenDFO.probtype
             case 'smooth'
                 [f,fv,G] = calfun(Xs);
                 Results{p,np}.f = f;

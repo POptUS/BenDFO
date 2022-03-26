@@ -46,9 +46,13 @@ function [y,fvec,G] = calfun(x)
 %     Argonne National Laboratory
 %     Jorge More' and Stefan Wild. January 2008.
 
-global m n nprob probtype fvals fvals_true nfev np
+global BenDFO 
+nprob = BenDFO.nprob;
+n = BenDFO.n;
+m = BenDFO.m;
+probtype = BenDFO.probtype;
 
-n = size(x,1); % Problem dimension
+% n = size(x,1); % Problem dimension
 
 % Restrict domain for some nondiff problems
 xc = x;
@@ -84,9 +88,11 @@ switch probtype
 end
 
 % Update the function value history
-nfev = nfev +1;
-fvals(nfev,np) = y;
-fvals_true(nfev,np) = y;
+if isfield(BenDFO,'nfev')    
+    BenDFO.nfev = BenDFO.nfev +1;
+    BenDFO.fvals(BenDFO.nfev,np) = y;
+    BenDFO.fvals_true(BenDFO.nfev,np) = y;
+end
 
 end
 
