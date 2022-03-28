@@ -53,7 +53,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
    g_x(ind)= g_tmp_x_00000+ g_t;
    x(ind)= tmp_x_00000+ t; 
    
-   clear tmp_x_00000 g_tmp_x_00000 ;
+   % clear tmp_x_00000 g_tmp_x_00000 ;
    switch nprob
       case 1
          for j= 1: n
@@ -64,7 +64,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             % Update detected: sum= some_expression(sum,...)
             g_sum= g_tmp_dfovec_1d_00191;
             sum= tmp_dfovec_1d_00191;
-            clear tmp_x_00001 g_tmp_x_00001 ;
+            % clear tmp_x_00001 g_tmp_x_00001 ;
          end
          g_tmp_dfovec_1d_00000= 2* g_sum;
          tmp_dfovec_1d_00000= 2* sum;
@@ -72,7 +72,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00001= tmp_dfovec_1d_00000/ m;
          g_temp= g_tmp_dfovec_1d_00001;
          temp= tmp_dfovec_1d_00001+ 1; 
-         clear tmp_dfovec_1d_00000 tmp_dfovec_1d_00001 g_tmp_dfovec_1d_00000 g_tmp_dfovec_1d_00001 ;
+         % clear tmp_dfovec_1d_00000 tmp_dfovec_1d_00001 g_tmp_dfovec_1d_00000 g_tmp_dfovec_1d_00001 ;
          for i= 1: m
             g_fvec(i)= -g_temp;
             fvec(i)= -temp; 
@@ -83,7 +83,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
                tmp_x_00002= x(i);
                g_fvec(i)= g_tmp_fvec_00000+ g_tmp_x_00002;
                fvec(i)= tmp_fvec_00000+ tmp_x_00002; 
-               clear tmp_fvec_00000 tmp_x_00002 g_tmp_fvec_00000 g_tmp_x_00002 ;
+               % clear tmp_fvec_00000 tmp_x_00002 g_tmp_fvec_00000 g_tmp_x_00002 ;
             end
          end
       case 2
@@ -97,14 +97,14 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             % Update detected: sum= some_expression(sum,...)
             g_sum= g_tmp_dfovec_1d_00192;
             sum= tmp_dfovec_1d_00192;
-            clear tmp_x_00003 tmp_dfovec_1d_00002 g_tmp_x_00003 g_tmp_dfovec_1d_00002 ;
+            % clear tmp_x_00003 tmp_dfovec_1d_00002 g_tmp_x_00003 g_tmp_dfovec_1d_00002 ;
          end
          for i= 1: m
             g_tmp_dfovec_1d_00003= i* g_sum;
             tmp_dfovec_1d_00003= i* sum;
             g_fvec(i)= g_tmp_dfovec_1d_00003;
             fvec(i)= tmp_dfovec_1d_00003- 1; 
-            clear tmp_dfovec_1d_00003 g_tmp_dfovec_1d_00003 ;
+            % clear tmp_dfovec_1d_00003 g_tmp_dfovec_1d_00003 ;
          end
       case 3
          tmp_dfovec_1d_00004= n- 1;
@@ -118,10 +118,10 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             % Update detected: sum= some_expression(sum,...)
             g_sum= g_tmp_dfovec_1d_00193;
             sum= tmp_dfovec_1d_00193;
-            clear tmp_x_00004 tmp_dfovec_1d_00005 g_tmp_x_00004 g_tmp_dfovec_1d_00005 ;
+            % clear tmp_x_00004 tmp_dfovec_1d_00005 g_tmp_x_00004 g_tmp_dfovec_1d_00005 ;
             tmp_dfovec_1d_00004= n- 1;
          end
-         clear tmp_dfovec_1d_00004 ;
+         % clear tmp_dfovec_1d_00004 ;
          tmp_dfovec_1d_00006= m- 1;
          for i= 1: tmp_dfovec_1d_00006
             tmp_dfovec_1d_00007= i- 1;
@@ -129,10 +129,10 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00008= tmp_dfovec_1d_00007* sum;
             g_fvec(i)= g_tmp_dfovec_1d_00008;
             fvec(i)= tmp_dfovec_1d_00008- 1; 
-            clear tmp_dfovec_1d_00007 tmp_dfovec_1d_00008 g_tmp_dfovec_1d_00008 ;
+            % clear tmp_dfovec_1d_00007 tmp_dfovec_1d_00008 g_tmp_dfovec_1d_00008 ;
             tmp_dfovec_1d_00006= m- 1;
          end
-         clear tmp_dfovec_1d_00006 ;
+         % clear tmp_dfovec_1d_00006 ;
          fvec(m)= -1; 
          g_fvec(m)= zeros(size(fvec(m)));
       case 4
@@ -146,12 +146,12 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00010= tmp_x_00005- tmp_dfovec_1d_00009;
          g_fvec(1)= 10* g_tmp_dfovec_1d_00010;
          fvec(1)= 10* tmp_dfovec_1d_00010; 
-         clear tmp_x_00005 tmp_x_00006 tmp_dfovec_1d_00009 tmp_dfovec_1d_00010 g_tmp_x_00005 g_tmp_x_00006 g_tmp_dfovec_1d_00009 g_tmp_dfovec_1d_00010 ;
+         % clear tmp_x_00005 tmp_x_00006 tmp_dfovec_1d_00009 tmp_dfovec_1d_00010 g_tmp_x_00005 g_tmp_x_00006 g_tmp_dfovec_1d_00009 g_tmp_dfovec_1d_00010 ;
          g_tmp_x_00007= g_x(1);
          tmp_x_00007= x(1);
          g_fvec(2)= -g_tmp_x_00007;
          fvec(2)= 1- tmp_x_00007; 
-         clear tmp_x_00007 g_tmp_x_00007 ;
+         % clear tmp_x_00007 g_tmp_x_00007 ;
       case 5
          if (x(1)> 0)
             g_tmp_x_00008= g_x(2);
@@ -165,7 +165,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00012= 2* pi;
             g_th= ((tmp_dfovec_1d_00012)' \ g_tmp_atan_00000' )' ;
             th= tmp_atan_00000/ tmp_dfovec_1d_00012; 
-            clear tmp_x_00008 tmp_x_00009 tmp_dfovec_1d_00011 tmp_atan_00000 tmp_dfovec_1d_00012 g_tmp_x_00008 g_tmp_x_00009 g_tmp_dfovec_1d_00011 g_tmp_atan_00000 ;
+            % clear tmp_x_00008 tmp_x_00009 tmp_dfovec_1d_00011 tmp_atan_00000 tmp_dfovec_1d_00012 g_tmp_x_00008 g_tmp_x_00009 g_tmp_dfovec_1d_00011 g_tmp_atan_00000 ;
          elseif (x(1)< 0)
             g_tmp_x_00010= g_x(2);
             tmp_x_00010= x(2);
@@ -180,7 +180,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00015= tmp_atan_00001/ tmp_dfovec_1d_00014;
             g_th= g_tmp_dfovec_1d_00015;
             th= tmp_dfovec_1d_00015+ .5; 
-            clear tmp_x_00010 tmp_x_00011 tmp_dfovec_1d_00013 tmp_atan_00001 tmp_dfovec_1d_00014 tmp_dfovec_1d_00015 g_tmp_x_00010 g_tmp_x_00011 g_tmp_dfovec_1d_00013 g_tmp_atan_00001 g_tmp_dfovec_1d_00015 ;
+            % clear tmp_x_00010 tmp_x_00011 tmp_dfovec_1d_00013 tmp_atan_00001 tmp_dfovec_1d_00014 tmp_dfovec_1d_00015 g_tmp_x_00010 g_tmp_x_00011 g_tmp_dfovec_1d_00013 g_tmp_atan_00001 g_tmp_dfovec_1d_00015 ;
          else % x(1)=0
             th= .25; 
             g_th= zeros(size(th));
@@ -197,7 +197,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00018= tmp_dfovec_1d_00016+ tmp_dfovec_1d_00017;
          r= sqrt(tmp_dfovec_1d_00018); 
          g_r= g_tmp_dfovec_1d_00018./ (2.* r);
-         clear tmp_x_00012 tmp_dfovec_1d_00016 tmp_x_00013 tmp_dfovec_1d_00017 tmp_dfovec_1d_00018 g_tmp_x_00012 g_tmp_dfovec_1d_00016 g_tmp_x_00013 g_tmp_dfovec_1d_00017 g_tmp_dfovec_1d_00018 ;
+         % clear tmp_x_00012 tmp_dfovec_1d_00016 tmp_x_00013 tmp_dfovec_1d_00017 tmp_dfovec_1d_00018 g_tmp_x_00012 g_tmp_dfovec_1d_00016 g_tmp_x_00013 g_tmp_dfovec_1d_00017 g_tmp_dfovec_1d_00018 ;
          g_tmp_x_00014= g_x(3);
          tmp_x_00014= x(3);
          g_tmp_dfovec_1d_00019= 10* g_th;
@@ -206,17 +206,17 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00020= tmp_x_00014- tmp_dfovec_1d_00019;
          g_fvec(1)= 10* g_tmp_dfovec_1d_00020;
          fvec(1)= 10* tmp_dfovec_1d_00020; 
-         clear tmp_x_00014 tmp_dfovec_1d_00019 tmp_dfovec_1d_00020 g_tmp_x_00014 g_tmp_dfovec_1d_00019 g_tmp_dfovec_1d_00020 ;
+         % clear tmp_x_00014 tmp_dfovec_1d_00019 tmp_dfovec_1d_00020 g_tmp_x_00014 g_tmp_dfovec_1d_00019 g_tmp_dfovec_1d_00020 ;
          g_tmp_dfovec_1d_00021= g_r;
          tmp_dfovec_1d_00021= r- 1;
          g_fvec(2)= 10* g_tmp_dfovec_1d_00021;
          fvec(2)= 10* tmp_dfovec_1d_00021; 
-         clear tmp_dfovec_1d_00021 g_tmp_dfovec_1d_00021 ;
+         % clear tmp_dfovec_1d_00021 g_tmp_dfovec_1d_00021 ;
          g_tmp_x_00015= g_x(3);
          tmp_x_00015= x(3);
          g_fvec(3)= g_tmp_x_00015;
          fvec(3)= tmp_x_00015; 
-         clear tmp_x_00015 g_tmp_x_00015 ;
+         % clear tmp_x_00015 g_tmp_x_00015 ;
       case 6
          g_tmp_x_00016= g_x(1);
          tmp_x_00016= x(1);
@@ -226,7 +226,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00022= 10* tmp_x_00017;
          g_fvec(1)= g_tmp_x_00016+ g_tmp_dfovec_1d_00022;
          fvec(1)= tmp_x_00016+ tmp_dfovec_1d_00022; 
-         clear tmp_x_00016 tmp_x_00017 tmp_dfovec_1d_00022 g_tmp_x_00016 g_tmp_x_00017 g_tmp_dfovec_1d_00022 ;
+         % clear tmp_x_00016 tmp_x_00017 tmp_dfovec_1d_00022 g_tmp_x_00016 g_tmp_x_00017 g_tmp_dfovec_1d_00022 ;
          g_tmp_x_00018= g_x(3);
          tmp_x_00018= x(3);
          g_tmp_x_00019= g_x(4);
@@ -235,7 +235,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00023= tmp_x_00018- tmp_x_00019;
          g_fvec(2)= sqrt(5)* g_tmp_dfovec_1d_00023;
          fvec(2)= sqrt(5)* tmp_dfovec_1d_00023; 
-         clear tmp_x_00018 tmp_x_00019 tmp_dfovec_1d_00023 g_tmp_x_00018 g_tmp_x_00019 g_tmp_dfovec_1d_00023 ;
+         % clear tmp_x_00018 tmp_x_00019 tmp_dfovec_1d_00023 g_tmp_x_00018 g_tmp_x_00019 g_tmp_dfovec_1d_00023 ;
          g_tmp_x_00020= g_x(2);
          tmp_x_00020= x(2);
          g_tmp_x_00021= g_x(3);
@@ -246,7 +246,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00025= tmp_x_00020- tmp_dfovec_1d_00024;
          g_fvec(3)= adimat_g_pow_left((g_tmp_dfovec_1d_00025), (tmp_dfovec_1d_00025), 2);
          fvec(3)= tmp_dfovec_1d_00025^ 2; 
-         clear tmp_x_00020 tmp_x_00021 tmp_dfovec_1d_00024 tmp_dfovec_1d_00025 g_tmp_x_00020 g_tmp_x_00021 g_tmp_dfovec_1d_00024 g_tmp_dfovec_1d_00025 ;
+         % clear tmp_x_00020 tmp_x_00021 tmp_dfovec_1d_00024 tmp_dfovec_1d_00025 g_tmp_x_00020 g_tmp_x_00021 g_tmp_dfovec_1d_00024 g_tmp_dfovec_1d_00025 ;
          g_tmp_x_00022= g_x(1);
          tmp_x_00022= x(1);
          g_tmp_x_00023= g_x(4);
@@ -257,7 +257,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00027= tmp_dfovec_1d_00026^ 2;
          g_fvec(4)= sqrt(10)* g_tmp_dfovec_1d_00027;
          fvec(4)= sqrt(10)* tmp_dfovec_1d_00027; 
-         clear tmp_x_00022 tmp_x_00023 tmp_dfovec_1d_00026 tmp_dfovec_1d_00027 g_tmp_x_00022 g_tmp_x_00023 g_tmp_dfovec_1d_00026 g_tmp_dfovec_1d_00027 ;
+         % clear tmp_x_00022 tmp_x_00023 tmp_dfovec_1d_00026 tmp_dfovec_1d_00027 g_tmp_x_00022 g_tmp_x_00023 g_tmp_dfovec_1d_00026 g_tmp_dfovec_1d_00027 ;
       case 7
          g_tmp_x_00024= g_x(1);
          tmp_x_00024= x(1);
@@ -273,7 +273,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00031= tmp_dfovec_1d_00030* tmp_x_00025;
          g_fvec(1)= g_tmp_x_00024+ g_tmp_dfovec_1d_00031;
          fvec(1)= -c13+ tmp_x_00024+ tmp_dfovec_1d_00031; 
-         clear tmp_x_00024 tmp_x_00025 tmp_dfovec_1d_00028 tmp_dfovec_1d_00029 tmp_dfovec_1d_00030 tmp_dfovec_1d_00031 g_tmp_x_00024 g_tmp_x_00025 g_tmp_dfovec_1d_00028 g_tmp_dfovec_1d_00029 g_tmp_dfovec_1d_00030 g_tmp_dfovec_1d_00031 ;
+         % clear tmp_x_00024 tmp_x_00025 tmp_dfovec_1d_00028 tmp_dfovec_1d_00029 tmp_dfovec_1d_00030 tmp_dfovec_1d_00031 g_tmp_x_00024 g_tmp_x_00025 g_tmp_dfovec_1d_00028 g_tmp_dfovec_1d_00029 g_tmp_dfovec_1d_00030 g_tmp_dfovec_1d_00031 ;
          g_tmp_x_00026= g_x(1);
          tmp_x_00026= x(1);
          g_tmp_x_00027= g_x(2);
@@ -288,7 +288,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00035= tmp_dfovec_1d_00034* tmp_x_00027;
          g_fvec(2)= g_tmp_x_00026+ g_tmp_dfovec_1d_00035;
          fvec(2)= -c29+ tmp_x_00026+ tmp_dfovec_1d_00035; 
-         clear tmp_x_00026 tmp_x_00027 tmp_dfovec_1d_00032 tmp_dfovec_1d_00033 tmp_dfovec_1d_00034 tmp_dfovec_1d_00035 g_tmp_x_00026 g_tmp_x_00027 g_tmp_dfovec_1d_00032 g_tmp_dfovec_1d_00033 g_tmp_dfovec_1d_00034 g_tmp_dfovec_1d_00035 ;
+         % clear tmp_x_00026 tmp_x_00027 tmp_dfovec_1d_00032 tmp_dfovec_1d_00033 tmp_dfovec_1d_00034 tmp_dfovec_1d_00035 g_tmp_x_00026 g_tmp_x_00027 g_tmp_dfovec_1d_00032 g_tmp_dfovec_1d_00033 g_tmp_dfovec_1d_00034 g_tmp_dfovec_1d_00035 ;
       case 8
          for i= 1: 15
             tmp1= i; 
@@ -319,7 +319,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00040= tmp_x_00028+ tmp_dfovec_1d_00039;
             g_fvec(i)= -g_tmp_dfovec_1d_00040;
             fvec(i)= y1(i)- tmp_dfovec_1d_00040; 
-            clear tmp_x_00028 tmp_x_00029 tmp_dfovec_1d_00036 tmp_x_00030 tmp_dfovec_1d_00037 tmp_dfovec_1d_00038 tmp_dfovec_1d_00039 tmp_dfovec_1d_00040 g_tmp_x_00028 g_tmp_x_00029 g_tmp_dfovec_1d_00036 g_tmp_x_00030 g_tmp_dfovec_1d_00037 g_tmp_dfovec_1d_00038 g_tmp_dfovec_1d_00039 g_tmp_dfovec_1d_00040 ;
+            % clear tmp_x_00028 tmp_x_00029 tmp_dfovec_1d_00036 tmp_x_00030 tmp_dfovec_1d_00037 tmp_dfovec_1d_00038 tmp_dfovec_1d_00039 tmp_dfovec_1d_00040 g_tmp_x_00028 g_tmp_x_00029 g_tmp_dfovec_1d_00036 g_tmp_x_00030 g_tmp_dfovec_1d_00037 g_tmp_dfovec_1d_00038 g_tmp_dfovec_1d_00039 g_tmp_dfovec_1d_00040 ;
          end
       case 9
          for i= 1: 11
@@ -329,7 +329,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00041= v(i)+ tmp_x_00031;
             g_tmp1= v(i)* g_tmp_dfovec_1d_00041;
             tmp1= v(i)* tmp_dfovec_1d_00041; 
-            clear tmp_x_00031 tmp_dfovec_1d_00041 g_tmp_x_00031 g_tmp_dfovec_1d_00041 ;
+            % clear tmp_x_00031 tmp_dfovec_1d_00041 g_tmp_x_00031 g_tmp_dfovec_1d_00041 ;
             g_tmp_x_00032= g_x(3);
             tmp_x_00032= x(3);
             g_tmp_dfovec_1d_00042= g_tmp_x_00032;
@@ -340,7 +340,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_x_00033= x(4);
             g_tmp2= g_tmp_dfovec_1d_00043+ g_tmp_x_00033;
             tmp2= tmp_dfovec_1d_00043+ tmp_x_00033; 
-            clear tmp_x_00032 tmp_dfovec_1d_00042 tmp_dfovec_1d_00043 tmp_x_00033 g_tmp_x_00032 g_tmp_dfovec_1d_00042 g_tmp_dfovec_1d_00043 g_tmp_x_00033 ;
+            % clear tmp_x_00032 tmp_dfovec_1d_00042 tmp_dfovec_1d_00043 tmp_x_00033 g_tmp_x_00032 g_tmp_dfovec_1d_00042 g_tmp_dfovec_1d_00043 g_tmp_x_00033 ;
             g_tmp_x_00034= g_x(1);
             tmp_x_00034= x(1);
             g_tmp_dfovec_1d_00044= g_tmp_x_00034* tmp1+ tmp_x_00034* g_tmp1;
@@ -349,7 +349,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             g_tmp_dfovec_1d_00045= (tmp2' \ (g_tmp_dfovec_1d_00044' - g_tmp2' * tmp_dfovec_1d_00045' ))' ;
             g_fvec(i)= -g_tmp_dfovec_1d_00045;
             fvec(i)= y2(i)- tmp_dfovec_1d_00045; 
-            clear tmp_x_00034 tmp_dfovec_1d_00044 tmp_dfovec_1d_00045 g_tmp_x_00034 g_tmp_dfovec_1d_00044 g_tmp_dfovec_1d_00045 ;
+            % clear tmp_x_00034 tmp_dfovec_1d_00044 tmp_dfovec_1d_00045 g_tmp_x_00034 g_tmp_dfovec_1d_00044 g_tmp_dfovec_1d_00045 ;
          end
       case 10
          for i= 1: 16
@@ -358,12 +358,12 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_x_00035= x(3);
             g_temp= g_tmp_x_00035;
             temp= tmp_dfovec_1d_00046+ c45+ tmp_x_00035; 
-            clear tmp_dfovec_1d_00046 tmp_x_00035 g_tmp_x_00035 ;
+            % clear tmp_dfovec_1d_00046 tmp_x_00035 g_tmp_x_00035 ;
             g_tmp_x_00036= g_x(2);
             tmp_x_00036= x(2);
             tmp1= tmp_x_00036/ temp; 
             g_tmp1= (temp' \ (g_tmp_x_00036' - g_temp' * tmp1' ))' ;
-            clear tmp_x_00036 g_tmp_x_00036 ;
+            % clear tmp_x_00036 g_tmp_x_00036 ;
             g_tmp2= g_tmp1.* exp(tmp1);
             tmp2= exp(tmp1); 
             g_tmp_x_00037= g_x(1);
@@ -372,7 +372,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00047= tmp_x_00037* tmp2;
             g_fvec(i)= g_tmp_dfovec_1d_00047;
             fvec(i)= tmp_dfovec_1d_00047- y3(i); 
-            clear tmp_x_00037 tmp_dfovec_1d_00047 g_tmp_x_00037 g_tmp_dfovec_1d_00047 ;
+            % clear tmp_x_00037 tmp_dfovec_1d_00047 g_tmp_x_00037 g_tmp_dfovec_1d_00047 ;
          end
       case 11
          for i= 1: 29
@@ -391,7 +391,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
                % Update detected: s1= some_expression(s1,...)
                g_s1= g_tmp_dfovec_1d_00194;
                s1= tmp_dfovec_1d_00194;
-               clear tmp_dfovec_1d_00048 tmp_x_00038 tmp_dfovec_1d_00049 g_tmp_x_00038 g_tmp_dfovec_1d_00049 ;
+               % clear tmp_dfovec_1d_00048 tmp_x_00038 tmp_dfovec_1d_00049 g_tmp_x_00038 g_tmp_dfovec_1d_00049 ;
                tmp_dfovec_1d_00195= div* dx; 
                % Update detected: dx= some_expression(dx,...)
                dx= tmp_dfovec_1d_00195;
@@ -409,7 +409,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
                % Update detected: s2= some_expression(s2,...)
                g_s2= g_tmp_dfovec_1d_00196;
                s2= tmp_dfovec_1d_00196;
-               clear tmp_x_00039 tmp_dfovec_1d_00050 g_tmp_x_00039 g_tmp_dfovec_1d_00050 ;
+               % clear tmp_x_00039 tmp_dfovec_1d_00050 g_tmp_x_00039 g_tmp_dfovec_1d_00050 ;
                tmp_dfovec_1d_00197= div* dx; 
                % Update detected: dx= some_expression(dx,...)
                dx= tmp_dfovec_1d_00197;
@@ -418,13 +418,13 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00051= s2^ 2;
             g_fvec(i)= g_s1- g_tmp_dfovec_1d_00051;
             fvec(i)= s1- tmp_dfovec_1d_00051- 1; 
-            clear tmp_dfovec_1d_00051 g_tmp_dfovec_1d_00051 ;
+            % clear tmp_dfovec_1d_00051 g_tmp_dfovec_1d_00051 ;
          end
          g_tmp_x_00040= g_x(1);
          tmp_x_00040= x(1);
          g_fvec(30)= g_tmp_x_00040;
          fvec(30)= tmp_x_00040; 
-         clear tmp_x_00040 g_tmp_x_00040 ;
+         % clear tmp_x_00040 g_tmp_x_00040 ;
          g_tmp_x_00041= g_x(2);
          tmp_x_00041= x(2);
          g_tmp_x_00042= g_x(1);
@@ -433,7 +433,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00052= tmp_x_00042^ 2;
          g_fvec(31)= g_tmp_x_00041- g_tmp_dfovec_1d_00052;
          fvec(31)= tmp_x_00041- tmp_dfovec_1d_00052- 1; 
-         clear tmp_x_00041 tmp_x_00042 tmp_dfovec_1d_00052 g_tmp_x_00041 g_tmp_x_00042 g_tmp_dfovec_1d_00052 ;
+         % clear tmp_x_00041 tmp_x_00042 tmp_dfovec_1d_00052 g_tmp_x_00041 g_tmp_x_00042 g_tmp_dfovec_1d_00052 ;
       case 12
          for i= 1: m
             temp= i; 
@@ -468,7 +468,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00058= tmp_dfovec_1d_00057* tmp_x_00045;
             g_fvec(i)= g_tmp_exp_00000- g_tmp_exp_00001+ g_tmp_dfovec_1d_00058;
             fvec(i)= tmp_exp_00000- tmp_exp_00001+ tmp_dfovec_1d_00058; 
-            clear tmp_dfovec_1d_00053 tmp_x_00043 tmp_dfovec_1d_00054 tmp_exp_00000 tmp_x_00044 tmp_dfovec_1d_00055 tmp_exp_00001 tmp_dfovec_1d_00056 tmp_exp_00002 tmp_exp_00003 tmp_dfovec_1d_00057 tmp_x_00045 tmp_dfovec_1d_00058 g_tmp_dfovec_1d_00053 g_tmp_x_00043 g_tmp_dfovec_1d_00054 g_tmp_exp_00000 g_tmp_x_00044 g_tmp_dfovec_1d_00055 g_tmp_exp_00001 g_tmp_dfovec_1d_00056 g_tmp_exp_00002 g_tmp_exp_00003 g_tmp_dfovec_1d_00057 g_tmp_x_00045 g_tmp_dfovec_1d_00058 ;
+            % clear tmp_dfovec_1d_00053 tmp_x_00043 tmp_dfovec_1d_00054 tmp_exp_00000 tmp_x_00044 tmp_dfovec_1d_00055 tmp_exp_00001 tmp_dfovec_1d_00056 tmp_exp_00002 tmp_exp_00003 tmp_dfovec_1d_00057 tmp_x_00045 tmp_dfovec_1d_00058 g_tmp_dfovec_1d_00053 g_tmp_x_00043 g_tmp_dfovec_1d_00054 g_tmp_exp_00000 g_tmp_x_00044 g_tmp_dfovec_1d_00055 g_tmp_exp_00001 g_tmp_dfovec_1d_00056 g_tmp_exp_00002 g_tmp_exp_00003 g_tmp_dfovec_1d_00057 g_tmp_x_00045 g_tmp_dfovec_1d_00058 ;
          end
       case 13
          for i= 1: m
@@ -490,7 +490,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_exp_00005= exp(tmp_dfovec_1d_00061);
             g_fvec(i)= g_tmp_dfovec_1d_00059- g_tmp_exp_00004- g_tmp_exp_00005;
             fvec(i)= 2+ tmp_dfovec_1d_00059- tmp_exp_00004- tmp_exp_00005; 
-            clear tmp_dfovec_1d_00059 tmp_x_00046 tmp_dfovec_1d_00060 tmp_exp_00004 tmp_x_00047 tmp_dfovec_1d_00061 tmp_exp_00005 g_tmp_dfovec_1d_00059 g_tmp_x_00046 g_tmp_dfovec_1d_00060 g_tmp_exp_00004 g_tmp_x_00047 g_tmp_dfovec_1d_00061 g_tmp_exp_00005 ;
+            % clear tmp_dfovec_1d_00059 tmp_x_00046 tmp_dfovec_1d_00060 tmp_exp_00004 tmp_x_00047 tmp_dfovec_1d_00061 tmp_exp_00005 g_tmp_dfovec_1d_00059 g_tmp_x_00046 g_tmp_dfovec_1d_00060 g_tmp_exp_00004 g_tmp_x_00047 g_tmp_dfovec_1d_00061 g_tmp_exp_00005 ;
          end
       case 14
          for i= 1: m
@@ -506,7 +506,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_exp_00006= exp(temp);
             g_tmp1= g_tmp_x_00048+ g_tmp_dfovec_1d_00062- g_tmp_exp_00006;
             tmp1= tmp_x_00048+ tmp_dfovec_1d_00062- tmp_exp_00006; 
-            clear tmp_x_00048 tmp_x_00049 tmp_dfovec_1d_00062 tmp_exp_00006 g_tmp_x_00048 g_tmp_x_00049 g_tmp_dfovec_1d_00062 g_tmp_exp_00006 ;
+            % clear tmp_x_00048 tmp_x_00049 tmp_dfovec_1d_00062 tmp_exp_00006 g_tmp_x_00048 g_tmp_x_00049 g_tmp_dfovec_1d_00062 g_tmp_exp_00006 ;
             g_tmp_x_00050= g_x(3);
             tmp_x_00050= x(3);
             g_tmp_sin_00000= g_temp.* cos(temp);
@@ -519,14 +519,14 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_cos_00000= cos(temp);
             g_tmp2= g_tmp_x_00050+ g_tmp_dfovec_1d_00063- g_tmp_cos_00000;
             tmp2= tmp_x_00050+ tmp_dfovec_1d_00063- tmp_cos_00000; 
-            clear tmp_x_00050 tmp_sin_00000 tmp_x_00051 tmp_dfovec_1d_00063 tmp_cos_00000 g_tmp_x_00050 g_tmp_sin_00000 g_tmp_x_00051 g_tmp_dfovec_1d_00063 g_tmp_cos_00000 ;
+            % clear tmp_x_00050 tmp_sin_00000 tmp_x_00051 tmp_dfovec_1d_00063 tmp_cos_00000 g_tmp_x_00050 g_tmp_sin_00000 g_tmp_x_00051 g_tmp_dfovec_1d_00063 g_tmp_cos_00000 ;
             g_tmp_dfovec_1d_00064= adimat_g_pow_left(g_tmp1, tmp1, 2);
             tmp_dfovec_1d_00064= tmp1^ 2;
             g_tmp_dfovec_1d_00065= adimat_g_pow_left(g_tmp2, tmp2, 2);
             tmp_dfovec_1d_00065= tmp2^ 2;
             g_fvec(i)= g_tmp_dfovec_1d_00064+ g_tmp_dfovec_1d_00065;
             fvec(i)= tmp_dfovec_1d_00064+ tmp_dfovec_1d_00065; 
-            clear tmp_dfovec_1d_00064 tmp_dfovec_1d_00065 g_tmp_dfovec_1d_00064 g_tmp_dfovec_1d_00065 ;
+            % clear tmp_dfovec_1d_00064 tmp_dfovec_1d_00065 g_tmp_dfovec_1d_00064 g_tmp_dfovec_1d_00065 ;
          end
       case 15
          for j= 1: n
@@ -538,7 +538,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00066= 2* tmp_x_00052;
             g_t2= g_tmp_dfovec_1d_00066;
             t2= tmp_dfovec_1d_00066- 1; 
-            clear tmp_x_00052 tmp_dfovec_1d_00066 g_tmp_x_00052 g_tmp_dfovec_1d_00066 ;
+            % clear tmp_x_00052 tmp_dfovec_1d_00066 g_tmp_x_00052 g_tmp_dfovec_1d_00066 ;
             g_t= 2* g_t2;
             t= 2* t2; 
             for i= 1: m
@@ -546,12 +546,12 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
                tmp_fvec_00001= fvec(i);
                g_fvec(i)= g_tmp_fvec_00001+ g_t2;
                fvec(i)= tmp_fvec_00001+ t2; 
-               clear tmp_fvec_00001 g_tmp_fvec_00001 ;
+               % clear tmp_fvec_00001 g_tmp_fvec_00001 ;
                g_tmp_dfovec_1d_00067= g_t* t2+ t* g_t2;
                tmp_dfovec_1d_00067= t* t2;
                g_th= g_tmp_dfovec_1d_00067- g_t1;
                th= tmp_dfovec_1d_00067- t1; 
-               clear tmp_dfovec_1d_00067 g_tmp_dfovec_1d_00067 ;
+               % clear tmp_dfovec_1d_00067 g_tmp_dfovec_1d_00067 ;
                g_t1= g_t2;
                t1= t2; 
                g_t2= g_th;
@@ -564,7 +564,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_fvec_00002= fvec(i);
             g_fvec(i)= (n' \ g_tmp_fvec_00002' )' ;
             fvec(i)= tmp_fvec_00002/ n; 
-            clear tmp_fvec_00002 g_tmp_fvec_00002 ;
+            % clear tmp_fvec_00002 g_tmp_fvec_00002 ;
             if (iev> 0)
                g_tmp_fvec_00003= g_fvec(i);
                tmp_fvec_00003= fvec(i);
@@ -573,7 +573,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
                tmp_dfovec_1d_00070= 1/ tmp_dfovec_1d_00069;
                g_fvec(i)= g_tmp_fvec_00003;
                fvec(i)= tmp_fvec_00003+ tmp_dfovec_1d_00070; 
-               clear tmp_fvec_00003 tmp_dfovec_1d_00068 tmp_dfovec_1d_00069 tmp_dfovec_1d_00070 g_tmp_fvec_00003 ;
+               % clear tmp_fvec_00003 tmp_dfovec_1d_00068 tmp_dfovec_1d_00069 tmp_dfovec_1d_00070 g_tmp_fvec_00003 ;
             end
             tmp_dfovec_1d_00198= -iev; 
             % Update detected: iev= some_expression(iev,...)
@@ -583,7 +583,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00071= n+ 1;
          sum1= -tmp_dfovec_1d_00071; 
          g_sum1= zeros(size(sum1));
-         clear tmp_dfovec_1d_00071 ;
+         % clear tmp_dfovec_1d_00071 ;
          prod1= 1; 
          g_prod1= zeros(size(prod1));
          for j= 1: n
@@ -594,7 +594,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             % Update detected: sum1= some_expression(sum1,...)
             g_sum1= g_tmp_dfovec_1d_00199;
             sum1= tmp_dfovec_1d_00199;
-            clear tmp_x_00053 g_tmp_x_00053 ;
+            % clear tmp_x_00053 g_tmp_x_00053 ;
             g_tmp_x_00054= g_x(j);
             tmp_x_00054= x(j);
             g_tmp_dfovec_1d_00200= g_tmp_x_00054* prod1+ tmp_x_00054* g_prod1;
@@ -602,7 +602,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             % Update detected: prod1= some_expression(prod1,...)
             g_prod1= g_tmp_dfovec_1d_00200;
             prod1= tmp_dfovec_1d_00200;
-            clear tmp_x_00054 g_tmp_x_00054 ;
+            % clear tmp_x_00054 g_tmp_x_00054 ;
          end
          tmp_dfovec_1d_00072= n- 1;
          for i= 1: tmp_dfovec_1d_00072
@@ -610,10 +610,10 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_x_00055= x(i);
             g_fvec(i)= g_tmp_x_00055+ g_sum1;
             fvec(i)= tmp_x_00055+ sum1; 
-            clear tmp_x_00055 g_tmp_x_00055 ;
+            % clear tmp_x_00055 g_tmp_x_00055 ;
             tmp_dfovec_1d_00072= n- 1;
          end
-         clear tmp_dfovec_1d_00072 ;
+         % clear tmp_dfovec_1d_00072 ;
          g_fvec(n)= g_prod1;
          fvec(n)= prod1- 1; 
       case 17
@@ -621,7 +621,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00073= i- 1;
             temp= 10* tmp_dfovec_1d_00073; 
             g_temp= zeros(size(temp));
-            clear tmp_dfovec_1d_00073 ;
+            % clear tmp_dfovec_1d_00073 ;
             g_tmp_x_00056= g_x(4);
             tmp_x_00056= x(4);
             g_tmp_dfovec_1d_00074= -g_tmp_x_00056;
@@ -630,7 +630,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00075= tmp_dfovec_1d_00074* temp;
             g_tmp1= g_tmp_dfovec_1d_00075.* exp(tmp_dfovec_1d_00075);
             tmp1= exp(tmp_dfovec_1d_00075); 
-            clear tmp_x_00056 tmp_dfovec_1d_00074 tmp_dfovec_1d_00075 g_tmp_x_00056 g_tmp_dfovec_1d_00074 g_tmp_dfovec_1d_00075 ;
+            % clear tmp_x_00056 tmp_dfovec_1d_00074 tmp_dfovec_1d_00075 g_tmp_x_00056 g_tmp_dfovec_1d_00074 g_tmp_dfovec_1d_00075 ;
             g_tmp_x_00057= g_x(5);
             tmp_x_00057= x(5);
             g_tmp_dfovec_1d_00076= -g_tmp_x_00057;
@@ -639,7 +639,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00077= tmp_dfovec_1d_00076* temp;
             g_tmp2= g_tmp_dfovec_1d_00077.* exp(tmp_dfovec_1d_00077);
             tmp2= exp(tmp_dfovec_1d_00077); 
-            clear tmp_x_00057 tmp_dfovec_1d_00076 tmp_dfovec_1d_00077 g_tmp_x_00057 g_tmp_dfovec_1d_00076 g_tmp_dfovec_1d_00077 ;
+            % clear tmp_x_00057 tmp_dfovec_1d_00076 tmp_dfovec_1d_00077 g_tmp_x_00057 g_tmp_dfovec_1d_00076 g_tmp_dfovec_1d_00077 ;
             g_tmp_x_00058= g_x(1);
             tmp_x_00058= x(1);
             g_tmp_x_00059= g_x(2);
@@ -654,14 +654,14 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00080= tmp_x_00058+ tmp_dfovec_1d_00078+ tmp_dfovec_1d_00079;
             g_fvec(i)= -g_tmp_dfovec_1d_00080;
             fvec(i)= y4(i)- tmp_dfovec_1d_00080; 
-            clear tmp_x_00058 tmp_x_00059 tmp_dfovec_1d_00078 tmp_x_00060 tmp_dfovec_1d_00079 tmp_dfovec_1d_00080 g_tmp_x_00058 g_tmp_x_00059 g_tmp_dfovec_1d_00078 g_tmp_x_00060 g_tmp_dfovec_1d_00079 g_tmp_dfovec_1d_00080 ;
+            % clear tmp_x_00058 tmp_x_00059 tmp_dfovec_1d_00078 tmp_x_00060 tmp_dfovec_1d_00079 tmp_dfovec_1d_00080 g_tmp_x_00058 g_tmp_x_00059 g_tmp_dfovec_1d_00078 g_tmp_x_00060 g_tmp_dfovec_1d_00079 g_tmp_dfovec_1d_00080 ;
          end
       case 18
          for i= 1: 65
             tmp_dfovec_1d_00081= i- 1;
             temp= tmp_dfovec_1d_00081/ 10; 
             g_temp= zeros(size(temp));
-            clear tmp_dfovec_1d_00081 ;
+            % clear tmp_dfovec_1d_00081 ;
             g_tmp_x_00061= g_x(5);
             tmp_x_00061= x(5);
             g_tmp_dfovec_1d_00082= -g_tmp_x_00061;
@@ -670,7 +670,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00083= tmp_dfovec_1d_00082* temp;
             g_tmp1= g_tmp_dfovec_1d_00083.* exp(tmp_dfovec_1d_00083);
             tmp1= exp(tmp_dfovec_1d_00083); 
-            clear tmp_x_00061 tmp_dfovec_1d_00082 tmp_dfovec_1d_00083 g_tmp_x_00061 g_tmp_dfovec_1d_00082 g_tmp_dfovec_1d_00083 ;
+            % clear tmp_x_00061 tmp_dfovec_1d_00082 tmp_dfovec_1d_00083 g_tmp_x_00061 g_tmp_dfovec_1d_00082 g_tmp_dfovec_1d_00083 ;
             g_tmp_x_00062= g_x(6);
             tmp_x_00062= x(6);
             g_tmp_dfovec_1d_00084= -g_tmp_x_00062;
@@ -685,7 +685,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00087= tmp_dfovec_1d_00084* tmp_dfovec_1d_00086;
             g_tmp2= g_tmp_dfovec_1d_00087.* exp(tmp_dfovec_1d_00087);
             tmp2= exp(tmp_dfovec_1d_00087); 
-            clear tmp_x_00062 tmp_dfovec_1d_00084 tmp_x_00063 tmp_dfovec_1d_00085 tmp_dfovec_1d_00086 tmp_dfovec_1d_00087 g_tmp_x_00062 g_tmp_dfovec_1d_00084 g_tmp_x_00063 g_tmp_dfovec_1d_00085 g_tmp_dfovec_1d_00086 g_tmp_dfovec_1d_00087 ;
+            % clear tmp_x_00062 tmp_dfovec_1d_00084 tmp_x_00063 tmp_dfovec_1d_00085 tmp_dfovec_1d_00086 tmp_dfovec_1d_00087 g_tmp_x_00062 g_tmp_dfovec_1d_00084 g_tmp_x_00063 g_tmp_dfovec_1d_00085 g_tmp_dfovec_1d_00086 g_tmp_dfovec_1d_00087 ;
             g_tmp_x_00064= g_x(7);
             tmp_x_00064= x(7);
             g_tmp_dfovec_1d_00088= -g_tmp_x_00064;
@@ -700,7 +700,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00091= tmp_dfovec_1d_00088* tmp_dfovec_1d_00090;
             g_tmp3= g_tmp_dfovec_1d_00091.* exp(tmp_dfovec_1d_00091);
             tmp3= exp(tmp_dfovec_1d_00091); 
-            clear tmp_x_00064 tmp_dfovec_1d_00088 tmp_x_00065 tmp_dfovec_1d_00089 tmp_dfovec_1d_00090 tmp_dfovec_1d_00091 g_tmp_x_00064 g_tmp_dfovec_1d_00088 g_tmp_x_00065 g_tmp_dfovec_1d_00089 g_tmp_dfovec_1d_00090 g_tmp_dfovec_1d_00091 ;
+            % clear tmp_x_00064 tmp_dfovec_1d_00088 tmp_x_00065 tmp_dfovec_1d_00089 tmp_dfovec_1d_00090 tmp_dfovec_1d_00091 g_tmp_x_00064 g_tmp_dfovec_1d_00088 g_tmp_x_00065 g_tmp_dfovec_1d_00089 g_tmp_dfovec_1d_00090 g_tmp_dfovec_1d_00091 ;
             g_tmp_x_00066= g_x(8);
             tmp_x_00066= x(8);
             g_tmp_dfovec_1d_00092= -g_tmp_x_00066;
@@ -715,7 +715,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00095= tmp_dfovec_1d_00092* tmp_dfovec_1d_00094;
             g_tmp4= g_tmp_dfovec_1d_00095.* exp(tmp_dfovec_1d_00095);
             tmp4= exp(tmp_dfovec_1d_00095); 
-            clear tmp_x_00066 tmp_dfovec_1d_00092 tmp_x_00067 tmp_dfovec_1d_00093 tmp_dfovec_1d_00094 tmp_dfovec_1d_00095 g_tmp_x_00066 g_tmp_dfovec_1d_00092 g_tmp_x_00067 g_tmp_dfovec_1d_00093 g_tmp_dfovec_1d_00094 g_tmp_dfovec_1d_00095 ;
+            % clear tmp_x_00066 tmp_dfovec_1d_00092 tmp_x_00067 tmp_dfovec_1d_00093 tmp_dfovec_1d_00094 tmp_dfovec_1d_00095 g_tmp_x_00066 g_tmp_dfovec_1d_00092 g_tmp_x_00067 g_tmp_dfovec_1d_00093 g_tmp_dfovec_1d_00094 g_tmp_dfovec_1d_00095 ;
             g_tmp_x_00068= g_x(1);
             tmp_x_00068= x(1);
             g_tmp_dfovec_1d_00096= g_tmp_x_00068* tmp1+ tmp_x_00068* g_tmp1;
@@ -736,7 +736,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00100= tmp_dfovec_1d_00096+ tmp_dfovec_1d_00097+ tmp_dfovec_1d_00098+ tmp_dfovec_1d_00099;
             g_fvec(i)= -g_tmp_dfovec_1d_00100;
             fvec(i)= y5(i)- tmp_dfovec_1d_00100; 
-            clear tmp_x_00068 tmp_dfovec_1d_00096 tmp_x_00069 tmp_dfovec_1d_00097 tmp_x_00070 tmp_dfovec_1d_00098 tmp_x_00071 tmp_dfovec_1d_00099 tmp_dfovec_1d_00100 g_tmp_x_00068 g_tmp_dfovec_1d_00096 g_tmp_x_00069 g_tmp_dfovec_1d_00097 g_tmp_x_00070 g_tmp_dfovec_1d_00098 g_tmp_x_00071 g_tmp_dfovec_1d_00099 g_tmp_dfovec_1d_00100 ;
+            % clear tmp_x_00068 tmp_dfovec_1d_00096 tmp_x_00069 tmp_dfovec_1d_00097 tmp_x_00070 tmp_dfovec_1d_00098 tmp_x_00071 tmp_dfovec_1d_00099 tmp_dfovec_1d_00100 g_tmp_x_00068 g_tmp_dfovec_1d_00096 g_tmp_x_00069 g_tmp_dfovec_1d_00097 g_tmp_x_00070 g_tmp_dfovec_1d_00098 g_tmp_x_00071 g_tmp_dfovec_1d_00099 g_tmp_dfovec_1d_00100 ;
          end
       case 19% n>=5, m = (n-4)*2
          tmp_dfovec_1d_00101= n- 4;
@@ -749,7 +749,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00103= tmp_dfovec_1d_00102+ 3.0;
             g_fvec(i)= g_tmp_dfovec_1d_00103;
             fvec(i)= tmp_dfovec_1d_00103; 
-            clear tmp_x_00072 tmp_dfovec_1d_00102 tmp_dfovec_1d_00103 g_tmp_x_00072 g_tmp_dfovec_1d_00102 g_tmp_dfovec_1d_00103 ;
+            % clear tmp_x_00072 tmp_dfovec_1d_00102 tmp_dfovec_1d_00103 g_tmp_x_00072 g_tmp_dfovec_1d_00102 g_tmp_dfovec_1d_00103 ;
             g_tmp_x_00073= g_x(i);
             tmp_x_00073= x(i);
             g_tmp_dfovec_1d_00104= adimat_g_pow_left(g_tmp_x_00073, tmp_x_00073, 2);
@@ -785,10 +785,10 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00116= tmp_dfovec_1d_00104+ tmp_dfovec_1d_00107+ tmp_dfovec_1d_00110+ tmp_dfovec_1d_00113+ tmp_dfovec_1d_00115;
             g_fvec(n- 4+ i)= g_tmp_dfovec_1d_00116;
             fvec(n- 4+ i)= tmp_dfovec_1d_00116; 
-            clear tmp_x_00073 tmp_dfovec_1d_00104 tmp_dfovec_1d_00105 tmp_x_00074 tmp_dfovec_1d_00106 tmp_dfovec_1d_00107 tmp_dfovec_1d_00108 tmp_x_00075 tmp_dfovec_1d_00109 tmp_dfovec_1d_00110 tmp_dfovec_1d_00111 tmp_x_00076 tmp_dfovec_1d_00112 tmp_dfovec_1d_00113 tmp_x_00077 tmp_dfovec_1d_00114 tmp_dfovec_1d_00115 tmp_dfovec_1d_00116 g_tmp_x_00073 g_tmp_dfovec_1d_00104 g_tmp_x_00074 g_tmp_dfovec_1d_00106 g_tmp_dfovec_1d_00107 g_tmp_x_00075 g_tmp_dfovec_1d_00109 g_tmp_dfovec_1d_00110 g_tmp_x_00076 g_tmp_dfovec_1d_00112 g_tmp_dfovec_1d_00113 g_tmp_x_00077 g_tmp_dfovec_1d_00114 g_tmp_dfovec_1d_00115 g_tmp_dfovec_1d_00116 ;
+            % clear tmp_x_00073 tmp_dfovec_1d_00104 tmp_dfovec_1d_00105 tmp_x_00074 tmp_dfovec_1d_00106 tmp_dfovec_1d_00107 tmp_dfovec_1d_00108 tmp_x_00075 tmp_dfovec_1d_00109 tmp_dfovec_1d_00110 tmp_dfovec_1d_00111 tmp_x_00076 tmp_dfovec_1d_00112 tmp_dfovec_1d_00113 tmp_x_00077 tmp_dfovec_1d_00114 tmp_dfovec_1d_00115 tmp_dfovec_1d_00116 g_tmp_x_00073 g_tmp_dfovec_1d_00104 g_tmp_x_00074 g_tmp_dfovec_1d_00106 g_tmp_dfovec_1d_00107 g_tmp_x_00075 g_tmp_dfovec_1d_00109 g_tmp_dfovec_1d_00110 g_tmp_x_00076 g_tmp_dfovec_1d_00112 g_tmp_dfovec_1d_00113 g_tmp_x_00077 g_tmp_dfovec_1d_00114 g_tmp_dfovec_1d_00115 g_tmp_dfovec_1d_00116 ;
             tmp_dfovec_1d_00101= n- 4;
          end
-         clear tmp_dfovec_1d_00101 ;
+         % clear tmp_dfovec_1d_00101 ;
       case 20% n=2; m=n;
          g_tmp_x_00078= g_x(1);
          tmp_x_00078= x(1);
@@ -796,7 +796,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00117= tmp_x_00078- 1.0;
          g_fvec(1)= g_tmp_dfovec_1d_00117;
          fvec(1)= tmp_dfovec_1d_00117; 
-         clear tmp_x_00078 tmp_dfovec_1d_00117 g_tmp_x_00078 g_tmp_dfovec_1d_00117 ;
+         % clear tmp_x_00078 tmp_dfovec_1d_00117 g_tmp_x_00078 g_tmp_dfovec_1d_00117 ;
          for i= 2: n
             g_tmp_x_00079= g_x(i);
             tmp_x_00079= x(i);
@@ -809,7 +809,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00120= tmp_x_00079- tmp_dfovec_1d_00119;
             g_fvec(i)= 10* g_tmp_dfovec_1d_00120;
             fvec(i)= 10* tmp_dfovec_1d_00120; 
-            clear tmp_x_00079 tmp_dfovec_1d_00118 tmp_x_00080 tmp_dfovec_1d_00119 tmp_dfovec_1d_00120 g_tmp_x_00079 g_tmp_x_00080 g_tmp_dfovec_1d_00119 g_tmp_dfovec_1d_00120 ;
+            % clear tmp_x_00079 tmp_dfovec_1d_00118 tmp_x_00080 tmp_dfovec_1d_00119 tmp_dfovec_1d_00120 g_tmp_x_00079 g_tmp_x_00080 g_tmp_dfovec_1d_00119 g_tmp_dfovec_1d_00120 ;
          end
       case 21% n >=2; m=n
          for i= 1: n
@@ -825,7 +825,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
                tmp_dfovec_1d_00123= tmp_dfovec_1d_00121+ tmp_dfovec_1d_00122;
                v2= sqrt(tmp_dfovec_1d_00123); 
                g_v2= g_tmp_dfovec_1d_00123./ (2.* v2);
-               clear tmp_x_00081 tmp_dfovec_1d_00121 tmp_dfovec_1d_00122 tmp_dfovec_1d_00123 g_tmp_x_00081 g_tmp_dfovec_1d_00121 g_tmp_dfovec_1d_00123 ;
+               % clear tmp_x_00081 tmp_dfovec_1d_00121 tmp_dfovec_1d_00122 tmp_dfovec_1d_00123 g_tmp_x_00081 g_tmp_dfovec_1d_00121 g_tmp_dfovec_1d_00123 ;
                g_tmp_log_00000= g_v2./ v2;
                tmp_log_00000= log(v2);
                g_tmp_sin_00001= g_tmp_log_00000.* cos(tmp_log_00000);
@@ -845,7 +845,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
                % Update detected: ss= some_expression(ss,...)
                g_ss= g_tmp_dfovec_1d_00201;
                ss= tmp_dfovec_1d_00201;
-               clear tmp_log_00000 tmp_sin_00001 tmp_dfovec_1d_00124 tmp_cos_00001 tmp_dfovec_1d_00125 tmp_dfovec_1d_00126 tmp_dfovec_1d_00127 g_tmp_log_00000 g_tmp_sin_00001 g_tmp_dfovec_1d_00124 g_tmp_cos_00001 g_tmp_dfovec_1d_00125 g_tmp_dfovec_1d_00126 g_tmp_dfovec_1d_00127 ;
+               % clear tmp_log_00000 tmp_sin_00001 tmp_dfovec_1d_00124 tmp_cos_00001 tmp_dfovec_1d_00125 tmp_dfovec_1d_00126 tmp_dfovec_1d_00127 g_tmp_log_00000 g_tmp_sin_00001 g_tmp_dfovec_1d_00124 g_tmp_cos_00001 g_tmp_dfovec_1d_00125 g_tmp_dfovec_1d_00126 g_tmp_dfovec_1d_00127 ;
             end
             g_tmp_x_00082= g_x(i);
             tmp_x_00082= x(i);
@@ -855,7 +855,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             tmp_dfovec_1d_00130= tmp_dfovec_1d_00129^ 3;
             g_fvec(i)= g_tmp_dfovec_1d_00128+ g_ss;
             fvec(i)= tmp_dfovec_1d_00128+ tmp_dfovec_1d_00130+ ss; 
-            clear tmp_x_00082 tmp_dfovec_1d_00128 tmp_dfovec_1d_00129 tmp_dfovec_1d_00130 g_tmp_x_00082 g_tmp_dfovec_1d_00128 ;
+            % clear tmp_x_00082 tmp_dfovec_1d_00128 tmp_dfovec_1d_00129 tmp_dfovec_1d_00130 g_tmp_x_00082 g_tmp_dfovec_1d_00128 ;
          end
       case 22% m=n=8
          g_tmp_x_00083= g_x(1);
@@ -864,14 +864,14 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_x_00084= x(2);
          g_fvec(1)= g_tmp_x_00083+ g_tmp_x_00084;
          fvec(1)= tmp_x_00083+ tmp_x_00084+ 0.69; 
-         clear tmp_x_00083 tmp_x_00084 g_tmp_x_00083 g_tmp_x_00084 ;
+         % clear tmp_x_00083 tmp_x_00084 g_tmp_x_00083 g_tmp_x_00084 ;
          g_tmp_x_00085= g_x(3);
          tmp_x_00085= x(3);
          g_tmp_x_00086= g_x(4);
          tmp_x_00086= x(4);
          g_fvec(2)= g_tmp_x_00085+ g_tmp_x_00086;
          fvec(2)= tmp_x_00085+ tmp_x_00086+ 0.044; 
-         clear tmp_x_00085 tmp_x_00086 g_tmp_x_00085 g_tmp_x_00086 ;
+         % clear tmp_x_00085 tmp_x_00086 g_tmp_x_00085 g_tmp_x_00086 ;
          g_tmp_x_00087= g_x(5);
          tmp_x_00087= x(5);
          g_tmp_x_00088= g_x(1);
@@ -898,7 +898,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00134= tmp_x_00093* tmp_x_00094;
          g_fvec(3)= g_tmp_dfovec_1d_00131+ g_tmp_dfovec_1d_00132- g_tmp_dfovec_1d_00133- g_tmp_dfovec_1d_00134;
          fvec(3)= tmp_dfovec_1d_00131+ tmp_dfovec_1d_00132- tmp_dfovec_1d_00133- tmp_dfovec_1d_00134+ 1.57; 
-         clear tmp_x_00087 tmp_x_00088 tmp_dfovec_1d_00131 tmp_x_00089 tmp_x_00090 tmp_dfovec_1d_00132 tmp_x_00091 tmp_x_00092 tmp_dfovec_1d_00133 tmp_x_00093 tmp_x_00094 tmp_dfovec_1d_00134 g_tmp_x_00087 g_tmp_x_00088 g_tmp_dfovec_1d_00131 g_tmp_x_00089 g_tmp_x_00090 g_tmp_dfovec_1d_00132 g_tmp_x_00091 g_tmp_x_00092 g_tmp_dfovec_1d_00133 g_tmp_x_00093 g_tmp_x_00094 g_tmp_dfovec_1d_00134 ;
+         % clear tmp_x_00087 tmp_x_00088 tmp_dfovec_1d_00131 tmp_x_00089 tmp_x_00090 tmp_dfovec_1d_00132 tmp_x_00091 tmp_x_00092 tmp_dfovec_1d_00133 tmp_x_00093 tmp_x_00094 tmp_dfovec_1d_00134 g_tmp_x_00087 g_tmp_x_00088 g_tmp_dfovec_1d_00131 g_tmp_x_00089 g_tmp_x_00090 g_tmp_dfovec_1d_00132 g_tmp_x_00091 g_tmp_x_00092 g_tmp_dfovec_1d_00133 g_tmp_x_00093 g_tmp_x_00094 g_tmp_dfovec_1d_00134 ;
          g_tmp_x_00095= g_x(7);
          tmp_x_00095= x(7);
          g_tmp_x_00096= g_x(1);
@@ -925,7 +925,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00138= tmp_x_00101* tmp_x_00102;
          g_fvec(4)= g_tmp_dfovec_1d_00135+ g_tmp_dfovec_1d_00136+ g_tmp_dfovec_1d_00137+ g_tmp_dfovec_1d_00138;
          fvec(4)= tmp_dfovec_1d_00135+ tmp_dfovec_1d_00136+ tmp_dfovec_1d_00137+ tmp_dfovec_1d_00138+ 1.31; 
-         clear tmp_x_00095 tmp_x_00096 tmp_dfovec_1d_00135 tmp_x_00097 tmp_x_00098 tmp_dfovec_1d_00136 tmp_x_00099 tmp_x_00100 tmp_dfovec_1d_00137 tmp_x_00101 tmp_x_00102 tmp_dfovec_1d_00138 g_tmp_x_00095 g_tmp_x_00096 g_tmp_dfovec_1d_00135 g_tmp_x_00097 g_tmp_x_00098 g_tmp_dfovec_1d_00136 g_tmp_x_00099 g_tmp_x_00100 g_tmp_dfovec_1d_00137 g_tmp_x_00101 g_tmp_x_00102 g_tmp_dfovec_1d_00138 ;
+         % clear tmp_x_00095 tmp_x_00096 tmp_dfovec_1d_00135 tmp_x_00097 tmp_x_00098 tmp_dfovec_1d_00136 tmp_x_00099 tmp_x_00100 tmp_dfovec_1d_00137 tmp_x_00101 tmp_x_00102 tmp_dfovec_1d_00138 g_tmp_x_00095 g_tmp_x_00096 g_tmp_dfovec_1d_00135 g_tmp_x_00097 g_tmp_x_00098 g_tmp_dfovec_1d_00136 g_tmp_x_00099 g_tmp_x_00100 g_tmp_dfovec_1d_00137 g_tmp_x_00101 g_tmp_x_00102 g_tmp_dfovec_1d_00138 ;
          g_tmp_x_00103= g_x(1);
          tmp_x_00103= x(1);
          g_tmp_x_00104= g_x(5);
@@ -964,7 +964,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00148= 2.0* tmp_x_00110* tmp_x_00108* tmp_x_00109;
          g_fvec(5)= g_tmp_dfovec_1d_00142- g_tmp_dfovec_1d_00143+ g_tmp_dfovec_1d_00147- g_tmp_dfovec_1d_00148;
          fvec(5)= tmp_dfovec_1d_00142- tmp_dfovec_1d_00143+ tmp_dfovec_1d_00147- tmp_dfovec_1d_00148+ 2.65; 
-         clear tmp_x_00103 tmp_x_00104 tmp_dfovec_1d_00139 tmp_x_00105 tmp_dfovec_1d_00140 tmp_dfovec_1d_00141 tmp_dfovec_1d_00142 tmp_x_00106 tmp_dfovec_1d_00143 tmp_x_00107 tmp_x_00108 tmp_dfovec_1d_00144 tmp_x_00109 tmp_dfovec_1d_00145 tmp_dfovec_1d_00146 tmp_dfovec_1d_00147 tmp_x_00110 tmp_dfovec_1d_00148 g_tmp_x_00103 g_tmp_x_00104 g_tmp_dfovec_1d_00139 g_tmp_x_00105 g_tmp_dfovec_1d_00140 g_tmp_dfovec_1d_00141 g_tmp_dfovec_1d_00142 g_tmp_x_00106 g_tmp_dfovec_1d_00143 g_tmp_x_00107 g_tmp_x_00108 g_tmp_dfovec_1d_00144 g_tmp_x_00109 g_tmp_dfovec_1d_00145 g_tmp_dfovec_1d_00146 g_tmp_dfovec_1d_00147 g_tmp_x_00110 g_tmp_dfovec_1d_00148 ;
+         % clear tmp_x_00103 tmp_x_00104 tmp_dfovec_1d_00139 tmp_x_00105 tmp_dfovec_1d_00140 tmp_dfovec_1d_00141 tmp_dfovec_1d_00142 tmp_x_00106 tmp_dfovec_1d_00143 tmp_x_00107 tmp_x_00108 tmp_dfovec_1d_00144 tmp_x_00109 tmp_dfovec_1d_00145 tmp_dfovec_1d_00146 tmp_dfovec_1d_00147 tmp_x_00110 tmp_dfovec_1d_00148 g_tmp_x_00103 g_tmp_x_00104 g_tmp_dfovec_1d_00139 g_tmp_x_00105 g_tmp_dfovec_1d_00140 g_tmp_dfovec_1d_00141 g_tmp_dfovec_1d_00142 g_tmp_x_00106 g_tmp_dfovec_1d_00143 g_tmp_x_00107 g_tmp_x_00108 g_tmp_dfovec_1d_00144 g_tmp_x_00109 g_tmp_dfovec_1d_00145 g_tmp_dfovec_1d_00146 g_tmp_dfovec_1d_00147 g_tmp_x_00110 g_tmp_dfovec_1d_00148 ;
          g_tmp_x_00111= g_x(3);
          tmp_x_00111= x(3);
          g_tmp_x_00112= g_x(5);
@@ -1003,7 +1003,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00158= 2.0* tmp_x_00118* tmp_x_00116* tmp_x_00117;
          g_fvec(6)= g_tmp_dfovec_1d_00152+ g_tmp_dfovec_1d_00153+ g_tmp_dfovec_1d_00157+ g_tmp_dfovec_1d_00158;
          fvec(6)= tmp_dfovec_1d_00152+ tmp_dfovec_1d_00153+ tmp_dfovec_1d_00157+ tmp_dfovec_1d_00158- 2.0; 
-         clear tmp_x_00111 tmp_x_00112 tmp_dfovec_1d_00149 tmp_x_00113 tmp_dfovec_1d_00150 tmp_dfovec_1d_00151 tmp_dfovec_1d_00152 tmp_x_00114 tmp_dfovec_1d_00153 tmp_x_00115 tmp_x_00116 tmp_dfovec_1d_00154 tmp_x_00117 tmp_dfovec_1d_00155 tmp_dfovec_1d_00156 tmp_dfovec_1d_00157 tmp_x_00118 tmp_dfovec_1d_00158 g_tmp_x_00111 g_tmp_x_00112 g_tmp_dfovec_1d_00149 g_tmp_x_00113 g_tmp_dfovec_1d_00150 g_tmp_dfovec_1d_00151 g_tmp_dfovec_1d_00152 g_tmp_x_00114 g_tmp_dfovec_1d_00153 g_tmp_x_00115 g_tmp_x_00116 g_tmp_dfovec_1d_00154 g_tmp_x_00117 g_tmp_dfovec_1d_00155 g_tmp_dfovec_1d_00156 g_tmp_dfovec_1d_00157 g_tmp_x_00118 g_tmp_dfovec_1d_00158 ;
+         % clear tmp_x_00111 tmp_x_00112 tmp_dfovec_1d_00149 tmp_x_00113 tmp_dfovec_1d_00150 tmp_dfovec_1d_00151 tmp_dfovec_1d_00152 tmp_x_00114 tmp_dfovec_1d_00153 tmp_x_00115 tmp_x_00116 tmp_dfovec_1d_00154 tmp_x_00117 tmp_dfovec_1d_00155 tmp_dfovec_1d_00156 tmp_dfovec_1d_00157 tmp_x_00118 tmp_dfovec_1d_00158 g_tmp_x_00111 g_tmp_x_00112 g_tmp_dfovec_1d_00149 g_tmp_x_00113 g_tmp_dfovec_1d_00150 g_tmp_dfovec_1d_00151 g_tmp_dfovec_1d_00152 g_tmp_x_00114 g_tmp_dfovec_1d_00153 g_tmp_x_00115 g_tmp_x_00116 g_tmp_dfovec_1d_00154 g_tmp_x_00117 g_tmp_dfovec_1d_00155 g_tmp_dfovec_1d_00156 g_tmp_dfovec_1d_00157 g_tmp_x_00118 g_tmp_dfovec_1d_00158 ;
          g_tmp_x_00119= g_x(1);
          tmp_x_00119= x(1);
          g_tmp_x_00120= g_x(5);
@@ -1054,7 +1054,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          tmp_dfovec_1d_00174= tmp_x_00126* tmp_x_00125* tmp_dfovec_1d_00173;
          g_fvec(7)= g_tmp_dfovec_1d_00163+ g_tmp_dfovec_1d_00166+ g_tmp_dfovec_1d_00171+ g_tmp_dfovec_1d_00174;
          fvec(7)= tmp_dfovec_1d_00163+ tmp_dfovec_1d_00166+ tmp_dfovec_1d_00171+ tmp_dfovec_1d_00174+ 12.6; 
-         clear tmp_x_00119 tmp_x_00120 tmp_dfovec_1d_00159 tmp_x_00121 tmp_dfovec_1d_00160 tmp_dfovec_1d_00161 tmp_dfovec_1d_00162 tmp_dfovec_1d_00163 tmp_x_00122 tmp_dfovec_1d_00164 tmp_dfovec_1d_00165 tmp_dfovec_1d_00166 tmp_x_00123 tmp_x_00124 tmp_dfovec_1d_00167 tmp_x_00125 tmp_dfovec_1d_00168 tmp_dfovec_1d_00169 tmp_dfovec_1d_00170 tmp_dfovec_1d_00171 tmp_x_00126 tmp_dfovec_1d_00172 tmp_dfovec_1d_00173 tmp_dfovec_1d_00174 g_tmp_x_00119 g_tmp_x_00120 g_tmp_dfovec_1d_00159 g_tmp_x_00121 g_tmp_dfovec_1d_00160 g_tmp_dfovec_1d_00161 g_tmp_dfovec_1d_00162 g_tmp_dfovec_1d_00163 g_tmp_x_00122 g_tmp_dfovec_1d_00164 g_tmp_dfovec_1d_00165 g_tmp_dfovec_1d_00166 g_tmp_x_00123 g_tmp_x_00124 g_tmp_dfovec_1d_00167 g_tmp_x_00125 g_tmp_dfovec_1d_00168 g_tmp_dfovec_1d_00169 g_tmp_dfovec_1d_00170 g_tmp_dfovec_1d_00171 g_tmp_x_00126 g_tmp_dfovec_1d_00172 g_tmp_dfovec_1d_00173 g_tmp_dfovec_1d_00174 ;
+         % clear tmp_x_00119 tmp_x_00120 tmp_dfovec_1d_00159 tmp_x_00121 tmp_dfovec_1d_00160 tmp_dfovec_1d_00161 tmp_dfovec_1d_00162 tmp_dfovec_1d_00163 tmp_x_00122 tmp_dfovec_1d_00164 tmp_dfovec_1d_00165 tmp_dfovec_1d_00166 tmp_x_00123 tmp_x_00124 tmp_dfovec_1d_00167 tmp_x_00125 tmp_dfovec_1d_00168 tmp_dfovec_1d_00169 tmp_dfovec_1d_00170 tmp_dfovec_1d_00171 tmp_x_00126 tmp_dfovec_1d_00172 tmp_dfovec_1d_00173 tmp_dfovec_1d_00174 g_tmp_x_00119 g_tmp_x_00120 g_tmp_dfovec_1d_00159 g_tmp_x_00121 g_tmp_dfovec_1d_00160 g_tmp_dfovec_1d_00161 g_tmp_dfovec_1d_00162 g_tmp_dfovec_1d_00163 g_tmp_x_00122 g_tmp_dfovec_1d_00164 g_tmp_dfovec_1d_00165 g_tmp_dfovec_1d_00166 g_tmp_x_00123 g_tmp_x_00124 g_tmp_dfovec_1d_00167 g_tmp_x_00125 g_tmp_dfovec_1d_00168 g_tmp_dfovec_1d_00169 g_tmp_dfovec_1d_00170 g_tmp_dfovec_1d_00171 g_tmp_x_00126 g_tmp_dfovec_1d_00172 g_tmp_dfovec_1d_00173 g_tmp_dfovec_1d_00174 ;
          g_tmp_x_00127= g_x(3);
          tmp_x_00127= x(3);
          g_tmp_x_00128= g_x(5);
@@ -1106,7 +1106,7 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          g_fvec(8)= g_tmp_dfovec_1d_00179- g_tmp_dfovec_1d_00182+ g_tmp_dfovec_1d_00187- g_tmp_dfovec_1d_00190;
          fvec(8)= tmp_dfovec_1d_00179- tmp_dfovec_1d_00182+ tmp_dfovec_1d_00187- tmp_dfovec_1d_00190- 9.48; 
          
-         clear tmp_x_00127 tmp_x_00128 tmp_dfovec_1d_00175 tmp_x_00129 tmp_dfovec_1d_00176 tmp_dfovec_1d_00177 tmp_dfovec_1d_00178 tmp_dfovec_1d_00179 tmp_x_00130 tmp_dfovec_1d_00180 tmp_dfovec_1d_00181 tmp_dfovec_1d_00182 tmp_x_00131 tmp_x_00132 tmp_dfovec_1d_00183 tmp_x_00133 tmp_dfovec_1d_00184 tmp_dfovec_1d_00185 tmp_dfovec_1d_00186 tmp_dfovec_1d_00187 tmp_x_00134 tmp_dfovec_1d_00188 tmp_dfovec_1d_00189 tmp_dfovec_1d_00190 g_tmp_x_00127 g_tmp_x_00128 g_tmp_dfovec_1d_00175 g_tmp_x_00129 g_tmp_dfovec_1d_00176 g_tmp_dfovec_1d_00177 g_tmp_dfovec_1d_00178 g_tmp_dfovec_1d_00179 g_tmp_x_00130 g_tmp_dfovec_1d_00180 g_tmp_dfovec_1d_00181 g_tmp_dfovec_1d_00182 g_tmp_x_00131 g_tmp_x_00132 g_tmp_dfovec_1d_00183 g_tmp_x_00133 g_tmp_dfovec_1d_00184 g_tmp_dfovec_1d_00185 g_tmp_dfovec_1d_00186 g_tmp_dfovec_1d_00187 g_tmp_x_00134 g_tmp_dfovec_1d_00188 g_tmp_dfovec_1d_00189 g_tmp_dfovec_1d_00190 ;
+         % clear tmp_x_00127 tmp_x_00128 tmp_dfovec_1d_00175 tmp_x_00129 tmp_dfovec_1d_00176 tmp_dfovec_1d_00177 tmp_dfovec_1d_00178 tmp_dfovec_1d_00179 tmp_x_00130 tmp_dfovec_1d_00180 tmp_dfovec_1d_00181 tmp_dfovec_1d_00182 tmp_x_00131 tmp_x_00132 tmp_dfovec_1d_00183 tmp_x_00133 tmp_dfovec_1d_00184 tmp_dfovec_1d_00185 tmp_dfovec_1d_00186 tmp_dfovec_1d_00187 tmp_x_00134 tmp_dfovec_1d_00188 tmp_dfovec_1d_00189 tmp_dfovec_1d_00190 g_tmp_x_00127 g_tmp_x_00128 g_tmp_dfovec_1d_00175 g_tmp_x_00129 g_tmp_dfovec_1d_00176 g_tmp_dfovec_1d_00177 g_tmp_dfovec_1d_00178 g_tmp_dfovec_1d_00179 g_tmp_x_00130 g_tmp_dfovec_1d_00180 g_tmp_dfovec_1d_00181 g_tmp_dfovec_1d_00182 g_tmp_x_00131 g_tmp_x_00132 g_tmp_dfovec_1d_00183 g_tmp_x_00133 g_tmp_dfovec_1d_00184 g_tmp_dfovec_1d_00185 g_tmp_dfovec_1d_00186 g_tmp_dfovec_1d_00187 g_tmp_x_00134 g_tmp_dfovec_1d_00188 g_tmp_dfovec_1d_00189 g_tmp_dfovec_1d_00190 ;
    end
    
    
