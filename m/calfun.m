@@ -23,7 +23,7 @@ function [y,fvec,G] = calfun(x)
 %     Additional problem descriptors are passed through the following fields
 %     contained in the global variable BenDFO:
 %       m is a positive integer (length of output from dfovec).
-%          m must not exceed n.
+%          n must not exceed m.
 %       nprob is a positive integer that defines the number of the problem.
 %          nprob must not exceed 22.
 %       probtype is a string specifying the type of problem desired:
@@ -55,6 +55,8 @@ probtype = BenDFO.probtype;
 eid = 'Input:dimensionIncompatible';
 [nin,jin] = size(x); % Problem dimension
 if (nin~=n || jin~=1), error(eid,'Input x is not of size n by 1.'), end
+
+if m < n, error(eid,'The dimension n must not exceed m.'), end
 
 % Restrict domain for some nondiff problems
 xc = x;
