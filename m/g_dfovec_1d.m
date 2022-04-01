@@ -36,15 +36,6 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
    %     The clears produced by adimat are removed for performance gains.
    %     Note that when nprob = 5 and x = 0, a NaN will result!
    
-   % Set lots of constants:
-   c13= 1.3d1; c14= 1.4d1; c29= 2.9d1; c45= 4.5d1; 
-   v= [4.0d0, 2.0d0, 1.0d0, 5.0d-1, 2.5d-1, 1.67d-1, 1.25d-1, 1.0d-1, 8.33d-2, 7.14d-2, 6.25d-2]; 
-   y1= [1.4d-1, 1.8d-1, 2.2d-1, 2.5d-1, 2.9d-1, 3.2d-1, 3.5d-1, 3.9d-1, 3.7d-1, 5.8d-1, 7.3d-1, 9.6d-1, 1.34d0, 2.1d0, 4.39d0]; 
-   y2= [1.957d-1, 1.947d-1, 1.735d-1, 1.6d-1, 8.44d-2, 6.27d-2, 4.56d-2, 3.42d-2, 3.23d-2, 2.35d-2, 2.46d-2]; 
-   y3= [3.478d4, 2.861d4, 2.365d4, 1.963d4, 1.637d4, 1.372d4, 1.154d4, 9.744d3, 8.261d3, 7.03d3, 6.005d3, 5.147d3, 4.427d3, 3.82d3, 3.307d3, 2.872d3]; 
-   y4= [8.44d-1, 9.08d-1, 9.32d-1, 9.36d-1, 9.25d-1, 9.08d-1, 8.81d-1, 8.5d-1, 8.18d-1, 7.84d-1, 7.51d-1, 7.18d-1, 6.85d-1, 6.58d-1, 6.28d-1, 6.03d-1, 5.8d-1, 5.58d-1, 5.38d-1, 5.22d-1, 5.06d-1, 4.9d-1, 4.78d-1, 4.67d-1, 4.57d-1, 4.48d-1, 4.38d-1, 4.31d-1, 4.24d-1, 4.2d-1, 4.14d-1, 4.11d-1, 4.06d-1]; 
-   y5= [1.366d0, 1.191d0, 1.112d0, 1.013d0, 9.91d-1, 8.85d-1, 8.31d-1, 8.47d-1, 7.86d-1, 7.25d-1, 7.46d-1, 6.79d-1, 6.08d-1, 6.55d-1, 6.16d-1, 6.06d-1, 6.02d-1, 6.26d-1, 6.51d-1, 7.24d-1, 6.49d-1, 6.49d-1, 6.94d-1, 6.44d-1, 6.24d-1, 6.61d-1, 6.12d-1, 5.58d-1, 5.33d-1, 4.95d-1, 5.0d-1, 4.23d-1, 3.95d-1, 3.75d-1, 3.72d-1, 3.91d-1, 3.96d-1, 4.05d-1, 4.28d-1, 4.29d-1, 5.23d-1, 5.62d-1, 6.07d-1, 6.53d-1, 6.72d-1, 7.08d-1, 6.33d-1, 6.68d-1, 6.45d-1, 6.32d-1, 5.91d-1, 5.59d-1, 5.97d-1, 6.25d-1, 7.39d-1, 7.1d-1, 7.29d-1, 7.2d-1, 6.36d-1, 5.81d-1, 4.28d-1, 2.92d-1, 1.62d-1, 9.8d-2, 5.4d-2]; 
-   
    % Initialize things:
    fvec= zeros(m, 1); 
    g_fvec= zeros(size(fvec));
@@ -261,6 +252,9 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          fvec(4)= sqrt(10)* tmp_dfovec_1d_00027; 
          % clear tmp_x_00022 tmp_x_00023 tmp_dfovec_1d_00026 tmp_dfovec_1d_00027 g_tmp_x_00022 g_tmp_x_00023 g_tmp_dfovec_1d_00026 g_tmp_dfovec_1d_00027 ;
       case 7
+         c13 = 1.3e1;
+         c14 = 1.4e1;
+         c29 = 2.9e1; 
          g_tmp_x_00024= g_x(1);
          tmp_x_00024= x(1);
          g_tmp_x_00025= g_x(2);
@@ -292,6 +286,8 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          fvec(2)= -c29+ tmp_x_00026+ tmp_dfovec_1d_00035; 
          % clear tmp_x_00026 tmp_x_00027 tmp_dfovec_1d_00032 tmp_dfovec_1d_00033 tmp_dfovec_1d_00034 tmp_dfovec_1d_00035 g_tmp_x_00026 g_tmp_x_00027 g_tmp_dfovec_1d_00032 g_tmp_dfovec_1d_00033 g_tmp_dfovec_1d_00034 g_tmp_dfovec_1d_00035 ;
       case 8
+          y1 = [1.4d-1, 1.8d-1, 2.2d-1, 2.5d-1, 2.9d-1, 3.2d-1, 3.5d-1, ...
+              3.9d-1, 3.7d-1, 5.8d-1, 7.3d-1, 9.6d-1, 1.34d0, 2.1d0, 4.39d0];
          for i= 1: 15
             tmp1= i; 
             g_tmp1= zeros(size(tmp1));
@@ -324,6 +320,10 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             % clear tmp_x_00028 tmp_x_00029 tmp_dfovec_1d_00036 tmp_x_00030 tmp_dfovec_1d_00037 tmp_dfovec_1d_00038 tmp_dfovec_1d_00039 tmp_dfovec_1d_00040 g_tmp_x_00028 g_tmp_x_00029 g_tmp_dfovec_1d_00036 g_tmp_x_00030 g_tmp_dfovec_1d_00037 g_tmp_dfovec_1d_00038 g_tmp_dfovec_1d_00039 g_tmp_dfovec_1d_00040 ;
          end
       case 9
+           y2 = [1.957d-1, 1.947d-1, 1.735d-1, 1.6d-1, 8.44d-2, 6.27d-2, ...
+               4.56d-2, 3.42d-2, 3.23d-2, 2.35d-2, 2.46d-2];
+           v  = [4.0d0, 2.0d0, 1.0d0, 5.0d-1, 2.5d-1, 1.67d-1, 1.25d-1, ...
+               1.0d-1, 8.33d-2, 7.14d-2, 6.25d-2];
          for i= 1: 11
             g_tmp_x_00031= g_x(2);
             tmp_x_00031= x(2);
@@ -354,6 +354,10 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             % clear tmp_x_00034 tmp_dfovec_1d_00044 tmp_dfovec_1d_00045 g_tmp_x_00034 g_tmp_dfovec_1d_00044 g_tmp_dfovec_1d_00045 ;
          end
       case 10
+          y3 = [3.478d4, 2.861d4, 2.365d4, 1.963d4, 1.637d4, 1.372d4, ...
+              1.154d4, 9.744d3, 8.261d3, 7.03d3, 6.005d3, 5.147d3, ...
+              4.427d3, 3.82d3, 3.307d3, 2.872d3];
+          c45 = 4.5e1;
          for i= 1: 16
             tmp_dfovec_1d_00046= 5* i;
             g_tmp_x_00035= g_x(3);
@@ -377,7 +381,8 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             % clear tmp_x_00037 tmp_dfovec_1d_00047 g_tmp_x_00037 g_tmp_dfovec_1d_00047 ;
          end
       case 11
-         for i= 1: 29
+          c29 = 2.9e1;
+          for i= 1: 29
             div= i/ c29; 
             s1= 0; 
             g_s1= zeros(size(s1));
@@ -619,6 +624,11 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
          g_fvec(n)= g_prod1;
          fvec(n)= prod1- 1; 
       case 17
+          y4 = [8.44d-1, 9.08d-1, 9.32d-1, 9.36d-1, 9.25d-1, 9.08d-1, ...
+              8.81d-1, 8.5d-1, 8.18d-1, 7.84d-1, 7.51d-1, 7.18d-1, 6.85d-1, ...
+              6.58d-1, 6.28d-1, 6.03d-1, 5.8d-1, 5.58d-1, 5.38d-1, 5.22d-1, ...
+              5.06d-1, 4.9d-1, 4.78d-1, 4.67d-1, 4.57d-1, 4.48d-1, 4.38d-1, ...
+              4.31d-1, 4.24d-1, 4.2d-1, 4.14d-1, 4.11d-1, 4.06d-1];
          for i= 1: 33
             tmp_dfovec_1d_00073= i- 1;
             temp= 10* tmp_dfovec_1d_00073; 
@@ -659,6 +669,16 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
             % clear tmp_x_00058 tmp_x_00059 tmp_dfovec_1d_00078 tmp_x_00060 tmp_dfovec_1d_00079 tmp_dfovec_1d_00080 g_tmp_x_00058 g_tmp_x_00059 g_tmp_dfovec_1d_00078 g_tmp_x_00060 g_tmp_dfovec_1d_00079 g_tmp_dfovec_1d_00080 ;
          end
       case 18
+          y5 = [1.366d0, 1.191d0, 1.112d0, 1.013d0, 9.91d-1, 8.85d-1, ...
+              8.31d-1, 8.47d-1, 7.86d-1, 7.25d-1, 7.46d-1, 6.79d-1, 6.08d-1, ...
+              6.55d-1, 6.16d-1, 6.06d-1, 6.02d-1, 6.26d-1, 6.51d-1, 7.24d-1, ...
+              6.49d-1, 6.49d-1, 6.94d-1, 6.44d-1, 6.24d-1, 6.61d-1, 6.12d-1, ...
+              5.58d-1, 5.33d-1, 4.95d-1, 5.0d-1, 4.23d-1, 3.95d-1, 3.75d-1, ...
+              3.72d-1, 3.91d-1, 3.96d-1, 4.05d-1, 4.28d-1, 4.29d-1, 5.23d-1, ...
+              5.62d-1, 6.07d-1, 6.53d-1, 6.72d-1, 7.08d-1, 6.33d-1, 6.68d-1, ...
+              6.45d-1, 6.32d-1, 5.91d-1, 5.59d-1, 5.97d-1, 6.25d-1, 7.39d-1, ...
+              7.1d-1, 7.29d-1, 7.2d-1, 6.36d-1, 5.81d-1, 4.28d-1, 2.92d-1, ...
+              1.62d-1, 9.8d-2, 5.4d-2];
          for i= 1: 65
             tmp_dfovec_1d_00081= i- 1;
             temp= tmp_dfovec_1d_00081/ 10; 
