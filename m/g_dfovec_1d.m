@@ -33,6 +33,8 @@ function [g_fvec, fvec]= g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
    %     This is based on a modified (evaluates along the coordinate
    %     direction for coordinate ind) version of dfovec.m 
    %     See jacobian.m for help/comments.
+   %     The clears produced by adimat are removed for performance gains.
+   %     Note that when nprob = 5 and x = 0, a NaN will result!
    
    % Set lots of constants:
    c13= 1.3d1; c14= 1.4d1; c29= 2.9d1; c45= 4.5d1; 
