@@ -7,7 +7,7 @@ function [y,fvec,G] = calfun(x)
 %     SIAM J. Optimization, Vol. 20 (1), pp.172-191, 2009.
 %
 %     The latest version of this subroutine is always available at
-%     http://www.mcs.anl.gov/~more/dfo/
+%           https://github.com/POptUS/BenDFO/
 %     The authors would appreciate feedback and experiences from numerical
 %     studies conducted using this subroutine.
 %
@@ -18,12 +18,13 @@ function [y,fvec,G] = calfun(x)
 %       fvec is an m-by-1 array containing component function values at x.
 %       G is an n-by-1 array containing component function values at x.
 %
-%     The rand generator should be seeded before this is called
+%     If reproducibility is needed, the rand generator should be seeded before
+%     this function is called.
 %
 %     Additional problem descriptors are passed through the following fields
 %     contained in the global variable BenDFO:
 %       m is a positive integer (length of output from dfovec).
-%          m must not exceed n.
+%          n must not exceed m.
 %       nprob is a positive integer that defines the number of the problem.
 %          nprob must not exceed 22.
 %       probtype is a string specifying the type of problem desired:
@@ -37,11 +38,11 @@ function [y,fvec,G] = calfun(x)
 %     desires. They are:
 %       nfev is a non-negative integer containing the number of function
 %          evaluations done so far (nfev=0 is a good default).
-%          after calling calfun, nfev will be incremented by one.
+%          After calling calfun, nfev will be incremented by one.
 %       np is a counter for the test problem number. np=1 is a good
 %          default if only a single problem/run will be done.
 %       fvals is a matrix containing the history of function
-%          values, the entry fvals(nfev+1,np) being updated here.
+%          values, the entry fvals(nfev+1, np) being updated here.
 %
 %     Argonne National Laboratory
 %     Jorge More' and Stefan Wild. January 2008.
@@ -55,6 +56,8 @@ probtype = BenDFO.probtype;
 eid = 'Input:dimensionIncompatible';
 [nin,jin] = size(x); % Problem dimension
 if (nin~=n || jin~=1), error(eid,'Input x is not of size n by 1.'), end
+
+if m < n, error(eid,'The dimension n must not exceed m.'), end
 
 % Restrict domain for some nondiff problems
 xc = x;
