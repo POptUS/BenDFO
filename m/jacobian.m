@@ -1,4 +1,4 @@
-function [J,fvec] = jacobian(m,n,x,nprob)
+function [J, fvec] = jacobian(m, n, x, nprob)
 %     This subroutine computes the Jacobian of the nonlinear equations
 %     defining the benchmark problems in
 %
@@ -15,7 +15,7 @@ function [J,fvec] = jacobian(m,n,x,nprob)
 %   J = jacobian(m,n,x,nprob)
 %
 %       J is an output array of size m-by-n, with J(i,j) denoting the
-%         derivative (evaluated at x) of the ith equation with respect to 
+%         derivative (evaluated at x) of the ith equation with respect to
 %         the jth variable.
 %       fvec returns the usual dfovec
 %       m and n are positive integer input variables. n must not
@@ -31,20 +31,14 @@ function [J,fvec] = jacobian(m,n,x,nprob)
 % This directory contains the dependency g_dfovec_1d.m
 
 % Initialization for adimat objects
-t = 0; g_t = 1; g_x = zeros(size(x));
+t = 0;
+g_t = 1;
+g_x = zeros(size(x));
 
-J = zeros(m,n);
+J = zeros(m, n);
 for ind = 1:n % Do one coordinate direction at a time:
     [g_fvec, fvec] = g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob);
-    J(:,ind) = g_fvec;
+    J(:, ind) = g_fvec;
 end
 
 end
-    
-
-
-
-
-
-
-

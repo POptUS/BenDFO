@@ -1,4 +1,4 @@
-function [y,fvec,G] = calfun(x)
+function [y, fvec, G] = calfun(x)
 %     This is a Matlab version of the subroutine calfun.f
 %     This subroutine returns a function value as used in:
 %
@@ -33,7 +33,7 @@ function [y,fvec,G] = calfun(x)
 %           'wild3' corresponds to deterministically noisy problems
 %           'noisy3' corresponds to stochastically noisy problems
 %
-%     To store the evaluation history, additional fields are passed via 
+%     To store the evaluation history, additional fields are passed via
 %     global variable BenDFO. These may be commented out if a user
 %     desires. They are:
 %       nfev is a non-negative integer containing the number of function
@@ -47,59 +47,60 @@ function [y,fvec,G] = calfun(x)
 %     Argonne National Laboratory
 %     Jorge More' and Stefan Wild. January 2008.
 
-global BenDFO 
+global BenDFO
 nprob = BenDFO.nprob;
 n = BenDFO.n;
 m = BenDFO.m;
 probtype = BenDFO.probtype;
 
 eid = 'Input:dimensionIncompatible';
-[nin,jin] = size(x); % Problem dimension
-if (nin~=n || jin~=1), error(eid,'Input x is not of size n by 1.'), end
+[nin, jin] = size(x); % Problem dimension
+if nin ~= n || jin ~= 1 error(eid, 'Input x is not of size n by 1.');
+end
 
 if m < n, error(eid,'The dimension n must not exceed m.'), end
 
 % Restrict domain for some nondiff problems
 xc = x;
-if strcmp('nondiff',probtype)
-    if nprob==8 || nprob==9 || nprob==13 || nprob==16 || nprob==17 || nprob==18
-        xc = max(x,eps);
+if strcmp('nondiff', probtype)
+    if nprob == 8 || nprob == 9 || nprob == 13 || nprob == 16 || nprob == 17 || nprob == 18
+        xc = max(x, eps);
     end
 end
 
 % Generate the vector
-fvec = dfovec(m,n,xc,nprob);
+fvec = dfovec(m, n, xc, nprob);
 
 % Calculate the function value
 switch probtype
     case 'noisy3'
         sigma = 10^-3;
-        u = sigma*(-ones(m,1)+2*rand(m,1));
-        fvec = fvec.*(1+u);
+        u = sigma * (-ones(m, 1) + 2 * rand(m, 1));
+        fvec = fvec .* (1 + u);
         y = sum(fvec.^2);
     case 'wild3'
         sigma = 10^-3;
-        phi = 0.9*sin(100*norm(x,1))*cos(100*norm(x,inf)) + 0.1*cos(norm(x,2));
-        phi = phi*(4*phi^2 -3);
-        y = (1 + sigma*phi)*sum(fvec.^2);
+        phi = 0.9 * sin(100 * norm(x, 1)) * cos(100 * norm(x, inf)) + 0.1 * cos(norm(x, 2));
+        phi = phi * (4 * phi^2 - 3);
+        y = (1 + sigma * phi) * sum(fvec.^2);
     case 'smooth'
         y = sum(fvec.^2);
-        if nargout>2
-            J = jacobian(m,n,x,nprob);
-            G = J'*fvec;
+        if nargout > 2
+            J = jacobian(m, n, x, nprob);
+            G = J' * fvec;
         end
     case 'nondiff'
         y = sum(abs(fvec));
 end
 
 % Update the function value history
-if isfield(BenDFO,'nfev')    
+if isfield(BenDFO, 'nfev')
     BenDFO.nfev = BenDFO.nfev + 1;
-    BenDFO.fvals(BenDFO.nfev,BenDFO.np) = y;
+    BenDFO.fvals(BenDFO.nfev, BenDFO.np) = y;
 end
 
 end
 
-%if y>1e64
+% if y>1e64
 %  display('Function value exceeds 10^64')
-%end
+% end
