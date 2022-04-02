@@ -6,7 +6,7 @@ function hl = data_profile(H, N, gate)
 %     SIAM J. Optimization, Vol. 20 (1), pp.172-191, 2009.
 %
 %     The latest version of this subroutine is always available at
-%     http://www.mcs.anl.gov/~more/dfo/
+%        https://github.com/POptUS/BenDFO
 %     The authors would appreciate feedback and experiences from numerical
 %     studies conducted using this subroutine.
 %

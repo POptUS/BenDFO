@@ -6,7 +6,7 @@ function hl = perf_profile(H, gate, logplot)
 %     SIAM J. Optimization, Vol. 20 (1), pp.172-191, 2009.
 %
 %     The latest version of this subroutine is always available at
-%     http://www.mcs.anl.gov/~more/dfo/
+%        https://github.com/POptUS/BenDFO
 %     The authors would appreciate feedback and experiences from numerical
 %     studies conducted using this subroutine.
 %
@@ -57,7 +57,8 @@ colors  = ['b' 'r' 'k' 'm' 'c' 'g' 'y'];
 lines   = {'-' '-.' '--'};
 markers = ['s' 'o' '^' 'v' 'p' '<' 'x' 'h' '+' 'd' '*' '<'];
 
-if nargin < 3 logplot = 0;
+if nargin < 3
+    logplot = 0;
 end
 
 % Compute ratios and divide by smallest element in each row.
