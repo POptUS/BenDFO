@@ -2,8 +2,11 @@
 ## Benchmarking Derivative-Free Optimization Algorithms 
 
 This repository contains source code and updates from the codes originally shared at https://www.mcs.anl.gov/~more/dfo/.
+Ways to contribute; extensions to other problems and languages; and additional resources will be updated at https://poptus.github.io/.
 
-These codes are based on the supplemental information for the paper:
+---
+
+The codes in this repository are based on the supplemental information for the paper:
 - [[1](#pap1)] Benchmarking Derivative-Free Optimization Algorithms by J.J. Moré and S.M. Wild. *SIAM J. Optimization*, Vol. 20 (1), pp. 172-191, 2009. doi:[10.1137/080724083](https://doi.org/10.1137/080724083)
    
 
@@ -33,10 +36,10 @@ Updates and other languages will be reflected here. Please also see:
 
 
 ### Derivatives and Testing
-Autodiff versions (using [adimat](https://www.informatik.tu-darmstadt.de/sc/res/sw/adimat/index.en.jsp)) of the problem derivates are also included.
+Autodiff versions (using [adimat](https://www.informatik.tu-darmstadt.de/sc/res/sw/adimat/index.en.jsp)) of the problem derivatives are also included.
 
-A sample calling script for testing and to see these derivatve capabilities is provided in `testbendfo.m` [[Matlab/Octave](profiling/testbendfo.m)].
+A sample calling script for testing and to see these derivative capabilities is provided in `testbendfo.m` [[Matlab/Octave](profiling/testbendfo.m)].
 
 ### Sample Solvers
 
-Many of the original solvers considered have seen significant refinements. Links to the original solvers considered are at https://www.mcs.anl.gov/~more/dfo/shootout.html 
+Many of the original solvers considered in [[1](https://github.com/POptUS/BenDFO#pap1)] have seen significant refinements. Links to the original solvers considered are at https://www.mcs.anl.gov/~more/dfo/shootout.html 
