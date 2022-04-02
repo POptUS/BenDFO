@@ -1,4 +1,4 @@
-function x = dfoxs(n,nprob,factor)
+function x = dfoxs(n, nprob, factor)
 %     This is a Matlab version of the subroutine dfoxs.f
 %     This subroutine specifies the standard starting points for the
 %     functions defined by subroutine dfovec as used in:
@@ -30,15 +30,15 @@ function x = dfoxs(n,nprob,factor)
 %     Argonne National Laboratory
 %     Jorge More' and Stefan Wild. January 2008.
 
-x = zeros(n,1);
+x = zeros(n, 1);
 
 switch nprob
     case 1 %     linear function - full rank or rank 1.
-        x = ones(n,1);
+        x = ones(n, 1);
     case 2 %     linear function - full rank or rank 1.
-        x = ones(n,1);
+        x = ones(n, 1);
     case 3 %     linear function - full rank or rank 1.
-        x = ones(n,1);
+        x = ones(n, 1);
     case 4 %     rosenbrock function.
         x(1) = -1.2;
         x(2) = 1;
@@ -64,7 +64,7 @@ switch nprob
         x(2) = 4000;
         x(3) = 250;
     case 11 %     watson function.
-        x = .5*ones(n,1);
+        x = .5 * ones(n, 1);
     case 12 %     box 3-dimensional function.
         x(1) = 0;
         x(2) = 10;
@@ -79,10 +79,10 @@ switch nprob
         x(4) = -1;
     case 15 %     chebyquad function.
         for k = 1:n
-            x(k) = k/(n+1);
+            x(k) = k / (n + 1);
         end
     case 16 %     brown almost-linear function.
-        x = .5*ones(n,1);
+        x = .5 * ones(n, 1);
     case 17 %     osborne 1 function.
         x(1) = .5;
         x(2) = 1.5;
@@ -102,19 +102,19 @@ switch nprob
         x(10) = 4.5;
         x(11) = 5.5;
     case 19 % bdqrtic
-        x = ones(n,1);
+        x = ones(n, 1);
     case 20 % cube
-        x = .5*ones(n,1);
+        x = .5 * ones(n, 1);
     case 21 % mancino
-        for i=1:n
+        for i = 1:n
             ss = 0;
-            for j=1:n
-                ss = ss+(sqrt(i/j)*((sin(log(sqrt(i/j))))^5+(cos(log(sqrt(i/j))))^5));
+            for j = 1:n
+                ss = ss + (sqrt(i / j) * ((sin(log(sqrt(i / j))))^5 + (cos(log(sqrt(i / j))))^5));
             end
-            x(i) = -8.710996D-4*((i-50)^3 + ss);
+            x(i) = -8.710996e-4 * ((i - 50)^3 + ss);
         end
     case 22  % Heart8
-        x= [-.3, -.39, .3, -.344, -1.2, 2.69, 1.59, -1.5]';
+        x = [-.3, -.39, .3, -.344, -1.2, 2.69, 1.59, -1.5]';
 end
 
-x = factor*x;
+x = factor * x;

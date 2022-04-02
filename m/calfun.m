@@ -55,10 +55,13 @@ probtype = BenDFO.probtype;
 
 eid = 'Input:dimensionIncompatible';
 [nin, jin] = size(x); % Problem dimension
-if nin ~= n || jin ~= 1 error(eid, 'Input x is not of size n by 1.');
+if nin ~= n || jin ~= 1
+    error(eid, 'Input x is not of size n by 1.');
 end
 
-if m < n, error(eid,'The dimension n must not exceed m.'), end
+if m < n
+    error(eid, 'The dimension n must not exceed m.');
+end
 
 % Restrict domain for some nondiff problems
 xc = x;
