@@ -67,7 +67,7 @@ end
 xc = x;
 if strcmp('nondiff', probtype)
     if nprob == 8 || nprob == 9 || nprob == 13 || nprob == 16 || nprob == 17 || nprob == 18
-        xc = max(x, eps);
+        xc = max(x, 0);
     end
 end
 
