@@ -1,3 +1,5 @@
+[![miss_hit](https://github.com/POptUS/BenDFO/actions/workflows/miss_hit.yml/badge.svg)](https://github.com/POptUS/BenDFO/actions/workflows/miss_hit.yml)
+
 # BenDFO
 ## Benchmarking Derivative-Free Optimization Algorithms 
 
