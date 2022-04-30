@@ -1,6 +1,6 @@
-[![miss_hit](https://github.com/POptUS/BenDFO/actions/workflows/miss_hit.yml/badge.svg)](https://github.com/POptUS/BenDFO/actions/workflows/miss_hit.yml)
-
 # BenDFO
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)    [![miss_hit](https://github.com/POptUS/BenDFO/actions/workflows/miss_hit.yml/badge.svg)](https://github.com/POptUS/BenDFO/actions/workflows/miss_hit.yml)
+
 ## Benchmarking Derivative-Free Optimization Algorithms 
 
 This repository contains source code and updates from the codes originally shared at https://www.mcs.anl.gov/~more/dfo/.
