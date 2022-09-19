@@ -53,6 +53,10 @@ n = BenDFO.n;
 m = BenDFO.m;
 probtype = BenDFO.probtype;
 
+if size(x, 1) == 1
+    x = x(:);
+end
+
 eid = 'Input:dimensionIncompatible';
 [nin, jin] = size(x); % Problem dimension
 if nin ~= n || jin ~= 1
