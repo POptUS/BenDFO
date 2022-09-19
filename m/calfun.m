@@ -16,7 +16,8 @@ function [y, fvec, G] = calfun(x)
 %       x is an input array of length n.
 %       y is an output that contains the function value at x.
 %       fvec is an m-by-1 array containing component function values at x.
-%       G is an n-by-1 array containing component function values at x.
+%       G is an n-by-m array containing the gradients of the component
+%           functions at x (only available when probtype is 'smooth').
 %
 %     If reproducibility is needed, the rand generator should be seeded before
 %     this function is called.
