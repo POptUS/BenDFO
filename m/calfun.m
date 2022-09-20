@@ -54,6 +54,7 @@ n = BenDFO.n;
 m = BenDFO.m;
 probtype = BenDFO.probtype;
 
+% Turn any row-vector x to a column vector
 if size(x, 1) == 1
     x = x(:);
 end
