@@ -66,12 +66,11 @@ if nargin <= 1 % Maintain for backward compatibility
     m = BenDFO.m;
     probtype = BenDFO.probtype;
 elseif nargin == 3
-    probspecs = varargin{1};
-    nprob = probspecs.nprob;
-    n = probspecs.n;
-    m = probspecs.m;
+    BenDFO = varargin{1};
+    nprob = BenDFO.nprob;
+    n = BenDFO.n;
+    m = BenDFO.m;
     probtype = varargin{2};
-    BenDFO.sigma = probspecs.sigma;
 end
 
 if ~isfield(BenDFO, 'sigma') || strcmp(probtype, 'noisy3') || strcmp(probtype, 'wild3')
