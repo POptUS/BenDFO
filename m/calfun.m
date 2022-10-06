@@ -41,7 +41,9 @@ function [y, fvec, G] = calfun(x, varargin)
 %           'noisy3' corresponds to stochastically noisy problems
 %       sigma is a standard deviation; it is ignored for deterministic
 %          noise, no noise, and noisy3
-
+%
+%     If not calling using a global variable, one could call via
+%         calfun(x, BenDFO, probtype)
 %
 %     To store the evaluation history, additional fields are passed via
 %     global variable BenDFO. These may be commented out if a user
@@ -63,12 +65,12 @@ if nargin <= 1 % Maintain for backward compatibility
     n = BenDFO.n;
     m = BenDFO.m;
     probtype = BenDFO.probtype;
-else
+elseif nargin == 3
     probspecs = varargin{1};
     nprob = probspecs.nprob;
     n = probspecs.n;
     m = probspecs.m;
-    probtype = probspecs.probtype;
+    probtype = varargin{2};
     BenDFO.sigma = probspecs.sigma;
 end
 
