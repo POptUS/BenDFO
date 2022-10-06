@@ -9,7 +9,8 @@ addpath('../data'); % location of dfo.dat
 load dfo.dat;
 numprobs = size(dfo, 1);
 
-probnames = {'smooth', 'nondiff', 'wild3', 'noisy3'};
+probnames = {'smooth', 'absnormal', 'absuniform', 'reluniform', ...
+    'relnormal', 'abswild', 'nondiff', 'relwild',  'wild3', 'noisy3'};
 
 % Global variables needed
 global BenDFO
@@ -24,12 +25,13 @@ for np = 1:numprobs
     BenDFO.n = dfo(np, 2);
     BenDFO.m = dfo(np, 3);
     BenDFO.factor_power = dfo(np, 4);
+    BenDFO.sigma = 1e-2;
 
     % Obtain starting vector
     Xs = dfoxs(BenDFO.n, BenDFO.nprob, 10^BenDFO.factor_power);
 
-    % Loop over the 4 problem types
-    for p = 1:4
+    % Loop over the 10 problem types
+    for p = 1:10
         BenDFO.probtype = probnames{p};
         BenDFO.nfev = 0;
         BenDFO.np = BenDFO.np + 1;

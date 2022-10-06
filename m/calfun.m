@@ -29,10 +29,18 @@ function [y, fvec, G] = calfun(x)
 %       nprob is a positive integer that defines the number of the problem.
 %          nprob must not exceed 22.
 %       probtype is a string specifying the type of problem desired:
-%           'smooth' corresponds to smooth problems
-%           'nondiff' corresponds to piecewise-smooth problems
-%           'wild3' corresponds to deterministically noisy problems
+%           'smooth' corresponds to smooth (noise-free) problems
+%           'absnormal' corresponds to stochastic Gaussian absolute noise
+%           'absuniform' corresponds to stochastic uniform absolute noise
+%           'abswild' corresponds to deterministic absolute noise
+%           'relnormal' corresponds to stochastic Gaussian relative noise
+%           'reluniform' corresponds to stochastic uniform relative noise
+%           'relwild' corresponds to deterministic relative noise
+%           'nondiff' corresponds to piecewise-smooth problems'smooth' corresponds to smooth problems
+%           'wild3' corresponds to deterministic relative noise with
 %           'noisy3' corresponds to stochastically noisy problems
+%       sigma is a standard deviation; it is ignored for deterministic noise, no noise, and noisy3
+
 %
 %     To store the evaluation history, additional fields are passed via
 %     global variable BenDFO. These may be commented out if a user
@@ -53,6 +61,10 @@ nprob = BenDFO.nprob;
 n = BenDFO.n;
 m = BenDFO.m;
 probtype = BenDFO.probtype;
+
+if ~isfield(BenDFO, 'sigma') || strcmp(probtype, 'noisy3') || strcmp(probtype, 'wild3')
+    BenDFO.sigma = 10^-3;
+end
 
 % Turn any row-vector x to a column vector
 if size(x, 1) == 1
@@ -82,6 +94,30 @@ fvec = dfovec(m, n, xc, nprob);
 
 % Calculate the function value
 switch probtype
+    case 'absnormal'
+        z = BenDFO.sigma * randn(m, 1);
+        fvec = fvec + z;
+        y = sum(fvec.^2);
+    case 'absuniform'
+        z = (BenDFO.sigma * sqrt(3)) * (2 * rand(m, 1) - ones(m, 1));
+        fvec = fvec + z;
+        y = sum(fvec.^2);
+    case 'abswild'
+        z = 0.9 * sin(100 * norm(x, 1)) * cos(100 * norm(x, inf)) + 0.1 * cos(norm(x, 2));
+        z = z * (4 * z^2 - 3);
+        y = sum(fvec.^2) + z;
+    case 'relnormal'
+        z = BenDFO.sigma * randn(m, 1);
+        fvec = fvec .* (1 + z);
+        y = sum(fvec.^2);
+    case 'reluniform'
+        z = (BenDFO.sigma * sqrt(3)) * (2 * rand(m, 1) - ones(m, 1));
+        fvec = fvec .* (1 + z);
+        y = sum(fvec.^2);
+    case 'relwild'
+        z = 0.9 * sin(100 * norm(x, 1)) * cos(100 * norm(x, inf)) + 0.1 * cos(norm(x, 2));
+        z = z * (4 * z^2 - 3);
+        y = (1 + BenDFO.sigma * z) * sum(fvec.^2);
     case 'noisy3'
         sigma = 10^-3;
         u = sigma * (-ones(m, 1) + 2 * rand(m, 1));
