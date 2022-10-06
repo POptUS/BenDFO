@@ -37,7 +37,7 @@ for np = 1:numprobs
         BenDFO.np = BenDFO.np + 1;
         switch BenDFO.probtype
             case 'smooth'
-                [f, fv, G] = calfun(Xs,BenDFO,'smooth');
+                [f, fv, G] = calfun(Xs, BenDFO, 'smooth');
                 Results{p, np}.f = f;
                 Results{p, np}.Xs = Xs;
                 Results{p, np}.Fv = fv;
