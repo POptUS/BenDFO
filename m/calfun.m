@@ -1,4 +1,4 @@
-function [y, fvec, G] = calfun(x)
+function [y, fvec, G] = calfun(x, varargin)
 %     This is a Matlab version of the subroutine calfun.f
 %     This subroutine returns a function value as used in:
 %
@@ -23,7 +23,7 @@ function [y, fvec, G] = calfun(x)
 %     this function is called.
 %
 %     Additional problem descriptors are passed through the following fields
-%     contained in the global variable BenDFO:
+%     contained in either the global variable BenDFO or the second argument:
 %       m is a positive integer (length of output from dfovec).
 %          n must not exceed m.
 %       nprob is a positive integer that defines the number of the problem.
@@ -39,7 +39,8 @@ function [y, fvec, G] = calfun(x)
 %           'nondiff' corresponds to piecewise-smooth problems'smooth' corresponds to smooth problems
 %           'wild3' corresponds to deterministic relative noise with
 %           'noisy3' corresponds to stochastically noisy problems
-%       sigma is a standard deviation; it is ignored for deterministic noise, no noise, and noisy3
+%       sigma is a standard deviation; it is ignored for deterministic
+%          noise, no noise, and noisy3
 
 %
 %     To store the evaluation history, additional fields are passed via
@@ -56,11 +57,20 @@ function [y, fvec, G] = calfun(x)
 %     Argonne National Laboratory
 %     Jorge More' and Stefan Wild. January 2008.
 
-global BenDFO
-nprob = BenDFO.nprob;
-n = BenDFO.n;
-m = BenDFO.m;
-probtype = BenDFO.probtype;
+if nargin <= 1 % Maintain for backward compatibility
+    global BenDFO
+    nprob = BenDFO.nprob;
+    n = BenDFO.n;
+    m = BenDFO.m;
+    probtype = BenDFO.probtype;
+else
+    probspecs = varargin{1};
+    nprob = probspecs.nprob;
+    n = probspecs.n;
+    m = probspecs.m;
+    probtype = probspecs.probtype;
+    BenDFO.sigma = probspecs.sigma;
+end
 
 if ~isfield(BenDFO, 'sigma') || strcmp(probtype, 'noisy3') || strcmp(probtype, 'wild3')
     BenDFO.sigma = 10^-3;
