@@ -4,7 +4,7 @@
 ## Benchmarking Derivative-Free Optimization Algorithms 
 
 This repository contains source code and updates from the codes originally shared at https://www.mcs.anl.gov/~more/dfo/.
-Ways to contribute; extensions to other problems and languages; and additional resources will be updated at https://poptus.github.io/.
+Ways to contribute; extensions to other problems and languages; and additional resources will be updated here.
 
 ---
 
