@@ -4,7 +4,7 @@
 ## Benchmarking Derivative-Free Optimization Algorithms 
 
 This repository contains source code and updates from the codes originally shared at https://www.mcs.anl.gov/~more/dfo/.
-Ways to contribute; extensions to other problems and languages; and additional resources will be updated at https://poptus.github.io/.
+Ways to contribute; extensions to other problems and languages; and additional resources will be updated here.
 
 ---
 
@@ -45,3 +45,20 @@ A sample calling script for testing and to see these derivative capabilities is 
 ### Sample Solvers
 
 Many of the original solvers considered in [[1](https://github.com/POptUS/BenDFO#pap1)] have seen significant refinements. Links to the original solvers considered are at https://www.mcs.anl.gov/~more/dfo/shootout.html 
+
+## Contributing to BenDFO
+
+Contributions are welcome in a variety of forms; please see [CONTRIBUTING](CONTRIBUTING.rst).
+
+## License 
+
+All code included in BenDFO is open source, with the particular form of license contained in the top-level 
+subdirectories.  If such a subdirectory does not contain a LICENSE file, then it is automatically licensed 
+as described in the otherwise encompassing BenDFO [LICENSE](/LICENSE).  
+
+
+## Resources
+
+To seek support or report issues, e-mail:
+
+ * ``poptus@mcs.anl.gov``
