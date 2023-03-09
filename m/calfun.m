@@ -1,4 +1,4 @@
-function [y, fvec, G] = calfun(x, varargin)
+function [y, fvec, G, J] = calfun(x, varargin)
 %     This is a Matlab version of the subroutine calfun.f
 %     This subroutine returns a function value as used in:
 %
@@ -16,7 +16,9 @@ function [y, fvec, G] = calfun(x, varargin)
 %       x is an input array of length n.
 %       y is an output that contains the function value at x.
 %       fvec is an m-by-1 array containing component function values at x.
-%       G is an n-by-m array containing the gradients of the component
+%       G is a 1-by-n array containing the gradients of the composed function
+%           at x (only available when probtype is 'smooth').
+%       J is an n-by-m array containing the gradients of the component
 %           functions at x (only available when probtype is 'smooth').
 %
 %     If reproducibility is needed, the rand generator should be seeded before
@@ -143,7 +145,8 @@ switch probtype
         y = sum(fvec.^2);
         if nargout > 2
             J = jacobian(m, n, x, nprob);
-            G = J' * fvec;
+            G = 2 * J' * fvec;
+            J = J';
         end
     case 'nondiff'
         y = sum(abs(fvec));
