@@ -20,6 +20,7 @@ function [y, fvec, G, J] = calfun(x, varargin)
 %           at x (only available when probtype is 'smooth').
 %       J is an n-by-m array containing the gradients of the component
 %           functions at x (only available when probtype is 'smooth').
+%           J(i,j) contains the derivative of the jth equation wrt x(i).
 %
 %     If reproducibility is needed, the rand generator should be seeded before
 %     this function is called.
