@@ -1,4 +1,4 @@
-# This is an example modified from 
+# This is an example modified from
 # https://florianschanda.github.io/miss_hit/configuration.html
 name: miss_hit
 
@@ -21,10 +21,10 @@ jobs:
         submodules: true
         fetch-depth: 1
 
-    - name: Set up Python 3.6
+    - name: Set up Python 3
       uses: actions/setup-python@v2
       with:
-        python-version: 3.6
+        python-version: 3
 
     - name: Install dependencies
       run: |
