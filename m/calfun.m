@@ -144,13 +144,19 @@ switch probtype
         y = (1 + sigma * phi) * sum(fvec.^2);
     case 'smooth'
         y = sum(fvec.^2);
-        if nargout > 2
-            J = jacobian(m, n, x, nprob);
-            G = 2 * J' * fvec;
-            J = J';
-        end
     case 'nondiff'
         y = sum(abs(fvec));
+end
+
+% Return Jacobian and gradient (of expectation function) or element of subdifferential
+if nargout > 2
+    J = jacobian(m, n, x, nprob);
+    J = J';
+    if strcmp('nondiff', probtype)
+        G = J * sign(fvec);
+    else
+        G = 2 * J * fvec;
+    end
 end
 
 % Update the function value history
