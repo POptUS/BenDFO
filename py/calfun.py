@@ -1,7 +1,7 @@
 # This is a python implementation of calfun.m,
 # provided at https://github.com/POptUS/BenDFO
 import numpy as np
-from .dfovec import dfovec
+from dfovec import dfovec
 
 
 def norm(x, type=2):
@@ -13,7 +13,7 @@ def norm(x, type=2):
         return max(np.abs(x))
 
 
-def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3):
+def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False):
     n = len(x)
 
     # Restrict domain for some nondiff problems
@@ -31,6 +31,9 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3):
 
     # Generate the vector
     fvec = dfovec(m, n, xc, nprob)
+
+    if vecout:
+        return fvec
 
     # Calculate the function value
     if probtype == "noisy3":

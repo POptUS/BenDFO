@@ -7,11 +7,11 @@ import scipy as sp
 from dfoxs import dfoxs
 from calfun import calfun
 
-np.seterr("raise")
+# np.seterr("raise")
 
 
 def doit():
-    dfo = np.loadtxt("./cutest/dfo.txt")
+    dfo = np.loadtxt("../data/dfo.dat")
 
     for row, (nprob, n, m, factor_power) in enumerate(dfo):
         n = int(n)
