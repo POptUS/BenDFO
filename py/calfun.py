@@ -14,6 +14,8 @@ def norm(x, type=2):
 
 
 def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False):
+    # Note: The vecout=True outputs are independent of probtype and noise_level
+
     n = len(x)
 
     # Restrict domain for some nondiff problems
