@@ -316,7 +316,7 @@ def dfovec(m, n, x, nprob):
             fvec[n - 4 + i] = x[i] ** 2 + 2 * x[i + 1] ** 2 + 3 * x[i + 2] ** 2 + 4 * x[i + 3] ** 2 + 5 * x[n - 1] ** 2
     elif nprob == 20:  # Cube
         # n = 2, m = n
-        fvec[1] = x[0] - 1.0
+        fvec[0] = x[0] - 1.0
         for i in range(1, n):
             fvec[i] = 10 * (x[i] - x[i - 1] ** 3)
     elif nprob == 21:  # Mancino
