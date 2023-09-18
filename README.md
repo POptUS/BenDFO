@@ -24,6 +24,23 @@ The following source files were used to define the benchmark problems in [[1](ht
 - `dfo.dat` [Data file](data/dfo.dat):
   Data file specifying the benchmark problem set P through the integer parameters (nprob, n, m, ns). 
 
+#### Types of Problems
+There are several different forms of objective functions included, all using the same underlying equations.
+
+The `smooth` problem type is deterministic and of the form 
+> f(x) = \sum_{i=1}^m F_i(x)^2
+ 
+The `nondiff` problem type is deterministic and of the form 
+> f(x) = \sum_{i=1}^m | F_i(x) |
+
+Absolute stochastic noise versions are of the form
+> f(x) = \sum_{i=1}^m (F_i(x) + z)^2
+
+and include stochastic additive noise controlled by `sigma`:
+- the `absnormal` problem type has components of z that are independent, mean zero, variance sigma^2 Gaussian random variables.
+- the `absuniform` problem type has components of z that are independent uniform random variables, with mean zero and variance sigma^2.
+
+
 ### Plotting the Profiles
 We provide the following Octave/Matlab files for producing basic data and performance profiles from data:
 
