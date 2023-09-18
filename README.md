@@ -25,7 +25,7 @@ The following source files were used to define the benchmark problems in [[1](ht
   Data file specifying the benchmark problem set P through the integer parameters (nprob, n, m, ns). 
 
 #### Types of Problems
-There are several different forms of objective functions included, all using the same underlying equations.
+There are 10 different forms of objective functions included, all using the same underlying equations.
 
 The `smooth` problem type is deterministic and of the form 
 > f(x) = \sum_{i=1}^m F_i(x)^2
@@ -52,8 +52,19 @@ Relative stochastic noise versions are of the form
 and include stochastic multiplicative noise controlled by `sigma` (except in the `wild3` case):
 - the `relnormal` problem type has components of z that are independent, mean zero, variance sigma^2 Gaussian random variables
 - the `reluniform` problem type has components of z that are independent uniform random variables, with mean zero and variance sigma^2
-- the `wild3` problem type has components of z that are independent, mean zero, variance (1e-3)^2 Gaussian random variables
+- the `noisy3` problem type has components of z that are independent, mean zero, variance (1e-3)^2 Gaussian random variables
 
+#### (Sub)Derivative Information
+For benchmarking purposes, derivative information is provided for the component functions F_i(x) defining each of the above problem types.
+
+> J is the n-by-m Jacobian, with J(j,i) denoting the derivative of the ith equation with respect to the jth variable
+> G is (or resembles, see below) a gradient of the objective f
+
+- For the `smooth` problem type, `G = 2 * J * fvec` is the gradient
+- For `abswild`, `wild3`, and `relwild` problem types, G ignores the oscillatory function
+- For the `nondiff` problem type, `G = J * sign(fvec)` is a subgradient
+- For `absnormal` and `absuniform` problem types, G is the gradient of the expected value of f
+- For `relnormal`, `reluniform`, and `noisy3` problem types, G is the gradient of the expected value of f
 
 ### Plotting the Profiles
 We provide the following Octave/Matlab files for producing basic data and performance profiles from data:
