@@ -49,7 +49,7 @@ and include stochastic additive noise controlled by `sigma`:
 Relative stochastic noise versions are of the form
 > f(x) = \sum_{i=1}^m (F_i(x) * (1 + z))^2
 
-and include stochastic multiplicative noise controlled by `sigma` (except in the `wild3` case):
+and include stochastic multiplicative noise controlled by `sigma` (except in the `noisy3` case):
 - the `relnormal` problem type has components of z that are independent, mean zero, variance sigma^2 Gaussian random variables
 - the `reluniform` problem type has components of z that are independent uniform random variables, with mean zero and variance sigma^2
 - the `noisy3` problem type has components of z that are independent, mean zero, variance (1e-3)^2 Gaussian random variables
