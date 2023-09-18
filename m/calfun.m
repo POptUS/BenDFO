@@ -44,8 +44,8 @@ function [y, fvec, G, J] = calfun(x, varargin)
 %           'nondiff' corresponds to piecewise-smooth problems'smooth' corresponds to smooth problems
 %           'wild3' corresponds to deterministic relative noise with
 %           'noisy3' corresponds to stochastically noisy problems
-%       sigma is a standard deviation; it is ignored for deterministic
-%          noise, no noise, and noisy3
+%       sigma is a standard deviation; it is ignored for 'smooth', 'nondiff',
+%          'noisy3', 'wild3', and 'abswild' problem types
 %
 %     If not calling using a global variable, one could call via
 %         calfun(x, BenDFO, probtype)
