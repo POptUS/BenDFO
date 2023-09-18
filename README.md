@@ -33,12 +33,26 @@ The `smooth` problem type is deterministic and of the form
 The `nondiff` problem type is deterministic and of the form 
 > f(x) = \sum_{i=1}^m | F_i(x) |
 
+There are three deterministic noise problems based on the smooth function `f`:
+
+- the `abswild` problem type is of the form `f(x) + phi(x)`, where phi(x) is a deterministic oscillatory function
+- the `wild3` problem type is of the form `f(x) * (1 + 1e-3 * phi(x))`, where phi(x) is a deterministic oscillatory function
+- the `relwild` problem type is of the form `f(x) * (1 + sigma * phi(x))`, where phi(x) is a deterministic oscillatory function, and `sigma` controls the noise level 
+
 Absolute stochastic noise versions are of the form
 > f(x) = \sum_{i=1}^m (F_i(x) + z)^2
 
 and include stochastic additive noise controlled by `sigma`:
-- the `absnormal` problem type has components of z that are independent, mean zero, variance sigma^2 Gaussian random variables.
-- the `absuniform` problem type has components of z that are independent uniform random variables, with mean zero and variance sigma^2.
+- the `absnormal` problem type has components of z that are independent, mean zero, variance sigma^2 Gaussian random variables
+- the `absuniform` problem type has components of z that are independent uniform random variables, with mean zero and variance sigma^2
+
+Relative stochastic noise versions are of the form
+> f(x) = \sum_{i=1}^m (F_i(x) * (1 + z))^2
+
+and include stochastic multiplicative noise controlled by `sigma` (except in the `wild3` case):
+- the `relnormal` problem type has components of z that are independent, mean zero, variance sigma^2 Gaussian random variables
+- the `reluniform` problem type has components of z that are independent uniform random variables, with mean zero and variance sigma^2
+- the `wild3` problem type has components of z that are independent, mean zero, variance (1e-3)^2 Gaussian random variables
 
 
 ### Plotting the Profiles
