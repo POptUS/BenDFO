@@ -16,10 +16,12 @@ function [y, fvec, G, J] = calfun(x, varargin)
 %       x is an input array of length n.
 %       y is an output that contains the function value at x.
 %       fvec is an m-by-1 array containing component function values at x.
-%       G is a 1-by-n array containing the gradients of the composed function
-%           at x (only available when probtype is 'smooth').
+%       G is a 1-by-n array containing the gradient of the function f at x.
+%           For stochastic problem types, this is the gradient of the expectation of f.
+%           For deterministically noisy problem types, this ignore the noise.
+%           For the nondiff problem type, this is the subgradient J * sign(fvec).
 %       J is an n-by-m array containing the gradients of the component
-%           functions at x (only available when probtype is 'smooth').
+%           functions at x.
 %           J(i,j) contains the derivative of the jth equation wrt x(i).
 %
 %     If reproducibility is needed, the rand generator should be seeded before
@@ -154,6 +156,8 @@ if nargout > 2
     J = J';
     if strcmp('nondiff', probtype)
         G = J * sign(fvec);
+    elseif strcmp('relnormal', probtype) || strcmp('reluniform', probtype) || strcmp('noisy3', probtype)
+        G = (1 + sigma^2) * J * sign(fvec);
     else
         G = 2 * J * fvec;
     end
