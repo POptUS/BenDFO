@@ -1,7 +1,7 @@
 # This is a python implementation of dfovec.m,
 # provided at https://github.com/POptUS/BenDFO
-import numpy as np
-
+import jax
+import jax.numpy as np
 
 def dfovec(m, n, x, nprob):
     # Set lots of constants:

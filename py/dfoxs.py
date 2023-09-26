@@ -1,6 +1,7 @@
 # This is a python implementation of dfoxs.m,
 # provided at https://github.com/POptUS/BenDFO
-import numpy as np
+import jax
+import jax.numpy as np
 
 
 def dfoxs(n, nprob, factor):
