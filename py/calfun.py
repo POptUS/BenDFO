@@ -1,8 +1,8 @@
 # This is a python implementation of calfun.m,
 # provided at https://github.com/POptUS/BenDFO
-from dfovec import dfovec
 import jax
 import jax.numpy as np
+from dfovec import dfovec
 
 
 def norm(x, type=2):
