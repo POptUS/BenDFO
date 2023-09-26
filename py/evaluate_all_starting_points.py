@@ -13,7 +13,7 @@ from calfun import calfun
 def doit():
     dfo = np.loadtxt("../data/dfo.dat")
 
-    for probtype in  ['absnormal', 'absuniform', 'abswild', 'noisy3', 'nondiff', 'relnormal', 'reluniform', 'relwild', 'smooth', 'wild3']:
+    for probtype in ["absnormal", "absuniform", "abswild", "noisy3", "nondiff", "relnormal", "reluniform", "relwild", "smooth", "wild3"]:
         for row, (nprob, n, m, factor_power) in enumerate(dfo):
             n = int(n)
             m = int(m)

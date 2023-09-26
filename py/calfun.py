@@ -31,48 +31,48 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False):
         return fvec
 
     # Calculate the function value
-    if probtype == 'absnormal':
+    if probtype == "absnormal":
         sigma = noise_level
         z = sigma * np.random.randn(m)
         fvec = fvec + z
         y = np.sum(fvec**2)
-    elif probtype == 'absuniform':
+    elif probtype == "absuniform":
         sigma = noise_level
         z = (sigma * np.sqrt(3)) * (2 * np.random.rand(m) - 1)
         fvec = fvec + z
         y = np.sum(fvec**2)
-    elif probtype == 'abswild':
+    elif probtype == "abswild":
         z = 0.9 * np.sin(100 * np.linalg.norm(x, 1)) * np.cos(100 * np.linalg.norm(x, np.inf)) + 0.1 * np.cos(np.linalg.norm(x, 2))
         z = z * (4 * z**2 - 3)
         y = np.sum(fvec**2) + z
-    elif probtype == 'relnormal':
+    elif probtype == "relnormal":
         sigma = noise_level
         z = sigma * np.random.randn(m)
         fvec = fvec * (1 + z)
         y = np.sum(fvec**2)
-    elif probtype == 'reluniform':
+    elif probtype == "reluniform":
         sigma = noise_level
         z = (sigma * np.sqrt(3)) * (2 * np.random.rand(m) - 1)
         fvec = fvec * (1 + z)
         y = np.sum(fvec**2)
-    elif probtype == 'relwild':
+    elif probtype == "relwild":
         sigma = noise_level
         z = 0.9 * np.sin(100 * np.linalg.norm(x, 1)) * np.cos(100 * np.linalg.norm(x, np.inf)) + 0.1 * np.cos(np.linalg.norm(x, 2))
         z = z * (4 * z**2 - 3)
         y = (1 + sigma * z) * np.sum(fvec**2)
-    elif probtype == 'noisy3':
+    elif probtype == "noisy3":
         sigma = 10**-3
         u = sigma * (-1 + 2 * np.random.rand(m))
         fvec = fvec * (1 + u)
         y = np.sum(fvec**2)
-    elif probtype == 'wild3':
+    elif probtype == "wild3":
         sigma = 10**-3
         phi = 0.9 * np.sin(100 * np.linalg.norm(x, 1)) * np.cos(100 * np.linalg.norm(x, np.inf)) + 0.1 * np.cos(np.linalg.norm(x, 2))
         phi = phi * (4 * phi**2 - 3)
         y = (1 + sigma * phi) * np.sum(fvec**2)
-    elif probtype == 'smooth':
+    elif probtype == "smooth":
         y = np.sum(fvec**2)
-    elif probtype == 'nondiff':
+    elif probtype == "nondiff":
         y = np.sum(np.abs(fvec))
     else:
         print(f"invalid probtype {probtype}")
