@@ -17,6 +17,7 @@ def norm(x, type=2):
 def jacobian(func, x):
     return jax.jacobian(func)(x)
 
+
 def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False, gradout=False):
     # Note: The vecout=True outputs are independent of probtype and noise_level
 
@@ -91,12 +92,12 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False, grado
         func = lambda x: dfovec(m, n, x, nprob)
         G = jacobian(func, xc)
 
-        if probtype == 'nondiff':
+        if probtype == "nondiff":
             G = J * np.sign(fvec)
-        elif probtype in ['relnormal', 'reluniform', 'noisy3']:
+        elif probtype in ["relnormal", "reluniform", "noisy3"]:
             G = (1 + noise_level**2) * J * np.sign(fvec)
         else:
             G = 2 * J * fvec
         return y, fvec, G, J
-    else: 
+    else:
         return y
