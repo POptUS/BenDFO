@@ -134,16 +134,14 @@ switch probtype
         z = 0.9 * sin(100 * norm(x, 1)) * cos(100 * norm(x, inf)) + 0.1 * cos(norm(x, 2));
         z = z * (4 * z^2 - 3);
         y = (1 + BenDFO.sigma * z) * sum(fvec.^2);
-    case 'noisy3'
-        sigma = 10^-3;
-        u = sigma * (-ones(m, 1) + 2 * rand(m, 1));
+    case 'noisy3'        
+        u = BenDFO.sigma * (-ones(m, 1) + 2 * rand(m, 1));
         fvec = fvec .* (1 + u);
         y = sum(fvec.^2);
-    case 'wild3'
-        sigma = 10^-3;
+    case 'wild3' 
         phi = 0.9 * sin(100 * norm(x, 1)) * cos(100 * norm(x, inf)) + 0.1 * cos(norm(x, 2));
         phi = phi * (4 * phi^2 - 3);
-        y = (1 + sigma * phi) * sum(fvec.^2);
+        y = (1 + BenDFO.sigma * phi) * sum(fvec.^2);
     case 'smooth'
         y = sum(fvec.^2);
     case 'nondiff'
@@ -157,7 +155,7 @@ if nargout > 2
     if strcmp('nondiff', probtype)
         G = J * sign(fvec);
     elseif strcmp('relnormal', probtype) || strcmp('reluniform', probtype) || strcmp('noisy3', probtype)
-        G = (1 + sigma^2) * J * sign(fvec);
+        G = (1 + BenDFO.sigma^2) * J * sign(fvec);
     else
         G = 2 * J * fvec;
     end
