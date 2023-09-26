@@ -1,9 +1,9 @@
-load('../data/dfo.dat')
+load('../data/dfo.dat');
 probtypes = ["absnormal", "absuniform", "abswild", "noisy3", "nondiff", "relnormal", "reluniform", "relwild", "smooth", "wild3"];
 
-Results = cell(length(probtypes), size(dfo,1));
+Results = cell(length(probtypes), size(dfo, 1));
 for p = 1:length(probtypes)
-    for row = 1:size(dfo,1)
+    for row = 1:size(dfo, 1)
         nprob = dfo(row, 1);
         n = dfo(row, 2);
         m = dfo(row, 3);
@@ -17,9 +17,9 @@ for p = 1:length(probtypes)
 
         [y, F, G, J] = calfun(X0, BenDFO, probtypes(p));
 
-        Results{p,row}.y = y;
-        Results{p,row}.F = F;
-        Results{p,row}.G = G;
-        Results{p,row}.J = J;
+        Results{p, row}.y = y;
+        Results{p, row}.F = F;
+        Results{p, row}.G = G;
+        Results{p, row}.J = J;
     end
 end
