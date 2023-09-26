@@ -16,10 +16,12 @@ function [y, fvec, G, J] = calfun(x, varargin)
 %       x is an input array of length n.
 %       y is an output that contains the function value at x.
 %       fvec is an m-by-1 array containing component function values at x.
-%       G is a 1-by-n array containing the gradients of the composed function
-%           at x (only available when probtype is 'smooth').
+%       G is a 1-by-n array containing the gradient of the function f at x.
+%           For stochastic problem types, this is the gradient of the expectation of f.
+%           For deterministically noisy problem types, this ignore the noise.
+%           For the nondiff problem type, this is the subgradient J * sign(fvec).
 %       J is an n-by-m array containing the gradients of the component
-%           functions at x (only available when probtype is 'smooth').
+%           functions at x.
 %           J(i,j) contains the derivative of the jth equation wrt x(i).
 %
 %     If reproducibility is needed, the rand generator should be seeded before
@@ -42,8 +44,8 @@ function [y, fvec, G, J] = calfun(x, varargin)
 %           'nondiff' corresponds to piecewise-smooth problems'smooth' corresponds to smooth problems
 %           'wild3' corresponds to deterministic relative noise with
 %           'noisy3' corresponds to stochastically noisy problems
-%       sigma is a standard deviation; it is ignored for deterministic
-%          noise, no noise, and noisy3
+%       sigma is a standard deviation; it is ignored for 'smooth', 'nondiff',
+%          'noisy3', 'wild3', and 'abswild' problem types
 %
 %     If not calling using a global variable, one could call via
 %         calfun(x, BenDFO, probtype)
@@ -144,13 +146,21 @@ switch probtype
         y = (1 + sigma * phi) * sum(fvec.^2);
     case 'smooth'
         y = sum(fvec.^2);
-        if nargout > 2
-            J = jacobian(m, n, x, nprob);
-            G = 2 * J' * fvec;
-            J = J';
-        end
     case 'nondiff'
         y = sum(abs(fvec));
+end
+
+% Return Jacobian and gradient (of expectation function) or element of subdifferential
+if nargout > 2
+    J = jacobian(m, n, x, nprob);
+    J = J';
+    if strcmp('nondiff', probtype)
+        G = J * sign(fvec);
+    elseif strcmp('relnormal', probtype) || strcmp('reluniform', probtype) || strcmp('noisy3', probtype)
+        G = (1 + sigma^2) * J * sign(fvec);
+    else
+        G = 2 * J * fvec;
+    end
 end
 
 % Update the function value history
