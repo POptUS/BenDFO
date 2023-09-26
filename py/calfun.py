@@ -22,7 +22,7 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False):
     xc = x
     if probtype == "nondiff":
         if nprob == 8 or nprob == 9 or nprob == 13 or nprob == 16 or nprob == 17 or nprob == 18:
-            xc = max(x, 0)
+            xc = np.maximum(x, 0)
 
     # Generate the vector
     fvec = dfovec(m, n, xc, nprob)
@@ -31,16 +31,45 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False):
         return fvec
 
     # Calculate the function value
-    if probtype == "noisy3":
+    if probtype == "absnormal":
         sigma = noise_level
-        u = sigma * (-np.ones(m) + 2 * np.random.rand(m))
+        z = sigma * np.random.randn(m)
+        fvec = fvec + z
+        y = np.sum(fvec**2)
+    elif probtype == "absuniform":
+        sigma = noise_level
+        z = (sigma * np.sqrt(3)) * (2 * np.random.rand(m) - 1)
+        fvec = fvec + z
+        y = np.sum(fvec**2)
+    elif probtype == "abswild":
+        z = 0.9 * np.sin(100 * np.linalg.norm(x, 1)) * np.cos(100 * np.linalg.norm(x, np.inf)) + 0.1 * np.cos(np.linalg.norm(x, 2))
+        z = z * (4 * z**2 - 3)
+        y = np.sum(fvec**2) + z
+    elif probtype == "relnormal":
+        sigma = noise_level
+        z = sigma * np.random.randn(m)
+        fvec = fvec * (1 + z)
+        y = np.sum(fvec**2)
+    elif probtype == "reluniform":
+        sigma = noise_level
+        z = (sigma * np.sqrt(3)) * (2 * np.random.rand(m) - 1)
+        fvec = fvec * (1 + z)
+        y = np.sum(fvec**2)
+    elif probtype == "relwild":
+        sigma = noise_level
+        z = 0.9 * np.sin(100 * np.linalg.norm(x, 1)) * np.cos(100 * np.linalg.norm(x, np.inf)) + 0.1 * np.cos(np.linalg.norm(x, 2))
+        z = z * (4 * z**2 - 3)
+        y = (1 + sigma * z) * np.sum(fvec**2)
+    elif probtype == "noisy3":
+        sigma = 10**-3
+        u = sigma * (-1 + 2 * np.random.rand(m))
         fvec = fvec * (1 + u)
         y = np.sum(fvec**2)
     elif probtype == "wild3":
-        sigma = noise_level
-        phi = 0.9 * np.sin(100 * norm(x, 1)) * np.cos(100 * norm(x, np.inf)) + 0.1 * np.cos(norm(x, 2))
+        sigma = 10**-3
+        phi = 0.9 * np.sin(100 * np.linalg.norm(x, 1)) * np.cos(100 * np.linalg.norm(x, np.inf)) + 0.1 * np.cos(np.linalg.norm(x, 2))
         phi = phi * (4 * phi**2 - 3)
-        y = (1 + sigma * phi) * sum(fvec**2)
+        y = (1 + sigma * phi) * np.sum(fvec**2)
     elif probtype == "smooth":
         y = np.sum(fvec**2)
     elif probtype == "nondiff":
@@ -48,6 +77,7 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False):
     else:
         print(f"invalid probtype {probtype}")
         return None
+
     # Never return nan. Return inf instead so that
     # optimization algorithms treat it as out of bounds.
     if np.isnan(y):
