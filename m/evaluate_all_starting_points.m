@@ -24,4 +24,4 @@ for p = 1:length(probtypes)
         Results{p, row}.J = J;
     end
 end
-save("fvec_and_gradients_at_starting_values_matlab.mat", "Results")
+save("fvec_and_gradients_at_starting_values_matlab.mat", "Results");

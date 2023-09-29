@@ -9,15 +9,13 @@ probtypes = ["absnormal", "absuniform", "abswild", "noisy3", "nondiff", "relnorm
 
 for probnum = 1:53
     for p = 1:length(probtypes)
-        P{p,probnum} = P1.(['prob_' int2str(p) '_' int2str(probnum)]);
+        P{p, probnum} = P1.(['prob_' int2str(p) '_' int2str(probnum)]);
     end
 end
 
 for probnum = 1:53
-    assert(norm(P{1,probnum}.X0 - M{1,probnum}.X0') == 0, "different starting point")
-    for p = [9]
-        probnum
-        assert(P{p,probnum}.y - M{p,probnum}.y <= 1e-8 , "different y value at starting")
+    assert(norm(P{1, probnum}.X0 - M{1, probnum}.X0') == 0, "different starting point");
+    for p = [5, 9, 10]
+        assert((P{p, probnum}.y - M{p, probnum}.y)/norm(P{p,probnum}.y) <= 1e-15, ['different y value for X0 for prob: ' int2str(probnum) ', ' char(probtypes(p))]);
     end
 end
-
