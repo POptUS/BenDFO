@@ -19,7 +19,7 @@ for p, probtype in enumerate(probtypes):
         n = int(n)
         m = int(m)
 
-        X0 = dfoxs(n, nprob, int(10**factor_power)).T
+        X0 = dfoxs(n, nprob, int(10**factor_power))
         [y, F, G, J] = calfun(X0, m, int(nprob), probtype, gradout=True)
 
         Results["prob_" + str(p + 1) + "_" + str(row + 1)] = {}
