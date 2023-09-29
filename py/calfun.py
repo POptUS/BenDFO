@@ -2,6 +2,7 @@
 # provided at https://github.com/POptUS/BenDFO
 import numpy as np
 from dfovec import dfovec
+from jacobian import jacobian
 
 
 def norm(x, type=2):
@@ -84,8 +85,7 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False, grado
         return np.inf
 
     if gradout:
-        func = lambda x: dfovec(m, n, x, nprob)
-        G = jacobian(func, xc)
+        G = jacobian(m, n, xc, nprob)
 
         if probtype == "nondiff":
             G = J * np.sign(fvec)

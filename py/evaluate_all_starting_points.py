@@ -4,6 +4,7 @@ import sys
 import numpy as np
 import scipy as sp
 from calfun import calfun
+from dfoxs import dfoxs
 
 # np.seterr("raise")
 
@@ -18,7 +19,6 @@ def doit():
             m = int(m)
 
             X0 = dfoxs(n, nprob, int(10**factor_power)).T
-            print(type(X0))
             [y, F, G, J] = calfun(X0, m, int(nprob), probtype, gradout=True)
 
             Results[str(p) + "_" + str(row)] = {}
