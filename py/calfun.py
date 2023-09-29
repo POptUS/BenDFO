@@ -85,7 +85,8 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False, grado
         return np.inf
 
     if gradout:
-        G = jacobian(m, n, xc, nprob)
+        J, _ = jacobian(m, n, xc, nprob)
+        J = J.T
 
         if probtype == "nondiff":
             G = J * np.sign(fvec)
