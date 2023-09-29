@@ -80,7 +80,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_fvec[i] = g_tmp_dfovec_1d_00003
 
      elif nprob == 3:
-        tmp_dfovec_1d_00004 = n - 1
+         tmp_dfovec_1d_00004 = n - 1
         for j in range(2, tmp_dfovec_1d_00004):
             g_tmp_x_00004 = g_x[j]
             tmp_x_00004 = x[j]
@@ -115,8 +115,8 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
         g_fvec[1] = -g_tmp_x_00007
         fvec[1] = 1 - tmp_x_00007
    elif nprob == 5:
-        if x[0] > 0:
-            g_tmp_x_00008 = g_x[1]
+       if x[0] > 0:
+           g_tmp_x_00008 = g_x[1]
             tmp_x_00008 = x[1]
             g_tmp_x_00009 = g_x[0]
             tmp_x_00009 = x[0]
@@ -144,7 +144,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
         else:  # x[0] == 0
             th = 0.25
             g_th = np.zeros_like(th)
-        
+
         g_tmp_x_00012 = g_x[0]
         tmp_x_00012 = x[0]
         g_tmp_dfovec_1d_00016 = g_tmp_x_00012**2
@@ -244,7 +244,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
         fvec[1] = -c29 + tmp_x_00026 + tmp_dfovec_1d_00035
     elif nprob == 8:
         y1 = [1.4e-1, 1.8e-1, 2.2e-1, 2.5e-1, 2.9e-1, 3.2e-1, 3.5e-1,
-              3.9e-1, 3.7e-1, 5.8e-1, 7.3e-1, 9.6e-1, 1.34, 2.1, 4.39]
+                3.9e-1, 3.7e-1, 5.8e-1, 7.3e-1, 9.6e-1, 1.34, 2.1, 4.39]
         for i in range(15):
             tmp1 = i + 1
             g_tmp1 = np.zeros_like(tmp1)
@@ -255,38 +255,38 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             if i > 7:
                 g_tmp3 = g_tmp2
                 tmp3 = tmp2
-            
+
             g_tmp_x_00028 = g_x[0]
             tmp_x_00028 = x[0]
             g_tmp_x_00029 = g_x[1]
             tmp_x_00029 = x[1]
-            
+
             g_tmp_dfovec_1d_00036 = g_tmp_x_00029 * tmp2 + tmp_x_00029 * g_tmp2
             tmp_dfovec_1d_00036 = tmp_x_00029 * tmp2
             g_tmp_x_00030 = g_x[2]
             tmp_x_00030 = x[2]
-            
+
             g_tmp_dfovec_1d_00037 = g_tmp_x_00030 * tmp3 + tmp_x_00030 * g_tmp3
             tmp_dfovec_1d_00037 = tmp_x_00030 * tmp3
-            
+
             g_tmp_dfovec_1d_00038 = g_tmp_dfovec_1d_00036 + g_tmp_dfovec_1d_00037
             tmp_dfovec_1d_00038 = tmp_dfovec_1d_00036 + tmp_dfovec_1d_00037
             tmp_dfovec_1d_00039 = tmp1 / tmp_dfovec_1d_00038
-            
+
             g_tmp_dfovec_1d_00039 = np.linalg.solve(tmp_dfovec_1d_00038.T, (g_tmp1 - np.dot(tmp_dfovec_1d_00038.T, tmp_dfovec_1d_00039)).T).T
-            
+
             g_tmp_dfovec_1d_00040 = g_tmp_x_00028 + g_tmp_dfovec_1d_00039
             tmp_dfovec_1d_00040 = tmp_x_00028 + tmp_dfovec_1d_00039
-            
+
             g_fvec[i] = -g_tmp_dfovec_1d_00040
             fvec[i] = y1[i] - tmp_dfovec_1d_00040
 
     elif nprob == 9:
         y2 = [1.957e-1, 1.947e-1, 1.735e-1, 1.6e-1, 8.44e-2, 6.27e-2,
-              4.56e-2, 3.42e-2, 3.23e-2, 2.35e-2, 2.46e-2]
+                4.56e-2, 3.42e-2, 3.23e-2, 2.35e-2, 2.46e-2]
         v = [4.0, 2.0, 1.0, 5.0e-1, 2.5e-1, 1.67e-1, 1.25e-1,
-             1.0e-1, 8.33e-2, 7.14e-2, 6.25e-2]
-        
+                1.0e-1, 8.33e-2, 7.14e-2, 6.25e-2]
+
         for i in range(11):
             g_tmp_x_00031 = g_x[1]
             tmp_x_00031 = x[1]
@@ -309,18 +309,18 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_tmp_dfovec_1d_00044 = g_tmp_x_00034 * tmp1 + tmp_x_00034 * g_tmp1
             tmp_dfovec_1d_00044 = tmp_x_00034 * tmp1
             tmp_dfovec_1d_00045 = tmp_dfovec_1d_00044 / tmp2
-            
+
             g_tmp_dfovec_1d_00045 = np.linalg.solve(tmp2.T, (g_tmp_dfovec_1d_00044.T - np.dot(g_tmp2.T, tmp_dfovec_1d_00045.T)).T).T
-            
+
             g_fvec[i] = -g_tmp_dfovec_1d_00045
             fvec[i] = y2[i] - tmp_dfovec_1d_00045
 
     elif nprob == 10:
         y3 = [3.478e4, 2.861e4, 2.365e4, 1.963e4, 1.637e4, 1.372e4,
-              1.154e4, 9.744e3, 8.261e3, 7.03e3, 6.005e3, 5.147e3,
-              4.427e3, 3.82e3, 3.307e3, 2.872e3]
+                1.154e4, 9.744e3, 8.261e3, 7.03e3, 6.005e3, 5.147e3,
+                4.427e3, 3.82e3, 3.307e3, 2.872e3]
         c45 = 4.5e1
-        
+
         for i in range(16):
             tmp_dfovec_1d_00046 = 5 * (i + 1)
             g_tmp_x_00035 = g_x[2]
@@ -359,7 +359,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
                 s1 = tmp_dfovec_1d_00194
                 tmp_dfovec_1d_00195 = div * dx
                 dx = tmp_dfovec_1d_00195
-            
+
             s2 = 0
             g_s2 = np.zeros_like(s2)
             dx = 1
@@ -374,17 +374,17 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
                 s2 = tmp_dfovec_1d_00196
                 tmp_dfovec_1d_00197 = div * dx
                 dx = tmp_dfovec_1d_00197
-            
+
             g_tmp_dfovec_1d_00051 = g_s2 ** 2
             tmp_dfovec_1d_00051 = s2 ** 2
             g_fvec[i] = g_s1 - g_tmp_dfovec_1d_00051
             fvec[i] = s1 - tmp_dfovec_1d_00051 - 1
-        
+
         g_tmp_x_00040 = g_x[0]
         tmp_x_00040 = x[0]
         g_fvec[29] = g_tmp_x_00040
         fvec[29] = tmp_x_00040
-        
+
         g_tmp_x_00041 = g_x[1]
         tmp_x_00041 = x[1]
         g_tmp_x_00042 = g_x[0]
@@ -395,8 +395,8 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
         fvec[30] = tmp_x_00041 - tmp_dfovec_1d_00052 - 1
 
  elif nprob == 12:
-        for i in range(m):
-            temp = i + 1
+     for i in range(m):
+         temp = i + 1
             g_temp = np.zeros_like(temp)
             g_tmp1 = np.linalg.solve(10, g_temp)
             tmp1 = temp / 10
@@ -554,10 +554,10 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
         fvec[n-1] = prod1 - 1
     elif nprob == 17:
         y4 = [8.44e-1, 9.08e-1, 9.32e-1, 9.36e-1, 9.25e-1, 9.08e-1,
-              8.81e-1, 8.5e-1, 8.18e-1, 7.84e-1, 7.51e-1, 7.18e-1, 6.85e-1,
-              6.58e-1, 6.28e-1, 6.03e-1, 5.8e-1, 5.58e-1, 5.38e-1, 5.22e-1,
-              5.06e-1, 4.9e-1, 4.78e-1, 4.67e-1, 4.57e-1, 4.48e-1, 4.38e-1,
-              4.31e-1, 4.24e-1, 4.2e-1, 4.14e-1, 4.11e-1, 4.06e-1]
+                8.81e-1, 8.5e-1, 8.18e-1, 7.84e-1, 7.51e-1, 7.18e-1, 6.85e-1,
+                6.58e-1, 6.28e-1, 6.03e-1, 5.8e-1, 5.58e-1, 5.38e-1, 5.22e-1,
+                5.06e-1, 4.9e-1, 4.78e-1, 4.67e-1, 4.57e-1, 4.48e-1, 4.38e-1,
+                4.31e-1, 4.24e-1, 4.2e-1, 4.14e-1, 4.11e-1, 4.06e-1]
         for i in range(33):
             tmp_dfovec_1d_00073 = i
             temp = 10 * tmp_dfovec_1d_00073
@@ -598,15 +598,15 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
 
     elif nprob == 18:
         y5 = [1.366, 1.191, 1.112, 1.013, 9.91e-1, 8.85e-1,
-              8.31e-1, 8.47e-1, 7.86e-1, 7.25e-1, 7.46e-1, 6.79e-1, 6.08e-1,
-              6.55e-1, 6.16e-1, 6.06e-1, 6.02e-1, 6.26e-1, 6.51e-1, 7.24e-1,
-              6.49e-1, 6.49e-1, 6.94e-1, 6.44e-1, 6.24e-1, 6.61e-1, 6.12e-1,
-              5.58e-1, 5.33e-1, 4.95e-1, 5.0e-1, 4.23e-1, 3.95e-1, 3.75e-1,
-              3.72e-1, 3.91e-1, 3.96e-1, 4.05e-1, 4.28e-1, 4.29e-1, 5.23e-1,
-              5.62e-1, 6.07e-1, 6.53e-1, 6.72e-1, 7.08e-1, 6.33e-1, 6.68e-1,
-              6.45e-1, 6.32e-1, 5.91e-1, 5.59e-1, 5.97e-1, 6.25e-1, 7.39e-1,
-              7.1e-1, 7.29e-1, 7.2e-1, 6.36e-1, 5.81e-1, 4.28e-1, 2.92e-1,
-              1.62e-1, 9.8e-2, 5.4e-2]
+                8.31e-1, 8.47e-1, 7.86e-1, 7.25e-1, 7.46e-1, 6.79e-1, 6.08e-1,
+                6.55e-1, 6.16e-1, 6.06e-1, 6.02e-1, 6.26e-1, 6.51e-1, 7.24e-1,
+                6.49e-1, 6.49e-1, 6.94e-1, 6.44e-1, 6.24e-1, 6.61e-1, 6.12e-1,
+                5.58e-1, 5.33e-1, 4.95e-1, 5.0e-1, 4.23e-1, 3.95e-1, 3.75e-1,
+                3.72e-1, 3.91e-1, 3.96e-1, 4.05e-1, 4.28e-1, 4.29e-1, 5.23e-1,
+                5.62e-1, 6.07e-1, 6.53e-1, 6.72e-1, 7.08e-1, 6.33e-1, 6.68e-1,
+                6.45e-1, 6.32e-1, 5.91e-1, 5.59e-1, 5.97e-1, 6.25e-1, 7.39e-1,
+                7.1e-1, 7.29e-1, 7.2e-1, 6.36e-1, 5.81e-1, 4.28e-1, 2.92e-1,
+                1.62e-1, 9.8e-2, 5.4e-2]
         for i in range(65):
             tmp_dfovec_1d_00081 = i
             temp = tmp_dfovec_1d_00081 / 10.0
@@ -633,7 +633,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_tmp_dfovec_1d_00086 = g_tmp_dfovec_1d_00085**2
             tmp_dfovec_1d_00086 = tmp_dfovec_1d_00085**2
             g_tmp_dfovec_1d_00087 = g_tmp_dfovec_1d_00084 * tmp_dfovec_1d_00086 + \
-                tmp_dfovec_1d_00084 * g_tmp_dfovec_1d_00086
+                    tmp_dfovec_1d_00084 * g_tmp_dfovec_1d_00086
             tmp_dfovec_1d_00087 = tmp_dfovec_1d_00084 * tmp_dfovec_1d_00086
             g_tmp2 = g_tmp_dfovec_1d_00087 * np.exp(tmp_dfovec_1d_00087)
             tmp2 = np.exp(tmp_dfovec_1d_00087)
@@ -650,7 +650,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_tmp_dfovec_1d_00090 = g_tmp_dfovec_1d_00089**2
             tmp_dfovec_1d_00090 = tmp_dfovec_1d_00089**2
             g_tmp_dfovec_1d_00091 = g_tmp_dfovec_1d_00088 * tmp_dfovec_1d_00090 + \
-                tmp_dfovec_1d_00088 * g_tmp_dfovec_1d_00090
+                    tmp_dfovec_1d_00088 * g_tmp_dfovec_1d_00090
             tmp_dfovec_1d_00091 = tmp_dfovec_1d_00088 * tmp_dfovec_1d_00090
             g_tmp3 = g_tmp_dfovec_1d_00091 * np.exp(tmp_dfovec_1d_00091)
             tmp3 = np.exp(tmp_dfovec_1d_00091)
@@ -667,7 +667,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_tmp_dfovec_1d_00094 = g_tmp_dfovec_1d_00093**2
             tmp_dfovec_1d_00094 = tmp_dfovec_1d_00093**2
             g_tmp_dfovec_1d_00095 = g_tmp_dfovec_1d_00092 * tmp_dfovec_1d_00094 + \
-                tmp_dfovec_1d_00092 * g_tmp_dfovec_1d_00094
+                    tmp_dfovec_1d_00092 * g_tmp_dfovec_1d_00094
             tmp_dfovec_1d_00095 = tmp_dfovec_1d_00092 * tmp_dfovec_1d_00094
             g_tmp4 = g_tmp_dfovec_1d_00095 * np.exp(tmp_dfovec_1d_00095)
             tmp4 = np.exp(tmp_dfovec_1d_00095)
@@ -689,13 +689,13 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_tmp_dfovec_1d_00099 = g_tmp_x_00071 * tmp4 + tmp_x_00071 * g_tmp4
             tmp_dfovec_1d_00099 = tmp_x_00071 * tmp4
             g_tmp_dfovec_1d_00100 = g_tmp_dfovec_1d_00096 + g_tmp_dfovec_1d_00097 + \
-                g_tmp_dfovec_1d_00098 + g_tmp_dfovec_1d_00099
+                    g_tmp_dfovec_1d_00098 + g_tmp_dfovec_1d_00099
             tmp_dfovec_1d_00100 = tmp_dfovec_1d_00096 + tmp_dfovec_1d_00097 + \
-                tmp_dfovec_1d_00098 + tmp_dfovec_1d_00099
+                    tmp_dfovec_1d_00098 + tmp_dfovec_1d_00099
             g_fvec[i] = -g_tmp_dfovec_1d_00100
             fvec[i] = y5[i] - tmp_dfovec_1d_00100
        elif nprob == 19:
-        tmp_dfovec_1d_00101 = n - 4
+           tmp_dfovec_1d_00101 = n - 4
         for i in range(1, tmp_dfovec_1d_00101 + 1):
             g_tmp_x_00072 = g_x[i]
             tmp_x_00072 = x[i]
@@ -747,19 +747,19 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             tmp_dfovec_1d_00115 = 5 * tmp_dfovec_1d_00114
 
             g_tmp_dfovec_1d_00116 = (
-                g_tmp_dfovec_1d_00104
-                + g_tmp_dfovec_1d_00107
-                + g_tmp_dfovec_1d_00110
-                + g_tmp_dfovec_1d_00113
-                + g_tmp_dfovec_1d_00115
-            )
+                    g_tmp_dfovec_1d_00104
+                    + g_tmp_dfovec_1d_00107
+                    + g_tmp_dfovec_1d_00110
+                    + g_tmp_dfovec_1d_00113
+                    + g_tmp_dfovec_1d_00115
+                    )
             tmp_dfovec_1d_00116 = (
-                tmp_dfovec_1d_00104
-                + tmp_dfovec_1d_00107
-                + tmp_dfovec_1d_00110
-                + tmp_dfovec_1d_00113
-                + tmp_dfovec_1d_00115
-            )
+                    tmp_dfovec_1d_00104
+                    + tmp_dfovec_1d_00107
+                    + tmp_dfovec_1d_00110
+                    + tmp_dfovec_1d_00113
+                    + tmp_dfovec_1d_00115
+                    )
 
             g_fvec[n - 4 + i] = g_tmp_dfovec_1d_00116
             fvec[n - 4 + i] = tmp_dfovec_1d_00116
