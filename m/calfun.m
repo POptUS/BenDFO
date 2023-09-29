@@ -150,8 +150,11 @@ end
 
 % Return Jacobian and gradient (of expectation function) or element of subdifferential
 if nargout > 2
-    J = jacobian(m, n, x, nprob);
+    [J, dummy] = jacobian(m, n, x, nprob);
     J = J';
+    if strcmp(probtype,'smooth')
+        assert(all(dummy==fvec), "Why do the fvecs from jacobian and dfovec disagree?")
+    end
     if strcmp('nondiff', probtype)
         G = J * sign(fvec);
     elseif strcmp('relnormal', probtype) || strcmp('reluniform', probtype) || strcmp('noisy3', probtype)

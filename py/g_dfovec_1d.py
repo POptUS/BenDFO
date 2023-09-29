@@ -31,8 +31,8 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
     g_fvec = np.zeros_like(fvec)
     g_sum = 0
     sum_val = 0
-    g_tmp_x_00000 = g_x[ind]
-    tmp_x_00000 = x[ind]
+    g_tmp_x_00000 = g_x[ind].copy()
+    tmp_x_00000 = x[ind].copy()
     g_x[ind] = g_tmp_x_00000 + g_t
     x[ind] = tmp_x_00000 + t
 
@@ -68,32 +68,33 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
         for j in range(n):
             g_tmp_x_00003 = g_x[j]
             tmp_x_00003 = x[j]
-            g_tmp_dfovec_1d_00002 = j * g_tmp_x_00003
-            tmp_dfovec_1d_00002 = j * tmp_x_00003
+            g_tmp_dfovec_1d_00002 = (j + 1) * g_tmp_x_00003
+            tmp_dfovec_1d_00002 = (j + 1) * tmp_x_00003
             g_tmp_dfovec_1d_00192 = g_sum + g_tmp_dfovec_1d_00002
             tmp_dfovec_1d_00192 = sum_val + tmp_dfovec_1d_00002
             g_sum = g_tmp_dfovec_1d_00192
             sum_val = tmp_dfovec_1d_00192
 
         for i in range(m):
-            g_tmp_dfovec_1d_00003 = i * g_sum
-            tmp_dfovec_1d_00003 = i * sum_val
+            g_tmp_dfovec_1d_00003 = (i + 1) * g_sum
+            tmp_dfovec_1d_00003 = (i + 1) * sum_val
             g_fvec[i] = g_tmp_dfovec_1d_00003
+            fvec[i] = tmp_dfovec_1d_00003 - 1
 
     elif nprob == 3:
         tmp_dfovec_1d_00004 = n - 1
-        for j in range(2, tmp_dfovec_1d_00004):
+        for j in range(1, tmp_dfovec_1d_00004):
             g_tmp_x_00004 = g_x[j]
             tmp_x_00004 = x[j]
-            g_tmp_dfovec_1d_00005 = j * g_tmp_x_00004
-            tmp_dfovec_1d_00005 = j * tmp_x_00004
+            g_tmp_dfovec_1d_00005 = (j + 1) * g_tmp_x_00004
+            tmp_dfovec_1d_00005 = (j + 1) * tmp_x_00004
             g_tmp_dfovec_1d_00193 = g_sum + g_tmp_dfovec_1d_00005
             tmp_dfovec_1d_00193 = sum_val + tmp_dfovec_1d_00005
             g_sum = g_tmp_dfovec_1d_00193
             sum_val = tmp_dfovec_1d_00193
         tmp_dfovec_1d_00006 = m - 1
         for i in range(tmp_dfovec_1d_00006):
-            tmp_dfovec_1d_00007 = i - 1
+            tmp_dfovec_1d_00007 = i
             g_tmp_dfovec_1d_00008 = tmp_dfovec_1d_00007 * g_sum
             tmp_dfovec_1d_00008 = tmp_dfovec_1d_00007 * sum_val
             g_fvec[i] = g_tmp_dfovec_1d_00008
