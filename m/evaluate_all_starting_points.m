@@ -17,9 +17,11 @@ for p = 1:length(probtypes)
 
         [y, F, G, J] = calfun(X0, BenDFO, probtypes(p));
 
+        Results{p, row}.X0 = X0;
         Results{p, row}.y = y;
         Results{p, row}.F = F;
         Results{p, row}.G = G;
         Results{p, row}.J = J;
     end
 end
+save("fvec_and_gradients_at_starting_values_matlab.mat", "Results")
