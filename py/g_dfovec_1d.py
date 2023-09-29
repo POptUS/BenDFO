@@ -122,11 +122,11 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_tmp_x_00009 = g_x[0]
             tmp_x_00009 = x[0]
             tmp_dfovec_1d_00011 = tmp_x_00008 / tmp_x_00009
-            g_tmp_dfovec_1d_00011 = (g_tmp_x_00008 - g_tmp_x_00009 * tmp_dfovec_1d_00011)/ tmp_x_00009
+            g_tmp_dfovec_1d_00011 = (g_tmp_x_00008 - g_tmp_x_00009 * tmp_dfovec_1d_00011) / tmp_x_00009
             g_tmp_atan_00000 = g_tmp_dfovec_1d_00011 / (1 + tmp_dfovec_1d_00011**2)
             tmp_atan_00000 = np.arctan(tmp_dfovec_1d_00011)
             tmp_dfovec_1d_00012 = 2 * np.pi
-            g_th = g_tmp_atan_00000/tmp_dfovec_1d_00012 
+            g_th = g_tmp_atan_00000 / tmp_dfovec_1d_00012
             th = tmp_atan_00000 / tmp_dfovec_1d_00012
         elif x[0] < 0:
             g_tmp_x_00010 = g_x[1]
@@ -134,7 +134,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_tmp_x_00011 = g_x[0]
             tmp_x_00011 = x[0]
             tmp_dfovec_1d_00013 = tmp_x_00010 / tmp_x_00011
-            g_tmp_dfovec_1d_00013 = (g_tmp_x_00010 - g_tmp_x_00011 * tmp_dfovec_1d_00013)/tmp_x_00011
+            g_tmp_dfovec_1d_00013 = (g_tmp_x_00010 - g_tmp_x_00011 * tmp_dfovec_1d_00013) / tmp_x_00011
             g_tmp_atan_00001 = g_tmp_dfovec_1d_00013 / (1 + tmp_dfovec_1d_00013**2)
             tmp_atan_00001 = np.arctan(tmp_dfovec_1d_00013)
             tmp_dfovec_1d_00014 = 2 * np.pi
@@ -273,7 +273,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             tmp_dfovec_1d_00038 = tmp_dfovec_1d_00036 + tmp_dfovec_1d_00037
             tmp_dfovec_1d_00039 = tmp1 / tmp_dfovec_1d_00038
 
-            g_tmp_dfovec_1d_00039 = (g_tmp1 - np.dot(tmp_dfovec_1d_00038.T, tmp_dfovec_1d_00039))/ tmp_dfovec_1d_00038
+            g_tmp_dfovec_1d_00039 = (g_tmp1 - np.dot(tmp_dfovec_1d_00038.T, tmp_dfovec_1d_00039)) / tmp_dfovec_1d_00038
 
             g_tmp_dfovec_1d_00040 = g_tmp_x_00028 + g_tmp_dfovec_1d_00039
             tmp_dfovec_1d_00040 = tmp_x_00028 + tmp_dfovec_1d_00039
@@ -308,7 +308,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             tmp_dfovec_1d_00044 = tmp_x_00034 * tmp1
             tmp_dfovec_1d_00045 = tmp_dfovec_1d_00044 / tmp2
 
-            g_tmp_dfovec_1d_00045 = (g_tmp_dfovec_1d_00044.T - np.dot(g_tmp2, tmp_dfovec_1d_00045))/ tmp2
+            g_tmp_dfovec_1d_00045 = (g_tmp_dfovec_1d_00044.T - np.dot(g_tmp2, tmp_dfovec_1d_00045)) / tmp2
 
             g_fvec[i] = -g_tmp_dfovec_1d_00045
             fvec[i] = y2[i] - tmp_dfovec_1d_00045
@@ -326,7 +326,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_tmp_x_00036 = g_x[1]
             tmp_x_00036 = x[1]
             tmp1 = tmp_x_00036 / temp
-            g_tmp1 = (g_tmp_x_00036 - g_temp * tmp1)/temp
+            g_tmp1 = (g_tmp_x_00036 - g_temp * tmp1) / temp
             g_tmp2 = g_tmp1 * np.exp(tmp1)
             tmp2 = np.exp(tmp1)
             g_tmp_x_00037 = g_x[0]
@@ -394,7 +394,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
         for i in range(m):
             temp = i + 1
             g_temp = np.zeros_like(temp)
-            g_tmp1 = g_temp/10
+            g_tmp1 = g_temp / 10
             tmp1 = temp / 10
             g_tmp_dfovec_1d_00053 = -g_tmp1
             tmp_dfovec_1d_00053 = -tmp1
@@ -511,7 +511,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             if iev > 0:
                 g_tmp_fvec_00003 = g_fvec[i]
                 tmp_fvec_00003 = fvec[i]
-                tmp_dfovec_1d_00068 = (i+1)**2
+                tmp_dfovec_1d_00068 = (i + 1) ** 2
                 tmp_dfovec_1d_00069 = tmp_dfovec_1d_00068 - 1
                 tmp_dfovec_1d_00070 = 1 / tmp_dfovec_1d_00069
                 g_fvec[i] = g_tmp_fvec_00003
@@ -815,8 +815,8 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             g_tmp_dfovec_1d_00113 = 4 * g_tmp_dfovec_1d_00112
             tmp_dfovec_1d_00113 = 4 * tmp_dfovec_1d_00112
 
-            g_tmp_x_00077 = g_x[n-1]
-            tmp_x_00077 = x[n-1]
+            g_tmp_x_00077 = g_x[n - 1]
+            tmp_x_00077 = x[n - 1]
             g_tmp_dfovec_1d_00114 = g_tmp_x_00077 - tmp_x_00077**2
             tmp_dfovec_1d_00114 = tmp_x_00077**2
 
@@ -862,7 +862,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
                 tmp_x_00081 = x[i]
                 g_tmp_dfovec_1d_00121 = g_tmp_x_00081 - tmp_x_00081**2
                 tmp_dfovec_1d_00121 = tmp_x_00081**2
-                tmp_dfovec_1d_00122 = (i+1) / (j+1)
+                tmp_dfovec_1d_00122 = (i + 1) / (j + 1)
 
                 g_tmp_dfovec_1d_00123 = g_tmp_dfovec_1d_00121
                 tmp_dfovec_1d_00123 = tmp_dfovec_1d_00121 + tmp_dfovec_1d_00122
@@ -1117,7 +1117,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
         tmp_dfovec_1d_00180 = 3.0 * tmp_dfovec_1d_00175
         g_tmp_dfovec_1d_00181 = g_tmp_dfovec_1d_00176 - g_tmp_dfovec_1d_00180
         tmp_dfovec_1d_00181 = tmp_dfovec_1d_00176 - tmp_dfovec_1d_00180
-        g_tmp_dfovec_1d_00182 = g_tmp_x_00130 * tmp_x_00129 * tmp_dfovec_1d_00181 + tmp_x_00130 * g_tmp_x_00129 * tmp_dfovec_1d_00181 + tmp_x_00130 * tmp_x_00129 * g_tmp_dfovec_1d_00181 
+        g_tmp_dfovec_1d_00182 = g_tmp_x_00130 * tmp_x_00129 * tmp_dfovec_1d_00181 + tmp_x_00130 * g_tmp_x_00129 * tmp_dfovec_1d_00181 + tmp_x_00130 * tmp_x_00129 * g_tmp_dfovec_1d_00181
         tmp_dfovec_1d_00182 = tmp_x_00130 * tmp_x_00129 * tmp_dfovec_1d_00181
         g_tmp_x_00131 = g_x[3]
         tmp_x_00131 = x[3]
@@ -1133,7 +1133,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
         tmp_dfovec_1d_00185 = 3.0 * tmp_dfovec_1d_00184
         g_tmp_dfovec_1d_00186 = g_tmp_dfovec_1d_00183 - g_tmp_dfovec_1d_00185
         tmp_dfovec_1d_00186 = tmp_dfovec_1d_00183 - tmp_dfovec_1d_00185
-        g_tmp_dfovec_1d_00187 = g_tmp_x_00131 * tmp_x_00132 * tmp_dfovec_1d_00186 + tmp_x_00131 * g_tmp_x_00132 * tmp_dfovec_1d_00186 + tmp_x_00131 * tmp_x_00132 * g_tmp_dfovec_1d_00186 
+        g_tmp_dfovec_1d_00187 = g_tmp_x_00131 * tmp_x_00132 * tmp_dfovec_1d_00186 + tmp_x_00131 * g_tmp_x_00132 * tmp_dfovec_1d_00186 + tmp_x_00131 * tmp_x_00132 * g_tmp_dfovec_1d_00186
         tmp_dfovec_1d_00187 = tmp_x_00131 * tmp_x_00132 * tmp_dfovec_1d_00186
         g_tmp_x_00134 = g_x[1]
         tmp_x_00134 = x[1]
