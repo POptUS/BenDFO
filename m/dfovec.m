@@ -91,7 +91,7 @@ switch nprob
         fvec(2) = sqrt(5) * (x(3) - x(4));
         fvec(3) = (x(2) - 2 * x(3))^2;
         fvec(4) = sqrt(10) * (x(1) - x(4))^2;
-    case  7 %     Freudenstein and Roth function.
+    case 7 %     Freudenstein and Roth function.
         c13 = 1.3e1;
         c14 = 1.4e1;
         c29 = 2.9e1;
