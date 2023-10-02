@@ -1,10 +1,51 @@
-# This is a python implementation of dfovec.m,
-# provided at https://github.com/POptUS/BenDFO
 import numpy as np
 from constants import set_constants
 
 
 def dfovec(m, n, x, nprob):
+        """
+         This is a Python translation of the Matlab version of the subroutine dfovec.f
+         This subroutine specifies the nonlinear benchmark problems in
+
+         Benchmarking Derivative-Free Optimization Algorithms
+         Jorge J. More' and Stefan M. Wild
+         SIAM J. Optimization, Vol. 20 (1), pp.172-191, 2009.
+
+         The latest version of this subroutine is always available at
+               https://github.com/POptUS/BenDFO/
+         The authors would appreciate feedback and experiences from numerical
+         studies conducted using this subroutine.
+
+         The data file dfo.dat defines suitable values of m and n
+         for each problem number nprob.
+
+         This subroutine defines the functions of 22 nonlinear
+         least squares problems. The allowable values of (m,n) for
+         functions 1,2 and 3 are variable but with m .ge. n.
+         For functions 4,5,6,7,8,9 and 10 the values of (m,n) are
+         (2,2),(3,3),(4,4),(2,2),(15,3),(11,4) and (16,3), respectively.
+         Function 11 (Watson) has m = 31 with n usually 6 or 9.
+         However, any n, n = 2,...,31, is permitted.
+         Functions 12,13 and 14 have n = 3,2 and 4, respectively, but
+         allow any m .ge. n, with the usual choices being 10,10 and 20.
+         Function 15 (Chebyquad) allows m and n variable with m .ge. n.
+         Function 16 (Brown) allows n variable with m = n.
+         For functions 17 and 18, the values of (m,n) are
+         (33,5) and (65,11), respectively.
+
+       fvec = dfovec(m, n, x, nprob)
+           fvec is an output array of length m which contains the nprob
+             function evaluated at x.
+           m and n are positive integer input variables. n must not
+             exceed m.
+           x is an input array of length n.
+           nprob is a positive integer input variable which defines the
+             number of the problem. nprob must not exceed 22.
+
+         Argonne National Laboratory
+         Jorge More' and Stefan Wild. January 2008.
+    """
+
     [c13, c14, c29, c45, v, y1, y2, y3, y4, y5] = set_constants()
 
     # Initialize things
