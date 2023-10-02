@@ -18,6 +18,6 @@ for i = 1:53
     for p = [5, 9, 10]
         assert((P{p, i}.y - M{p, i}.y) / norm(P{p, i}.y) <= 1e-15, ['different y for X0 for prob: ' int2str(i) ', ' char(probtypes(p))]);
         assert(all(P{p, i}.F - M{p, i}.F' <= 1e-14), ['different fvec for X0 for prob: ' int2str(i) ', ' char(probtypes(p))]);
-        assert(norm(P{p, i}.J - M{p, i}.J) <= 1e-14, ['different J for X0 for prob: ' int2str(i) ', ' char(probtypes(p))]);
+        assert(norm(P{p, i}.J - M{p, i}.J) / norm(P{p, i}.J) <= 1e-14, ['different J for X0 for prob: ' int2str(i) ', ' char(probtypes(p))]);
     end
 end
