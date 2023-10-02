@@ -1,5 +1,3 @@
-# This is a python implementation of calfun.m,
-# provided at https://github.com/POptUS/BenDFO
 import numpy as np
 from dfovec import dfovec
 from jacobian import jacobian
@@ -14,8 +12,64 @@ def norm(x, type=2):
         return max(np.abs(x))
 
 
-def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False, gradout=False):
+def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, num_outs=1):
+    """
+    This is a Python translation of a Matlab version of the subroutine calfun.f
+    This subroutine returns a function value as used in:
+
+    Benchmarking Derivative-Free Optimization Algorithms
+    Jorge J. More' and Stefan M. Wild
+    SIAM J. Optimization, Vol. 20 (1), pp.172-191, 2009.
+
+    The latest version of this subroutine is always available at
+          https://github.com/POptUS/BenDFO/
+    The authors would appreciate feedback and experiences from numerical
+    studies conducted using this subroutine.
+
+    The subroutine returns the function value f(x)
+
+      x is an input array of length n.
+      y is an output that contains the function value at x.
+      fvec is an m-by-1 array containing component function values at x.
+      G is a 1-by-n array containing the gradient of the function f at x.
+          For stochastic problem types, this is the gradient of the expectation of f.
+          For deterministically noisy problem types, this ignore the noise.
+          For the nondiff problem type, this is the subgradient J * sign(fvec).
+      J is an n-by-m array containing the gradients of the component
+          functions at x.
+          J(i,j) contains the derivative of the jth equation wrt x(i).
+
     # Note: The vecout=True outputs are independent of probtype and noise_level
+    If reproducibility is needed, the np.random seed should be set before
+    this function is called.
+
+    Additional problem descriptors are passed through the following fields:
+      m is a positive integer (length of output from dfovec).
+         n must not exceed m.
+      nprob is a positive integer that defines the number of the problem.
+         nprob must not exceed 22.
+      probtype is a string specifying the type of problem desired:
+          'smooth' corresponds to smooth (noise-free) problems
+          'absnormal' corresponds to stochastic Gaussian absolute noise
+          'absuniform' corresponds to stochastic uniform absolute noise
+          'abswild' corresponds to deterministic absolute noise
+          'relnormal' corresponds to stochastic Gaussian relative noise
+          'reluniform' corresponds to stochastic uniform relative noise
+          'relwild' corresponds to deterministic relative noise
+          'nondiff' corresponds to piecewise-smooth problems'smooth' corresponds to smooth problems
+          'wild3' corresponds to deterministic relative noise with
+          'noisy3' corresponds to stochastically noisy problems
+      noise_level is a standard deviation; it is ignored for 'smooth', 'nondiff',
+         'noisy3', 'wild3', and 'abswild' problem types
+      num_outs is the desired number of outputs
+            1: returns y
+            2: returns y, fvec
+            3: returns y, fvec, G,
+            4: returns y, fvec, G, J
+
+    Argonne National Laboratory
+    Jorge More' and Stefan Wild. January 2008.
+    """
 
     n = len(x)
 
@@ -27,9 +81,6 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False, grado
 
     # Generate the vector
     fvec = dfovec(m, n, xc, nprob)
-
-    if vecout:
-        return fvec
 
     # Calculate the function value
     if probtype == "absnormal":
@@ -79,24 +130,30 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, vecout=False, grado
         print(f"invalid probtype {probtype}")
         return None
 
-    # Never return nan. Return inf instead so that
-    # optimization algorithms treat it as out of bounds.
-    if np.isnan(y):
-        return np.inf
+    # The scipy.benchmark version of calfun doesn't return Nans.
+    # if np.isnan(y):
+    #     return np.inf
 
-    if gradout:
+    if num_outs == 1:
+        return y
+    elif num_outs == 2:
+        return y, fvec
+    else:
         J, dummy = jacobian(m, n, xc, nprob)
         J = J.T
+        # if probtype == "smooth":
+        #     assert np.all(dummy == fvec), "Why do the fvecs from jacobian and dfovec disagree?"
 
-        if probtype == "smooth":
-            assert np.all(dummy == fvec), "Why do the fvecs from jacobian and dfovec disagree?"
+            if probtype == "nondiff":
+                G = J @ np.sign(fvec)
+            elif probtype in ["relnormal", "reluniform", "noisy3"]:
+                G = (1 + noise_level**2) * J @ np.sign(fvec)
+            else:
+                G = 2 * J @ fvec
 
-        if probtype == "nondiff":
-            G = J @ np.sign(fvec)
-        elif probtype in ["relnormal", "reluniform", "noisy3"]:
-            G = (1 + noise_level**2) * J @ np.sign(fvec)
+        if num_outs == 3:
+            return y, fvec, G
+        elif num_outs == 4:
+            return y, fvec, G, J
         else:
-            G = 2 * J @ fvec
-        return y, fvec, G, J
-    else:
-        return y
+            raise ValueError("Unknown value for num_outs")
