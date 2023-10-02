@@ -20,9 +20,9 @@ for p = 1:length(probtypes)
             if pt == 1
                 X0 = dfoxs(n, nprob, 10^factor_power);
             elseif pt == 2
-                X0 = 0.1*ones(1,n)
+                X0 = 0.1 * ones(1, n);
             elseif pt == 3
-                X0 = 0.1*1:n
+                X0 = 0.1 * [1:n];
             end
 
             [y, F, G, J] = calfun(X0, BenDFO, probtypes(p));
