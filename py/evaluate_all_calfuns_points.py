@@ -27,7 +27,7 @@ for p, probtype in enumerate(probtypes):
             elif pt == 2:
                 X0 = 0.1 * np.arange(1, n + 1)
 
-            [y, F, G, J] = calfun(X0, m, int(nprob), probtype, num_outs = 4)
+            [y, F, G, J] = calfun(X0, m, int(nprob), probtype, num_outs=4)
 
             Results["prob_" + str(p + 1) + "_" + str(row + 1) + "_" + str(pt + 1)] = {}
             Results["prob_" + str(p + 1) + "_" + str(row + 1) + "_" + str(pt + 1)]["X0"] = X0
