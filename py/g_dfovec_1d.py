@@ -788,7 +788,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             tmp_x_00073 = x[i]
             g_tmp_dfovec_1d_00104 = adimat_g_pow_left(g_tmp_x_00073, tmp_x_00073, 2)[0]
             tmp_dfovec_1d_00104 = tmp_x_00073**2
-            tmp_dfovec_1d_00105 = i + 2
+            tmp_dfovec_1d_00105 = i + 1
 
             g_tmp_x_00074 = g_x[tmp_dfovec_1d_00105]
             tmp_x_00074 = x[tmp_dfovec_1d_00105]
@@ -797,7 +797,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
 
             g_tmp_dfovec_1d_00107 = 2 * g_tmp_dfovec_1d_00106
             tmp_dfovec_1d_00107 = 2 * tmp_dfovec_1d_00106
-            tmp_dfovec_1d_00108 = i + 3
+            tmp_dfovec_1d_00108 = i + 2
 
             g_tmp_x_00075 = g_x[tmp_dfovec_1d_00108]
             tmp_x_00075 = x[tmp_dfovec_1d_00108]
@@ -806,7 +806,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
 
             g_tmp_dfovec_1d_00110 = 3 * g_tmp_dfovec_1d_00109
             tmp_dfovec_1d_00110 = 3 * tmp_dfovec_1d_00109
-            tmp_dfovec_1d_00111 = i + 4
+            tmp_dfovec_1d_00111 = i + 3
 
             g_tmp_x_00076 = g_x[tmp_dfovec_1d_00111]
             tmp_x_00076 = x[tmp_dfovec_1d_00111]
