@@ -3,8 +3,8 @@
 import numpy as np
 from constants import set_constants
 
-def dfovec(m, n, x, nprob):
 
+def dfovec(m, n, x, nprob):
     [c13, c14, c29, c45, v, y1, y2, y3, y4, y5] = set_constants()
 
     # Initialize things
