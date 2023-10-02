@@ -411,7 +411,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             tmp_dfovec_1d_00055 = tmp_dfovec_1d_00053 * tmp_x_00044
             g_tmp_exp_00001 = g_tmp_dfovec_1d_00055 * np.exp(tmp_dfovec_1d_00055)
             tmp_exp_00001 = np.exp(tmp_dfovec_1d_00055)
-            g_tmp_dfovec_1d_00056 = -temp
+            g_tmp_dfovec_1d_00056 = -g_temp
             tmp_dfovec_1d_00056 = -temp
             g_tmp_exp_00002 = g_tmp_dfovec_1d_00056 * np.exp(tmp_dfovec_1d_00056)
             tmp_exp_00002 = np.exp(tmp_dfovec_1d_00056)
