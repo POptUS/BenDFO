@@ -144,12 +144,12 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, num_outs=1):
         # if probtype == "smooth":
         #     assert np.all(dummy == fvec), "Why do the fvecs from jacobian and dfovec disagree?"
 
-            if probtype == "nondiff":
-                G = J @ np.sign(fvec)
-            elif probtype in ["relnormal", "reluniform", "noisy3"]:
-                G = (1 + noise_level**2) * J @ np.sign(fvec)
-            else:
-                G = 2 * J @ fvec
+        if probtype == "nondiff":
+            G = J @ np.sign(fvec)
+        elif probtype in ["relnormal", "reluniform", "noisy3"]:
+            G = (1 + noise_level**2) * J @ np.sign(fvec)
+        else:
+            G = 2 * J @ fvec
 
         if num_outs == 3:
             return y, fvec, G
