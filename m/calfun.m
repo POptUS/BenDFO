@@ -152,8 +152,8 @@ end
 if nargout > 2
     [J, dummy] = jacobian(m, n, x, nprob);
     J = J';
-    if strcmp(probtype,'smooth')
-        assert(all(dummy==fvec), "Why do the fvecs from jacobian and dfovec disagree?")
+    if strcmp(probtype, 'smooth')
+        assert(all(dummy == fvec), "Why do the fvecs from jacobian and dfovec disagree?");
     end
     if strcmp('nondiff', probtype)
         G = J * sign(fvec);
