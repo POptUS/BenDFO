@@ -29,12 +29,11 @@ def jacobian(m, n, x, nprob):
 
     t = 0
     g_t = 1
-    g_x = np.zeros(x.shape)
 
     J = np.zeros((m, n))
 
     for ind in range(n):
-        g_fvec, fvec = g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob)
+        g_fvec, fvec = g_dfovec_1d(g_t, t, ind, m, n, np.zeros(x.shape), x, nprob)
         J[:, ind] = g_fvec
 
     return J, fvec
