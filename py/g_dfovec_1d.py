@@ -274,7 +274,7 @@ def g_dfovec_1d(g_t, t, ind, m, n, g_x, x, nprob):
             tmp_dfovec_1d_00038 = tmp_dfovec_1d_00036 + tmp_dfovec_1d_00037
             tmp_dfovec_1d_00039 = tmp1 / tmp_dfovec_1d_00038
 
-            g_tmp_dfovec_1d_00039 = (g_tmp1 - np.dot(tmp_dfovec_1d_00038.T, tmp_dfovec_1d_00039)) / tmp_dfovec_1d_00038
+            g_tmp_dfovec_1d_00039 = (g_tmp1 - np.dot(g_tmp_dfovec_1d_00038.T, tmp_dfovec_1d_00039)) / tmp_dfovec_1d_00038
 
             g_tmp_dfovec_1d_00040 = g_tmp_x_00028 + g_tmp_dfovec_1d_00039
             tmp_dfovec_1d_00040 = tmp_x_00028 + tmp_dfovec_1d_00039
