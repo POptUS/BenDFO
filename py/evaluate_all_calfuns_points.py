@@ -1,6 +1,3 @@
-import os
-import sys
-
 import numpy as np
 import scipy as sp
 from calfun import calfun
