@@ -31,7 +31,7 @@ for j = 1:ns
     end
 end
 
-prob_min = min(min(H), [], 3);   % The global minimum for each problem
+prob_min = min(min(H), [], 3);   % The minimum value seen for each problem
 prob_max = H(1, :, 1);           % The starting value for each problem
 
 % For each problem and solver, determine the number of
