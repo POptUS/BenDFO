@@ -147,7 +147,7 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, num_outs=1):
         if probtype == "nondiff":
             G = J @ np.sign(fvec)
         elif probtype in ["relnormal", "reluniform", "noisy3"]:
-            G = (1 + noise_level**2) * J @ np.sign(fvec)
+            G = (1 + sigma**2) * J @ np.sign(fvec)
         else:
             G = 2 * J @ fvec
 
