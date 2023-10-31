@@ -32,6 +32,10 @@ for i = 1:53
     for p = [5, 9, 10]
         ps = probtypes(p);
         for pt = 1:num_pts
+            out1(i, p) = (P{p, i, pt}.y - M{p, i, pt}.y) / norm(P{p, i, pt}.y);
+            out2(i, p) = max(P{p, i, pt}.F - M{p, i, pt}.F');
+            out3(i, p) = norm(P{p, i, pt}.J - M{p, i, pt}.J) / norm(P{p, i, pt}.J);
+            out4(i, p) = norm(P{p, i, pt}.G - M{p, i, pt}.G') / norm(P{p, i, pt}.G);
             assert((P{p, i, pt}.y - M{p, i, pt}.y) / norm(P{p, i, pt}.y) <= 1e-15, sprintf(msg, 'y', 1, ps, xs));
             assert(all(P{p, i, pt}.F - M{p, i, pt}.F' <= 1e-14), sprintf(msg, 'fvec', 1, ps, xs));
             assert(norm(P{p, i, pt}.J - M{p, i, pt}.J) / norm(P{p, i, pt}.J) <= 1e-14, sprintf(msg, 'J', 1, ps, xs));
@@ -39,3 +43,10 @@ for i = 1:53
         end
     end
 end
+
+% Print summary to screen
+format short g
+[max(out1(:, [5 9 10]));
+max(out2(:, [5 9 10]));
+max(out3(:, [5 9 10]));
+max(out4(:, [5 9 10]))]
