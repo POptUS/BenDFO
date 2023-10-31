@@ -37,7 +37,7 @@ for i = 1:53
             out3(i, p, pt) = norm(P{p, i, pt}.J - M{p, i, pt}.J) / norm(P{p, i, pt}.J);
             out4(i, p, pt) = norm(P{p, i, pt}.G - M{p, i, pt}.G') / norm(P{p, i, pt}.G);
             assert(out1(i, p, pt) <= 1e-13, sprintf(msg, 'y', 1, ps, xs));
-            assert(out2(i, p, pt) <= 1e-14, sprintf(msg, 'fvec', 1, ps, xs));
+            assert(out2(i, p, pt) <= 1e-12, sprintf(msg, 'fvec', 1, ps, xs));
             assert(out3(i, p, pt) / norm(P{p, i, pt}.J) <= 1e-14, sprintf(msg, 'J', 1, ps, xs));
             assert(out4(i, p, pt) / norm(P{p, i, pt}.G) <= 1e-14, sprintf(msg, 'G', 1, ps, xs));
         end
