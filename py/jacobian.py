@@ -11,8 +11,11 @@ def jacobian(m, n, x, nprob):
     Jorge J. More' and Stefan M. Wild
     SIAM J. Optimization, Vol. 20 (1), pp.172-191, 2009.
 
+    The latest version of this subroutine is always available at
+    https://github.com/POptUS/BenDFO/
+
     The dependencies of this function are based on a Python translation of
-    the Matlab AD software "adimat" on a modified from of the dfovec function
+    the Matlab AD software "adimat" on a modified form of the dfovec function
     from
     http://www.mcs.anl.gov/~more/dfo/
     See the instructions of dfovec.m for additional details on these
