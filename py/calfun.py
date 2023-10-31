@@ -56,9 +56,9 @@ def calfun(x, m, nprob, probtype="smooth", noise_level=1e-3, num_outs=1):
           'relnormal' corresponds to stochastic Gaussian relative noise
           'reluniform' corresponds to stochastic uniform relative noise
           'relwild' corresponds to deterministic relative noise
-          'nondiff' corresponds to piecewise-smooth problems'smooth' corresponds to smooth problems
-          'wild3' corresponds to deterministic relative noise with
-          'noisy3' corresponds to stochastically noisy problems
+          'nondiff' corresponds to piecewise-smooth problems
+          'wild3' corresponds to deterministic relative noise with fixed variance
+          'noisy3' corresponds to stochastically noisy problems with fixed variance
       noise_level is a standard deviation; it is ignored for 'smooth', 'nondiff',
          'noisy3', 'wild3', and 'abswild' problem types
       num_outs is the desired number of outputs
