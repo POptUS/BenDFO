@@ -7,10 +7,10 @@
 % Do the same in matlab by running `evaluate_all_calfuns_points` in the `m`
 % directory. Finally, run this script to compare the differences.
 
-M = load("m/fvec_and_gradients_at_starting_values_matlab.mat");
+M = load("../m/fvec_and_gradients_at_starting_values_matlab.mat");
 M = M.Results;
 
-P1 = load("py/fvec_and_gradients_at_starting_values_python.mat");
+P1 = load("../py/fvec_and_gradients_at_starting_values_python.mat");
 P = cell(size(M));
 probtypes = ["absnormal", "absuniform", "abswild", "noisy3", "nondiff", "relnormal", "reluniform", "relwild", "smooth", "wild3"];
 num_pts = 3;
