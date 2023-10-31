@@ -46,7 +46,7 @@ end
 
 % Print summary to screen
 format short g;
-disp([max(out1(:, [5 9 10]))
-max(out2(:, [5 9 10]))
-max(out3(:, [5 9 10]))
-max(out4(:, [5 9 10]))])
+disp(max(out1(:, [5 9 10])));
+disp(max(out2(:, [5 9 10])));
+disp(max(out3(:, [5 9 10])));
+disp(max(out4(:, [5 9 10])));
