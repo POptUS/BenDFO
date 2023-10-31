@@ -32,21 +32,21 @@ for i = 1:53
     for p = [5, 9, 10]
         ps = probtypes(p);
         for pt = 1:num_pts
-            out1(i, p) = (P{p, i, pt}.y - M{p, i, pt}.y) / norm(P{p, i, pt}.y);
-            out2(i, p) = max(P{p, i, pt}.F - M{p, i, pt}.F');
-            out3(i, p) = norm(P{p, i, pt}.J - M{p, i, pt}.J) / norm(P{p, i, pt}.J);
-            out4(i, p) = norm(P{p, i, pt}.G - M{p, i, pt}.G') / norm(P{p, i, pt}.G);
-            assert((P{p, i, pt}.y - M{p, i, pt}.y) / norm(P{p, i, pt}.y) <= 1e-15, sprintf(msg, 'y', 1, ps, xs));
-            assert(all(P{p, i, pt}.F - M{p, i, pt}.F' <= 1e-14), sprintf(msg, 'fvec', 1, ps, xs));
-            assert(norm(P{p, i, pt}.J - M{p, i, pt}.J) / norm(P{p, i, pt}.J) <= 1e-14, sprintf(msg, 'J', 1, ps, xs));
-            assert(norm(P{p, i, pt}.G - M{p, i, pt}.G') / norm(P{p, i, pt}.G) <= 1e-14, sprintf(msg, 'G', 1, ps, xs));
+            out1(i, p, pt) = abs(P{p, i, pt}.y - M{p, i, pt}.y) / abs(P{p, i, pt}.y);
+            out2(i, p, pt) = max(abs(P{p, i, pt}.F - M{p, i, pt}.F') ./ abs(P{p, i, pt}.F));
+            out3(i, p, pt) = norm(P{p, i, pt}.J - M{p, i, pt}.J) / norm(P{p, i, pt}.J);
+            out4(i, p, pt) = norm(P{p, i, pt}.G - M{p, i, pt}.G') / norm(P{p, i, pt}.G);
+            assert(out1(i, p, pt) <= 1e-15, sprintf(msg, 'y', 1, ps, xs));
+            assert(out2(i, p, pt) <= 1e-14), sprintf(msg, 'fvec', 1, ps, xs));
+            assert(out3(i, p, pt) / norm(P{p, i, pt}.J) <= 1e-14, sprintf(msg, 'J', 1, ps, xs));
+            assert(out4(i, p, pt) / norm(P{p, i, pt}.G) <= 1e-14, sprintf(msg, 'G', 1, ps, xs));
         end
     end
 end
 
 % Print summary to screen
 format short g;
-disp(max(out1(:, [5 9 10])));
-disp(max(out2(:, [5 9 10])));
-disp(max(out3(:, [5 9 10])));
-disp(max(out4(:, [5 9 10])));
+disp(max(out1(:, [5 9 10], :)));
+disp(max(out2(:, [5 9 10], :)));
+disp(max(out3(:, [5 9 10], :)));
+disp(max(out4(:, [5 9 10], :)));
