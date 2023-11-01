@@ -86,6 +86,8 @@ We provide the following Octave/Matlab files for producing basic data and perfor
 Updates and other languages will be reflected here. Please also see:
 
 - [Julia package for data and performance profiles](https://github.com/JuliaSmoothOptimizers/BenchmarkProfiles.jl)
+- [Basic implementation of the benchmark in scipy](https://github.com/scipy/scipy/tree/main/benchmarks/benchmarks/cutest)
+  - Primary differences are that this version includes additional functional forms (probtypes) and provides derivative outputs
 
 ### Derivatives and Testing
 Autodiff versions (using [adimat](https://www.informatik.tu-darmstadt.de/sc/res/sw/adimat/index.en.jsp)) of the problem derivatives are also included.
