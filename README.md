@@ -64,7 +64,7 @@ and include stochastic multiplicative noise controlled by `sigma` (except in the
 #### (Sub)Derivative Information
 For benchmarking purposes, derivative information is provided for the component functions `F_i(x)` defining each of the above problem types.
 
-- `J` is the n-by-m Jacobian, with `J(j,i)` denoting the derivative of the ith equation with respect to the `j`th variable
+- `J` is the n-by-m Jacobian, with `J(j,i)` denoting the derivative of the `i`th equation with respect to the `j`th variable
 - `G` is (or resembles, see below) a gradient of the objective `f`
 
 These are primarily determined from the `jacobian` routine available in [[Matlab/Octave](m/jacobian.m)] and [[Python](py/jacobian.py)].
@@ -89,7 +89,7 @@ Updates and other languages will be reflected here. Please also see:
 
 - [Julia package for data and performance profiles](https://github.com/JuliaSmoothOptimizers/BenchmarkProfiles.jl)
 - [Basic implementation of the benchmark in scipy](https://github.com/scipy/scipy/tree/main/benchmarks/benchmarks/cutest)
-  - Primary differences are that this version includes additional functional forms (probtypes) and provides derivative outputs
+  - Notably, the BenDFO version includes additional functional forms (via `probtype` arguments) and provides derivative outputs
 
 ### Derivatives and Testing
 Autodiff versions (using [adimat](https://www.informatik.tu-darmstadt.de/sc/res/sw/adimat/index.en.jsp)) of the problem derivatives are also included.
