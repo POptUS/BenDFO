@@ -1,7 +1,7 @@
 name: black
 on:
   pull_request:
-  # Allows one to run this workflow manually from the Actions tab
+  # The following allows one to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
   linter_name:
