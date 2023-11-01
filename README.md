@@ -12,13 +12,13 @@ The codes in this repository are based on the supplemental information for the p
 - [[1](#pap1)] Benchmarking Derivative-Free Optimization Algorithms by J.J. Moré and S.M. Wild. *SIAM J. Optimization*, Vol. 20 (1), pp. 172-191, 2009. doi:[10.1137/080724083](https://doi.org/10.1137/080724083)
 
 ### Benchmark Problems
-The following source files were used to define the benchmark problems in [[1](https://github.com/POptUS/BenDFO#pap1)]. Fortran files are found in `fortran/` and Octave/Matlab files are found in `m/`.
+The following source files were used to define the benchmark problems in [[1](https://github.com/POptUS/BenDFO#pap1)]. Fortran files are found in `fortran/`, Octave/Matlab files are found in `m/`, and Python files are found in `py/`.
 
-- `calfun` [[Fortran](fortran/calfun.f)]  [[Matlab/Octave](m/calfun.m)]:
+- `calfun` [[Fortran](fortran/calfun.f)] [[Matlab/Octave](m/calfun.m)] [[Python](py/calfun.py)]:
   Code for evaluating the 22 CUTEr problems considered (needs dfovec).
-- `dfovec` [[Fortran](fortran/dfovec.f)]  [[Matlab/Octave](m/dfovec.m)]:
+- `dfovec` [[Fortran](fortran/dfovec.f)] [[Matlab/Octave](m/dfovec.m)] [[Python](py/dfovec.py)]:
   Code producing component vectors for the 22 CUTEr problems considered.
-- `dfoxs` [[Fortran](fortran/dfoxs.f)]  [[Matlab/Octave](m/dfoxs.m)]:
+- `dfoxs` [[Fortran](fortran/dfoxs.f)] [[Matlab/Octave](m/dfoxs.m)] [[Python](py/dfoxs.py)]:
   Code specifying the standard starting points.
 - `dfo.dat` [Data file](data/dfo.dat):
   Data file specifying the benchmark problem set `P` through the integer parameters `(nprob, n, m, ns)`.
@@ -66,6 +66,8 @@ For benchmarking purposes, derivative information is provided for the component 
 
 - `J` is the n-by-m Jacobian, with `J(j,i)` denoting the derivative of the ith equation with respect to the `j`th variable
 - `G` is (or resembles, see below) a gradient of the objective `f`
+
+These are primarily determined from the `jacobian` routine available in [[Matlab/Octave](m/jacobian.m)] and [[Python](py/jacobian.py)].
 
 Note:
 
