@@ -6,7 +6,7 @@
 % `(y, fvec, G, J)` for 3 different points and saving output to a .mat file
 %
 % Do the same in matlab by running `evaluate_all_calfuns_points` in the `m/`
-% directory. 
+% directory.
 %
 % Finally, run this script to compare the differences.
 
