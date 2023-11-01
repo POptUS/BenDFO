@@ -1,11 +1,14 @@
 % This is a test to compare the outputs form matlab and python BenDFO versions.
+%
 % First run
 % `python evaluate_all_calfuns_points.py`
-% in the `py` directory. This evaluates `calfun.py` returning 4 outputs
+% in the `py/` directory. This evaluates `calfun.py` returning 4 outputs
 % `(y, fvec, G, J)` for 3 different points and saving output to a .mat file
-
-% Do the same in matlab by running `evaluate_all_calfuns_points` in the `m`
-% directory. Finally, run this script to compare the differences.
+%
+% Do the same in matlab by running `evaluate_all_calfuns_points` in the `m/`
+% directory. 
+%
+% Finally, run this script to compare the differences.
 
 M = load("../m/fvec_and_gradients_at_starting_values_matlab.mat");
 M = M.Results;

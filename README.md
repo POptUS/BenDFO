@@ -94,7 +94,7 @@ Updates and other languages will be reflected here. Please also see:
 ### Derivatives and Testing
 Autodiff versions (using [adimat](https://www.informatik.tu-darmstadt.de/sc/res/sw/adimat/index.en.jsp)) of the problem derivatives are also included.
 
-A sample calling script for testing and to see these derivative capabilities is provided in `testbendfo.m` [[Matlab/Octave](profiling/testbendfo.m)].
+A sample calling script for testing and to see these derivative capabilities is provided by `testing/compare_matlab_and_python.m` [[Matlab/Octave](testing/compare_matlab_and_python.m)].
 
 ### Sample Solvers
 
