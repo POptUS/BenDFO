@@ -41,9 +41,9 @@ function [y, fvec, G, J] = calfun(x, varargin)
 %           'relnormal' corresponds to stochastic Gaussian relative noise
 %           'reluniform' corresponds to stochastic uniform relative noise
 %           'relwild' corresponds to deterministic relative noise
-%           'nondiff' corresponds to piecewise-smooth problems'smooth' corresponds to smooth problems
-%           'wild3' corresponds to deterministic relative noise with
-%           'noisy3' corresponds to stochastically noisy problems
+%           'nondiff' corresponds to piecewise-smooth problems
+%           'wild3' corresponds to deterministic relative noise with fixed variance
+%           'noisy3' corresponds to stochastically noisy problems with fixed variance
 %       sigma is a standard deviation; it is ignored for 'smooth', 'nondiff',
 %          'noisy3', 'wild3', and 'abswild' problem types
 %
@@ -152,12 +152,15 @@ end
 
 % Return Jacobian and gradient (of expectation function) or element of subdifferential
 if nargout > 2
-    J = jacobian(m, n, x, nprob);
+    [J, dummy] = jacobian(m, n, x, nprob);
     J = J';
+    if strcmp(probtype, 'smooth')
+        assert(all(dummy == fvec), "Why do the fvecs from jacobian and dfovec disagree?");
+    end
     if strcmp('nondiff', probtype)
         G = J * sign(fvec);
     elseif strcmp('relnormal', probtype) || strcmp('reluniform', probtype) || strcmp('noisy3', probtype)
-        G = (1 + sigma^2) * J * sign(fvec);
+        G = (1 + BenDFO.sigma^2) * J * sign(fvec);
     else
         G = 2 * J * fvec;
     end

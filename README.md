@@ -12,13 +12,13 @@ The codes in this repository are based on the supplemental information for the p
 - [[1](#pap1)] Benchmarking Derivative-Free Optimization Algorithms by J.J. Moré and S.M. Wild. *SIAM J. Optimization*, Vol. 20 (1), pp. 172-191, 2009. doi:[10.1137/080724083](https://doi.org/10.1137/080724083)
 
 ### Benchmark Problems
-The following source files were used to define the benchmark problems in [[1](https://github.com/POptUS/BenDFO#pap1)]. Fortran files are found in `fortran/` and Octave/Matlab files are found in `m/`.
+The following source files were used to define the benchmark problems in [[1](https://github.com/POptUS/BenDFO#pap1)]. Fortran files are found in `fortran/`, Octave/Matlab files are found in `m/`, and Python files are found in `py/`.
 
-- `calfun` [[Fortran](fortran/calfun.f)]  [[Matlab/Octave](m/calfun.m)]:
+- `calfun` [[Fortran](fortran/calfun.f)] [[Matlab/Octave](m/calfun.m)] [[Python](py/calfun.py)]:
   Code for evaluating the 22 CUTEr problems considered (needs dfovec).
-- `dfovec` [[Fortran](fortran/dfovec.f)]  [[Matlab/Octave](m/dfovec.m)]:
+- `dfovec` [[Fortran](fortran/dfovec.f)] [[Matlab/Octave](m/dfovec.m)] [[Python](py/dfovec.py)]:
   Code producing component vectors for the 22 CUTEr problems considered.
-- `dfoxs` [[Fortran](fortran/dfoxs.f)]  [[Matlab/Octave](m/dfoxs.m)]:
+- `dfoxs` [[Fortran](fortran/dfoxs.f)] [[Matlab/Octave](m/dfoxs.m)] [[Python](py/dfoxs.py)]:
   Code specifying the standard starting points.
 - `dfo.dat` [Data file](data/dfo.dat):
   Data file specifying the benchmark problem set `P` through the integer parameters `(nprob, n, m, ns)`.
@@ -64,8 +64,10 @@ and include stochastic multiplicative noise controlled by `sigma` (except in the
 #### (Sub)Derivative Information
 For benchmarking purposes, derivative information is provided for the component functions `F_i(x)` defining each of the above problem types.
 
-- `J` is the n-by-m Jacobian, with `J(j,i)` denoting the derivative of the ith equation with respect to the `j`th variable
+- `J` is the n-by-m Jacobian, with `J(j,i)` denoting the derivative of the `i`th equation with respect to the `j`th variable
 - `G` is (or resembles, see below) a gradient of the objective `f`
+
+These are primarily determined from the `jacobian` routine available in [[Matlab/Octave](m/jacobian.m)] and [[Python](py/jacobian.py)].
 
 Note:
 
@@ -86,11 +88,13 @@ We provide the following Octave/Matlab files for producing basic data and perfor
 Updates and other languages will be reflected here. Please also see:
 
 - [Julia package for data and performance profiles](https://github.com/JuliaSmoothOptimizers/BenchmarkProfiles.jl)
+- [Basic implementation of the benchmark in scipy](https://github.com/scipy/scipy/tree/main/benchmarks/benchmarks/cutest)
+  - Notably, the BenDFO version includes additional functional forms (via `probtype` arguments) and provides derivative outputs
 
 ### Derivatives and Testing
 Autodiff versions (using [adimat](https://www.informatik.tu-darmstadt.de/sc/res/sw/adimat/index.en.jsp)) of the problem derivatives are also included.
 
-A sample calling script for testing and to see these derivative capabilities is provided in `testbendfo.m` [[Matlab/Octave](profiling/testbendfo.m)].
+A sample calling script for testing and to see these derivative capabilities is provided by `testing/compare_matlab_and_python.m` [[Matlab/Octave](testing/compare_matlab_and_python.m)].
 
 ### Sample Solvers
 

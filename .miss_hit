@@ -1,6 +1,6 @@
 project_root
 enable: true
-line_length: 110
+line_length: 130
 file_length: 1500
 suppress_rule: "naming_functions"
 suppress_rule: "copyright_notice"
