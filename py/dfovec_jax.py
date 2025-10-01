@@ -175,20 +175,20 @@ def dfovec_jax(m, n, x, nprob):
         fvec = -temp * jnp.ones(m)
         fvec = fvec.at[:n].add(x[:n])
 
-    elif nprob == 2:
+    elif nprob == 2:  # Linear function - rank 1.
         weights = jnp.arange(1, n + 1)
         total = jnp.sum(weights * x)
         fvec = (jnp.arange(1, m + 1) * total) - 1
 
-    elif nprob == 3:
+    elif nprob == 3:  # Linear function - rank 1 with zero columns and rows.
         weights = jnp.arange(2, n)
         total = jnp.sum(weights * x[1:-1])
         fvec = jnp.zeros(m).at[: m - 1].set(jnp.arange(m - 1) * total - 1).at[m - 1].set(-1.0)
 
-    elif nprob == 4:
+    elif nprob == 4:  # Rosenbrock function.
         fvec = jnp.array([10 * (x[1] - x[0] ** 2), 1 - x[0]])
 
-    elif nprob == 5:
+    elif nprob == 5:  # Helical valley function.
 
         def theta(x0, x1):
             angle = jnp.arctan2(x1, x0) / (2 * jnp.pi)
@@ -198,13 +198,13 @@ def dfovec_jax(m, n, x, nprob):
         r = jnp.sqrt(x[0] ** 2 + x[1] ** 2)
         fvec = jnp.array([10 * (x[2] - 10 * th), 10 * (r - 1), x[2]])
 
-    elif nprob == 6:
+    elif nprob == 6:  # Powell singular function.
         fvec = jnp.array([x[0] + 10 * x[1], jnp.sqrt(5.0) * (x[2] - x[3]), (x[1] - 2 * x[2]) ** 2, jnp.sqrt(10.0) * (x[0] - x[3]) ** 2])
 
-    elif nprob == 7:
+    elif nprob == 7:  # Freudenstein and Roth function.
         fvec = jnp.array([-c13 + x[0] + ((5 - x[1]) * x[1] - 2) * x[1], -c29 + x[0] + ((1 + x[1]) * x[1] - c14) * x[1]])
 
-    elif nprob == 8:
+    elif nprob == 8:  # Bard function.
         i = jnp.arange(15)
         tmp1 = i + 1
         tmp2 = 15 - i
@@ -212,19 +212,19 @@ def dfovec_jax(m, n, x, nprob):
         denom = x[1] * tmp2 + x[2] * tmp3
         fvec = y1 - (x[0] + tmp1 / denom)
 
-    elif nprob == 9:
+    elif nprob == 9:  # Kowalik and Osborne function.
         tmp1 = v * (v + x[1])
         tmp2 = v * (v + x[2]) + x[3]
         fvec = y2 - x[0] * tmp1 / tmp2
 
-    elif nprob == 10:
+    elif nprob == 10:  # Meyer function.
         i = jnp.arange(16)
         temp = 5 * (i + 1) + c45 + x[2]
         tmp1 = x[1] / temp
         tmp2 = jnp.exp(tmp1)
         fvec = x[0] * tmp2 - y3
 
-    elif nprob == 11:
+    elif nprob == 11:  # Watson function.
 
         def watson_term(i):
             div = (i + 1) / c29
@@ -236,43 +236,43 @@ def dfovec_jax(m, n, x, nprob):
 
         fvec = jnp.array([watson_term(i) for i in range(29)] + [x[0], x[1] - x[0] ** 2 - 1])
 
-    elif nprob == 12:
+    elif nprob == 12:  # Box 3-dimensional function.
         i = jnp.arange(1, m + 1)
         tmp1 = i / 10.0
         term = jnp.exp(-tmp1[:, None] * x[:2])
         const = jnp.exp(-i) - jnp.exp(-tmp1)
         fvec = term[:, 0] - term[:, 1] + const * x[2]
 
-    elif nprob == 13:
+    elif nprob == 13:  # Jennrich and Sampson function.
         i = jnp.arange(1, m + 1)
         fvec = 2 + 2 * i - jnp.exp(i * x[0]) - jnp.exp(i * x[1])
 
-    elif nprob == 14:
+    elif nprob == 14:  # Brown and Dennis function.
         i = jnp.arange(1, m + 1)
         temp = i / 5.0
         tmp1 = x[0] + temp * x[1] - jnp.exp(temp)
         tmp2 = x[2] + jnp.sin(temp) * x[3] - jnp.cos(temp)
         fvec = tmp1**2 + tmp2**2
 
-    elif nprob == 15:
+    elif nprob == 15:  # Chebyquad function.
         t = 2 * x - 1
         T = jnp.polynomial.chebyshev.chebvander(t, m - 1).T
         coeffs = jnp.mean(T, axis=1)
         correction = jnp.array([0.0 if i % 2 == 0 else 1 / ((i + 1) ** 2 - 1) for i in range(m)])
         fvec = coeffs + correction
 
-    elif nprob == 16:
+    elif nprob == 16:  # Brown almost-linear function.
         total = jnp.sum(x) - (n + 1)
         prod = jnp.prod(x)
         fvec = jnp.concatenate([x[:-1] + total, jnp.array([prod - 1])])
 
-    elif nprob == 17:
+    elif nprob == 17:  # Osborne 1 function.
         i = jnp.arange(33)
         tmp1 = jnp.exp(-x[3] * 10 * i)
         tmp2 = jnp.exp(-x[4] * 10 * i)
         fvec = y4 - (x[0] + x[1] * tmp1 + x[2] * tmp2)
 
-    elif nprob == 18:
+    elif nprob == 18:  # Osborne 2 function.
         i = jnp.arange(65)
         t = i / 10.0
         tmp1 = jnp.exp(-x[4] * t)
@@ -281,17 +281,17 @@ def dfovec_jax(m, n, x, nprob):
         tmp4 = jnp.exp(-x[7] * (t - x[10]) ** 2)
         fvec = y5 - (x[0] * tmp1 + x[1] * tmp2 + x[2] * tmp3 + x[3] * tmp4)
 
-    elif nprob == 19:
+    elif nprob == 19:  # Bdqrtic
         f1 = -4 * x[: n - 4] + 3
         f2 = sum((i + 1) * x[i + j] ** 2 for j, i in enumerate(range(n - 4)))
         fvec = jnp.concatenate([f1, f2.reshape(-1)])
 
-    elif nprob == 20:
+    elif nprob == 20:  # Cube
         fvec = jnp.zeros(n)
         fvec = fvec.at[0].set(x[0] - 1.0)
         fvec = fvec.at[1:].set(10 * (x[1:] - x[:-1] ** 3))
 
-    elif nprob == 21:
+    elif nprob == 21:  # Mancino
 
         def mancino_term(i):
             j = jnp.arange(n)
@@ -300,7 +300,7 @@ def dfovec_jax(m, n, x, nprob):
 
         fvec = jnp.array([mancino_term(i) for i in range(n)])
 
-    elif nprob == 22:
+    elif nprob == 22:  # Heart8ls
         fvec = jnp.zeros(8)
         fvec = fvec.at[0].set(x[0] + x[1] + 0.69)
         fvec = fvec.at[1].set(x[2] + x[3] + 0.044)

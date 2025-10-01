@@ -29,6 +29,8 @@ def compare_jacobians(nprob, m, n, x0):
     rel_diff = diff / (np.linalg.norm(J_fd) + 1e-12)
 
     print(f"nprob={nprob:2d}, m={m:3d}, n={n:2d} | abs diff: {diff:.2e}, rel diff: {rel_diff:.2e}")
+    if diff > 1e-7 and rel_diff > 1e-7:
+        raise Exception("Difference is too large")
 
 
 # Loop over all benchmark problems and 3 starting points
