@@ -1,3 +1,4 @@
+import jax
 import jax.numpy as np
 
 
@@ -225,16 +226,23 @@ def dfovec_jax(m, n, x, nprob):
         fvec = x[0] * tmp2 - y3
 
     elif nprob == 11:  # Watson function.
+        fvec_body = []
+        for i in range(29):
+            div = (i + 1.0) / c29
+            s1 = 0.0
+            dx = 1.0
+            for j in range(1, n):
+                s1 += j * dx * x[j]
+                dx *= div
+            s2 = 0.0
+            dx = 1.0
+            for j in range(n):
+                s2 += dx * x[j]
+                dx *= div
+            fvec_body.append(s1 - s2 * s2 - 1.0)
+        fvec_tail = [x[0], x[1] - x[0]**2 - 1.0]
+        fvec = np.array(fvec_body + fvec_tail)
 
-        def watson_term(i):
-            div = (i + 1) / c29
-            dx = div ** np.arange(n)
-            dx1 = np.arange(1, n) * div ** np.arange(1, n)
-            s1 = np.sum(dx1 * x[1:])
-            s2 = np.sum(dx * x)
-            return s1 - s2**2 - 1
-
-        fvec = np.array([watson_term(i) for i in range(29)] + [x[0], x[1] - x[0] ** 2 - 1])
 
     elif nprob == 12:  # Box 3-dimensional function.
         i = np.arange(1, m + 1)
