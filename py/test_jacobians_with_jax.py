@@ -10,6 +10,7 @@ from dfoxs import dfoxs  # for generating X0s
 # Load benchmark problem definitions
 dfo_table = np.loadtxt("../data/dfo.dat")
 
+
 def compare_jacobians(nprob, m, n, x0):
     x0 = np.array(x0)
     fvec_np = dfovec(m, n, x0, nprob)
@@ -29,12 +30,13 @@ def compare_jacobians(nprob, m, n, x0):
 
     print(f"nprob={nprob:2d}, m={m:3d}, n={n:2d} | abs diff: {diff:.2e}, rel diff: {rel_diff:.2e}")
 
+
 # Loop over all benchmark problems and 3 starting points
-for (nprob, n, m, factor_power) in dfo_table:
+for nprob, n, m, factor_power in dfo_table:
     n = int(n)
     m = int(m)
     nprob = int(nprob)
-    scale = int(10 ** factor_power)
+    scale = int(10**factor_power)
 
     for pt in range(3):
         if pt == 0:
@@ -48,4 +50,3 @@ for (nprob, n, m, factor_power) in dfo_table:
             compare_jacobians(nprob, m, n, x0)
         except Exception as e:
             print(f"nprob={nprob:2d} failed at pt={pt}: {e}")
-
