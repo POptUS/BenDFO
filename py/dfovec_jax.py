@@ -263,11 +263,23 @@ def dfovec_jax(m, n, x, nprob):
         fvec = tmp1**2 + tmp2**2
 
     elif nprob == 15:  # Chebyquad function.
-        t = 2 * x - 1
-        T = np.polynomial.chebyshev.chebvander(t, m - 1).T
-        coeffs = np.mean(T, axis=1)
-        correction = np.array([0.0 if i % 2 == 0 else 1 / ((i + 1) ** 2 - 1) for i in range(m)])
-        fvec = coeffs + correction
+        for j in range(n):
+            t1 = 1.0
+            t2 = 2.0 * x[j] - 1.0
+            t = 2.0 * t2
+            for i in range(m):
+                fvec = fvec.at[i].add(t2)
+                th = t * t2 - t1
+                t1 = t2
+                t2 = th
+
+        iev = -1
+        for i in range(m):
+            val = fvec[i] / n
+            if iev > 0:
+                val += 1.0 / ((i + 1)**2 - 1.0)
+            fvec = fvec.at[i].set(val)
+            iev = -iev
 
     elif nprob == 16:  # Brown almost-linear function.
         total = np.sum(x) - (n + 1)
@@ -290,9 +302,10 @@ def dfovec_jax(m, n, x, nprob):
         fvec = y5 - (x[0] * tmp1 + x[1] * tmp2 + x[2] * tmp3 + x[3] * tmp4)
 
     elif nprob == 19:  # Bdqrtic
-        f1 = -4 * x[: n - 4] + 3
-        f2 = sum((i + 1) * x[i + j] ** 2 for j, i in enumerate(range(n - 4)))
-        fvec = np.concatenate([f1, f2.reshape(-1)])
+        for i in range(n - 4):
+            fvec = fvec.at[i].set(-4.0 * x[i] + 3.0)
+            quad = x[i] ** 2 + 2.0 * x[i + 1] ** 2 + 3.0 * x[i + 2] ** 2 + 4.0 * x[i + 3] ** 2 + 5.0 * x[n - 1] ** 2
+            fvec = fvec.at[n - 4 + i].set(quad)
 
     elif nprob == 20:  # Cube
         fvec = np.zeros(n)
