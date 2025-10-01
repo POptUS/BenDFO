@@ -240,9 +240,8 @@ def dfovec_jax(m, n, x, nprob):
                 s2 += dx * x[j]
                 dx *= div
             fvec_body.append(s1 - s2 * s2 - 1.0)
-        fvec_tail = [x[0], x[1] - x[0]**2 - 1.0]
+        fvec_tail = [x[0], x[1] - x[0] ** 2 - 1.0]
         fvec = np.array(fvec_body + fvec_tail)
-
 
     elif nprob == 12:  # Box 3-dimensional function.
         i = np.arange(1, m + 1)
@@ -277,7 +276,7 @@ def dfovec_jax(m, n, x, nprob):
         for i in range(m):
             val = fvec[i] / n
             if iev > 0:
-                val += 1.0 / ((i + 1)**2 - 1.0)
+                val += 1.0 / ((i + 1) ** 2 - 1.0)
             fvec = fvec.at[i].set(val)
             iev = -iev
 
