@@ -191,13 +191,12 @@ def dfovec_jax(m, n, x, nprob):
 
     elif nprob == 5:  # Helical valley function.
 
-        def theta(x0, x1):
-            angle = np.arctan2(x1, x0) / (2 * np.pi)
-            return np.where(x0 > 0, angle, np.where(x0 < 0, angle + 0.5, np.where((x0 == 0) & (x1 == 0), 0.0, 0.25)))
-
-        th = theta(x[0], x[1])
+        th = np.arctan2(x[1], x[0]) / (2.0 * np.pi)
         r = np.sqrt(x[0] ** 2 + x[1] ** 2)
-        fvec = np.array([10 * (x[2] - 10 * th), 10 * (r - 1), x[2]])
+
+        fvec = fvec.at[0].set(10.0 * (x[2] - 10.0 * th))
+        fvec = fvec.at[1].set(10.0 * (r - 1.0))
+        fvec = fvec.at[2].set(x[2])
 
     elif nprob == 6:  # Powell singular function.
         fvec = np.array([x[0] + 10 * x[1], np.sqrt(5.0) * (x[2] - x[3]), (x[1] - 2 * x[2]) ** 2, np.sqrt(10.0) * (x[0] - x[3]) ** 2])
