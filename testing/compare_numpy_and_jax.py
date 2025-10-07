@@ -1,11 +1,14 @@
 import numpy as np
+import sys
 import jax
 import jax.numpy as jnp
 
+from pathlib import Path
+
+sys.path.append('../py')
 from calfun import calfun
 from dfovec_jax import dfovec_jax
 from dfoxs import dfoxs
-from pathlib import Path
 
 # Load problem definitions: nprob, n, m, scale_power
 dfo_table = np.loadtxt("../data/dfo.dat")  # Adjust path as needed
