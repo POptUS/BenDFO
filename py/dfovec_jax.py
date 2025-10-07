@@ -190,7 +190,6 @@ def dfovec_jax(m, n, x, nprob):
         fvec = np.array([10 * (x[1] - x[0] ** 2), 1 - x[0]])
 
     elif nprob == 5:  # Helical valley function.
-
         th = np.arctan2(x[1], x[0]) / (2.0 * np.pi)
         r = np.sqrt(x[0] ** 2 + x[1] ** 2)
 
