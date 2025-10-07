@@ -5,7 +5,7 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-sys.path.append('../py')
+sys.path.append("../py")
 from calfun import calfun
 from dfovec_jax import dfovec_jax
 from dfoxs import dfoxs
