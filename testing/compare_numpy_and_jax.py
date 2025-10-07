@@ -1,9 +1,9 @@
-import numpy as np
 import sys
+from pathlib import Path
+
 import jax
 import jax.numpy as jnp
-
-from pathlib import Path
+import numpy as np
 
 sys.path.append('../py')
 from calfun import calfun
