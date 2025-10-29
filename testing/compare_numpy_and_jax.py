@@ -4,6 +4,7 @@ from pathlib import Path
 import jax
 import jax.numpy as jnp
 import numpy as np
+
 jax.config.update("jax_enable_x64", True)
 
 sys.path.append("../py")
