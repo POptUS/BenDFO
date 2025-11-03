@@ -58,7 +58,7 @@ def compare_outputs(nprob, m, n, x0):
     )
 
     # --- Fail if any relative diff is large ---
-    if any(val > 6e-7 for val in [fval_rel, fvec_rel, grad_rel, jac_rel]):
+    if any(val > 5e-15 for val in [fval_rel, fvec_rel, grad_rel, jac_rel]):
         raise Exception("Large differences detected")
 
 
