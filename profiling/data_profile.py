@@ -2,6 +2,28 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+def _cutoffs_for_mode(HIST, gate, optimality_type):
+    """
+    Per-problem cutoff value that determines when a solver has "solved" a
+    problem, one entry per problem, for each optimality_type:
+       "value"   -> use smallest function value seen by all solvers
+       "absgrad" -> solved when absolute gradient is small, ||nabla f_k|| <= gate
+       "relgrad" -> solved when relative gradient is small, ||nabla f_k|| <= gate*||nabla f_0||
+    """
+    prob_max = HIST[0, :, 0]  # The starting value for each problem
+
+    match optimality_type:
+        case "value":
+            prob_min = np.nanmin(HIST, axis=(0, 2))  # The minimum value seen for each problem
+            return prob_min + gate * (prob_max - prob_min)
+        case "absgrad":
+            return np.full_like(prob_max, gate)
+        case "relgrad":
+            return gate * prob_max
+        case _:
+            raise ValueError(f"Unknown optimality_type: {optimality_type!r}")
+
+
 ##############################################
 def _compute_data_profile_T(HIST, N, gate, optimality_type="value"):
     """
@@ -33,55 +55,14 @@ def _compute_data_profile_T(HIST, N, gate, optimality_type="value"):
         for i in range(1, nf):
             HIST[i, :, j] = np.minimum(HIST[i, :, j], HIST[i - 1, :, j])
 
-    # build T with T[p,s] = number of iters to solve problem p with solver s
-    match optimality_type:
+    cutoffs = _cutoffs_for_mode(HIST, gate, optimality_type)  # one cutoff per problem
 
-        case "value":
-
-            prob_min = np.nanmin(HIST, axis=(0, 2))  # The minimum value seen for each problem
-            prob_max = HIST[0, :, 0]  # The starting value for each problem
-
-            # For each problem and solver, determine the number of
-            # N-function bundles (e.g.- gradients) required to reach the cutoff value
-            T = np.zeros((nprob, ns))
-            for p in range(nprob):
-                cutoff = prob_min[p] + gate * (prob_max[p] - prob_min[p])
-                for s in range(ns):
-                    nfevs = np.argmax(HIST[:, p, s] <= cutoff) + 1  # use argmax to find first occurrence; +1 for zero index
-                    if nfevs == 1 and not (HIST[0, p, s] <= cutoff):  # all HIST[:,p,s] values are above the cutoff; argmax returns first index
-                        T[p, s] = np.nan
-                    else:
-                        T[p, s] = nfevs / N[p]
-
-        case "absgrad":
-
-            # For each problem and solver, determine the number of
-            # N-function bundles (e.g.- gradients) required to reach the cutoff value
-            T = np.zeros((nprob, ns))
-            for p in range(nprob):
-                cutoff = gate
-                for s in range(ns):
-                    nfevs = np.argmax(HIST[:, p, s] <= cutoff) + 1  # use argmax to find first occurrence; +1 for zero index
-                    if nfevs == 1 and not (HIST[0, p, s] <= cutoff):
-                        T[p, s] = np.nan
-                    else:
-                        T[p, s] = nfevs / N[p]
-
-        case "relgrad":
-
-            prob_max = HIST[0, :, 0]  # The starting grad norm for each problem
-
-            # For each problem and solver, determine the number of
-            # N-function bundles (e.g.- gradients) required to reach the cutoff value
-            T = np.zeros((nprob, ns))
-            for p in range(nprob):
-                cutoff = gate * prob_max[p]
-                for s in range(ns):
-                    nfevs = np.argmax(HIST[:, p, s] <= cutoff) + 1  # use argmax to find first occurrence; +1 for zero index
-                    if nfevs == 1 and not (HIST[0, p, s] <= cutoff):
-                        T[p, s] = np.nan
-                    else:
-                        T[p, s] = nfevs / N[p]
+    # For each problem and solver, determine the number of N-function
+    # bundles (e.g.- gradients) required to reach the cutoff value
+    solved = HIST <= cutoffs[None, :, None]
+    nfevs = solved.argmax(axis=0) + 1  # first occurrence along the history axis; +1 for zero index
+    T = nfevs / np.asarray(N)[:, None]
+    T[~solved.any(axis=0)] = np.nan  # never reached the cutoff
 
     return T
 
