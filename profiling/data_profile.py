@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def _cutoffs_for_mode(HIST, gate, optimality_type):
+def _cutoffs_for_mode(H, gate, optimality_type):
     """
     Per-problem cutoff value that determines when a solver has "solved" a
     problem, one entry per problem, for each optimality_type:
@@ -10,11 +10,11 @@ def _cutoffs_for_mode(HIST, gate, optimality_type):
        "absgrad" -> solved when absolute gradient is small, ||nabla f_k|| <= gate
        "relgrad" -> solved when relative gradient is small, ||nabla f_k|| <= gate*||nabla f_0||
     """
-    prob_max = HIST[0, :, 0]  # The starting value for each problem
+    prob_max = H[0, :, 0]  # The starting value for each problem
 
     match optimality_type:
         case "value":
-            prob_min = np.nanmin(HIST, axis=(0, 2))  # The minimum value seen for each problem
+            prob_min = np.nanmin(H, axis=(0, 2))  # The minimum value seen for each problem
             return prob_min + gate * (prob_max - prob_min)
         case "absgrad":
             return np.full_like(prob_max, gate)
@@ -25,11 +25,11 @@ def _cutoffs_for_mode(HIST, gate, optimality_type):
 
 
 ##############################################
-def _compute_data_profile_T(HIST, N, gate, optimality_type="value"):
+def _compute_data_profile_T(H, N, gate, optimality_type="value"):
     """
     Pure (non-plotting) computation of the data-profile T matrix.
 
-      HIST contains a three dimensional array of function values.
+      H contains a three dimensional array of function values.
         H[f,p,s] = function value # f for problem p and solver s.
       N is an np-vector of (positive) budget units. If simplex
         gradients are desired, then N(p) would be n(p)+1, where n(p) is
@@ -46,29 +46,34 @@ def _compute_data_profile_T(HIST, N, gate, optimality_type="value"):
     reach the cutoff value on problem p (NaN if it never does).
     """
 
-    HIST = HIST.copy()  # Avoid mutating the caller's array
+    H = H.copy()  # Avoid mutating the caller's array
 
-    nf, nprob, ns = HIST.shape  # Grab the dimensions
+    nf, nprob, ns = H.shape  # Grab the dimensions
 
     # Produce a suitable history array with sorted entries:
     for j in range(ns):
         for i in range(1, nf):
-            HIST[i, :, j] = np.minimum(HIST[i, :, j], HIST[i - 1, :, j])
+            H[i, :, j] = np.minimum(H[i, :, j], H[i - 1, :, j])
 
-    cutoffs = _cutoffs_for_mode(HIST, gate, optimality_type)  # one cutoff per problem
+    cutoffs = _cutoffs_for_mode(H, gate, optimality_type)  # one cutoff per problem
 
     # For each problem and solver, determine the number of N-function
     # bundles (e.g.- gradients) required to reach the cutoff value
-    solved = HIST <= cutoffs[None, :, None]
-    nfevs = solved.argmax(axis=0) + 1  # first occurrence along the history axis; +1 for zero index
-    T = nfevs / np.asarray(N)[:, None]
-    T[~solved.any(axis=0)] = np.nan  # never reached the cutoff
+    T = np.zeros((nprob, ns))
+    for p in range(nprob):
+        cutoff = cutoffs[p]
+        for s in range(ns):
+            nfevs = np.flatnonzero(H[:, p, s] <= cutoff)
+            if nfevs.size == 0:
+                T[p, s] = np.nan
+            else:
+                T[p, s] = (nfevs[0] + 1) / N[p]
 
     return T
 
 
 ##############################################
-def plot_data_profile(HIST, N, gate, optimality_type="value", legendstr=None):
+def plot_data_profile(H, N, gate, optimality_type="value", legendstr=None):
     """
     This subroutine produces a data profile as described in:
 
@@ -78,7 +83,7 @@ def plot_data_profile(HIST, N, gate, optimality_type="value", legendstr=None):
 
     The subroutine returns a handle to lines in a data profile.
 
-      HIST contains a three dimensional array of function values.
+      H contains a three dimensional array of function values.
         H[f,p,s] = function value # f for problem p and solver s.
       N is an np-vector of (positive) budget units. If simplex
         gradients are desired, then N(p) would be n(p)+1, where n(p) is
@@ -94,12 +99,12 @@ def plot_data_profile(HIST, N, gate, optimality_type="value", legendstr=None):
     Jorge More' and Stefan Wild. January 2008.
     """
 
-    nf, nprob, ns = HIST.shape  # Grab the dimensions
+    nf, nprob, ns = H.shape  # Grab the dimensions
 
     if legendstr is None:
         legendstr = [f"solver {s}" for s in range(ns)]
 
-    T = _compute_data_profile_T(HIST, N, gate, optimality_type)
+    T = _compute_data_profile_T(H, N, gate, optimality_type)
 
     ##############################################################
     # plot
@@ -110,7 +115,7 @@ def plot_data_profile(HIST, N, gate, optimality_type="value", legendstr=None):
     colors = ["b", "r", "k", "m", "c", "g", "y"]
     markers = ["s", "o", "^", "v", "p", "<", "x", "h", "+", "d", "*", "<"]
 
-    # Replace all NaN's with twice the max_ratio and sort.
+    # Replace all NaN's with twice the max_data and sort.
     max_data = np.nanmax(T)
     T[np.isnan(T)] = 2 * max_data
     T = np.sort(T, axis=0)
@@ -122,9 +127,9 @@ def plot_data_profile(HIST, N, gate, optimality_type="value", legendstr=None):
         sl = s % len(lines)
         sc = s % len(colors)
         sm = s % len(markers)
-        fstring = f"{lines[sl]}{colors[sc]}{markers[sm]}"
+        option1 = f"{lines[sl]}{colors[sc]}{markers[sm]}"
 
-        (hl[s],) = plt.step(xs, ys, fstring, where="post", label=legendstr[s])
+        (hl[s],) = plt.step(xs, ys, option1, where="post", label=legendstr[s])
 
     plt.axis([0, 1.1 * max_data, 0, 1])
     plt.xlabel("Normalized Iterations")

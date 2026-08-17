@@ -3,11 +3,11 @@ import numpy as np
 
 
 ##############################################
-def _compute_perf_profile_T(HIST, gate):
+def _compute_perf_profile_T(H, gate):
     """
     Pure (non-plotting) computation of the performance-profile T matrix.
 
-      HIST contains a three dimensional array of function values.
+      H contains a three dimensional array of function values.
         H[f,p,s] = function value # f for problem p and solver s.
       gate is a positive constant reflecting the convergence tolerance.
 
@@ -16,17 +16,17 @@ def _compute_perf_profile_T(HIST, gate):
     cutoff value on problem p (NaN if it never does).
     """
 
-    HIST = HIST.copy()  # Avoid mutating the caller's array
+    H = H.copy()  # Avoid mutating the caller's array
 
-    nf, nprob, ns = HIST.shape  # Grab the dimensions
+    nf, nprob, ns = H.shape  # Grab the dimensions
 
     # Produce a suitable history array with sorted entries:
     for j in range(ns):
         for i in range(1, nf):
-            HIST[i, :, j] = np.minimum(HIST[i, :, j], HIST[i - 1, :, j])
+            H[i, :, j] = np.minimum(H[i, :, j], H[i - 1, :, j])
 
-    prob_min = np.nanmin(HIST, axis=(0, 2))  # The minimum value seen for each problem
-    prob_max = HIST[0, :, 0]  # The starting value for each problem
+    prob_min = np.nanmin(H, axis=(0, 2))  # The minimum value seen for each problem
+    prob_max = H[0, :, 0]  # The starting value for each problem
 
     # For each problem and solver, determine the number of evaluations
     # required to reach the cutoff value
@@ -34,11 +34,11 @@ def _compute_perf_profile_T(HIST, gate):
     for p in range(nprob):
         cutoff = prob_min[p] + gate * (prob_max[p] - prob_min[p])
         for s in range(ns):
-            nfevs = np.argmax(HIST[:, p, s] <= cutoff) + 1  # use argmax to find first occurrence; +1 for zero index
-            if nfevs == 1 and not (HIST[0, p, s] <= cutoff):  # all HIST[:,p,s] values are above the cutoff; argmax returns first index
+            nfevs = np.flatnonzero(H[:, p, s] <= cutoff)
+            if nfevs.size == 0:
                 T[p, s] = np.nan
             else:
-                T[p, s] = nfevs
+                T[p, s] = nfevs[0] + 1
 
     return T
 
@@ -50,7 +50,7 @@ def _ratios_from_T(T):
 
 
 ##############################################
-def plot_perf_profile(HIST, gate, logplot=False, legendstr=None):
+def plot_perf_profile(H, gate, logplot=False, legendstr=None):
     """
     This subroutine produces a performance profile as described in:
 
@@ -65,7 +65,7 @@ def plot_perf_profile(HIST, gate, logplot=False, legendstr=None):
 
     The subroutine returns a handle to lines in a performance profile.
 
-      HIST contains a three dimensional array of function values.
+      H contains a three dimensional array of function values.
         H[f,p,s] = function value # f for problem p and solver s.
       gate is a positive constant reflecting the convergence tolerance.
       logplot=True is used to indicate that a log (base 2) plot is desired.
@@ -74,12 +74,12 @@ def plot_perf_profile(HIST, gate, logplot=False, legendstr=None):
     Jorge More' and Stefan Wild. January 2008.
     """
 
-    nf, nprob, ns = HIST.shape  # Grab the dimensions
+    nf, nprob, ns = H.shape  # Grab the dimensions
 
     if legendstr is None:
         legendstr = [f"solver {s}" for s in range(ns)]
 
-    T = _compute_perf_profile_T(HIST, gate)
+    T = _compute_perf_profile_T(H, gate)
 
     # Other colors, lines, and markers are easily possible:
     lines = ["-", "-.", "--"]
@@ -110,9 +110,9 @@ def plot_perf_profile(HIST, gate, logplot=False, legendstr=None):
         sl = s % len(lines)
         sc = s % len(colors)
         sm = s % len(markers)
-        fstring = f"{lines[sl]}{colors[sc]}{markers[sm]}"
+        option1 = f"{lines[sl]}{colors[sc]}{markers[sm]}"
 
-        (hl[s],) = plt.step(xs, ys, fstring, where="post", label=legendstr[s])
+        (hl[s],) = plt.step(xs, ys, option1, where="post", label=legendstr[s])
 
     # Axis properties are set so that failures are not shown, but with the
     # max_ratio data points shown. This highlights the "flatline" effect.
